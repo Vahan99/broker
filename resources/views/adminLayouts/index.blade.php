@@ -6,9 +6,9 @@
         <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
         <meta name="author" content="Coderthemes">
 
-        <link rel="shortcut icon" href="{!! URL::asset('images/kamar-logo.png') !!}">
+        <link rel="shortcut icon" href="{!! URL::asset('assets/sm-logo.png') !!}">
 
-        <title >Kamar Realty</title>
+        <title>Անշարժ գույքի տվյալների կառավարման համակարգ</title>
 
 
         <!--Morris Chart CSS -->
@@ -99,10 +99,7 @@
 
 
     <body class="fixed-left">
-        
-
     	 @yield('content')
-
         <script>
             var resizefunc = [];
         </script>

@@ -2,11 +2,11 @@
     <div class="topbar">
         <div class="topbar-left">
             <div class="text-center">
-                <a href="index.html" class="logo">
+                <a href="/admin/reality/reality-list/1/1" class="logo logo-title">
+                    <img style="margin: auto; border: none; width: 9rem; padding: 0" src="{!! URL::asset('assets/light-logo.png') !!}" class="img-responsive" alt="">
                     <i class="icon-c-logo">
-                        <img style="border: none;padding: 15px 0px;" src="{!! URL::asset('images/kamar-logo.png') !!}" class="img-responsive" alt="">
                     </i>
-                    <span>KAMAR REALTY</span>
+{{--                    <span>Անշարժ գույքի տվյալների կառավարման համակարգ</span>--}}
                 </a>
             </div>
         </div>
@@ -21,7 +21,9 @@
                         </button>
                         <span class="clearfix"></span>
                     </div>
-
+                    <div class="col-md-offset-3 col-md-4">
+                        <p style="color: white; line-height: 50px; font-weight: 600; margin: 0">ԱՆՇԱՐԺ ԳՈՒՅՔԻ ՏՎՅԱԼՆԵՐԻ ԿԱՌԱՎԱՐՄԱՆ ՀԱՄԱԿԱՐԳ</p>
+                    </div>
                     <ul class="nav navbar-nav navbar-right pull-right">
                         <li class="dropdown">
                             <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="{{ URL::asset('images/avatar-1.jpg') }}" alt="user-img" class="img-circle"> </a>

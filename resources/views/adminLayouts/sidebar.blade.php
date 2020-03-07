@@ -17,8 +17,8 @@
                 <li class="has_sub">
                     <a href="#"  class="{{strrpos(url()->full(), 'gorcakal', 0) ? 'active' : ''}} waves-effect"><i class="ti-user"></i> <span> Աշխատակիցներ </span> </a>
                     <ul class="list-unstyled">
-                        <li class="{{strrpos(url()->full(), 'user-list', 0) ? 'active' : ''}}"><a href="/admin/gorcakal/user-list">Աշխատակիցների ցուցակ</a></li>
-                        <li class="{{strrpos(url()->full(), 'add-user', 0) ? 'active' : ''}}"><a href="/admin/gorcakal/add-user">Ավելացնել Աշխատակից</a></li>
+                        <li class="{{strrpos(url()->full(), 'user-list', 0) ? 'active' : ''}}"><a href="/admin/gorcakal/user-list">Գործակալների ցուցակ</a></li>
+                        <li class="{{strrpos(url()->full(), 'add-user', 0) ? 'active' : ''}}"><a href="/admin/gorcakal/add-user">Ավելացնել Գործակալ</a></li>
                     </ul>
                 </li>
                 @endif

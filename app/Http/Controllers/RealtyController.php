@@ -454,10 +454,6 @@ class RealtyController extends Controller
                 } else {
                     array_push($array, ["user_id", "=",null]);
                 }
-                
-                
-                
-
                 $regions = DB::table('regions')->get();
                 $subRegions = DB::table('sub_regions')->get();
                 $reality = DB::table('reality')

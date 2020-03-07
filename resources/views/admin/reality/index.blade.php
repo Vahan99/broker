@@ -235,12 +235,13 @@
                             </div>
                         </div>
                         <div class="col-sm-12">
-                            <div class="row m-t-20 text-center">
+                            <div class="row m-t-20 text-center filter-buttons">
                                     <button type="button" class="btn btn-danger"  id="clearFiltr">Մաքրել</button>
                                     <button type="button" class="btn btn-success" id="searchButtonReality">Որոնել
                                     </button>
                                     <button type="button" class="btn btn-success" id="otherSearch" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                        <span class="glyphicon glyphicon-chevron-down"></span> Ընդլայնված որոնում
+                                        <span class="glyphicon glyphicon-chevron-down"></span>
+                                        Ընդլայնված որոնում
                                     </button>
                             </div>
                         </div>

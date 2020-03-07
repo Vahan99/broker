@@ -16,9 +16,7 @@ Route::post('/', [ 'as' => 'login', 'uses' => 'UserController@login']);
 
 
 
-Route::group(['prefix' => 'admin','middleware' => ['superAdmin','auth']],function (){
-
-
+Route::group(['prefix' => 'admin', 'middleware' => ['superAdmin','auth']], function (){
     Route::get('/gorcakal/user-list', 'UserController@list');
     Route::get('/gorcakal/add-user', 'UserController@addAdminBlade');
     Route::post('/gorcakal/add-user', 'UserController@addAdminPost');
@@ -71,7 +69,6 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']],function (){
     Route::post('/reality/reality-list/{id}/{type}', 'RealtyController@index');
     Route::get('/reality/single-reality/{id}', 'RealtyController@singleRealityBlade');
     Route::get('/reality/reality-print-list/{id}', 'RealtyController@printList');
-
 
     Route::get('/clients/{id}', 'RealtyController@usersList');
     Route::get('/client/{id}', 'RealtyController@curentUser');

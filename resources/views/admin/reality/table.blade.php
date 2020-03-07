@@ -6,8 +6,6 @@
                 <tr>
                     <th>#</th>
                     <th>Կոդ</th>
-
-                    
                     <th>Համայնք</th>
                     <th>Փողոց</th>
                     <th>Սեն.</th>
@@ -26,12 +24,14 @@
                         <th>Գործակալ</th>
                         <th>Ստատուս</th>
                     @endif
-                    <th class="last">Տպել</th>
+                    <th class="last">
+                        <i class="fa fa-print printNumbers" aria-hidden="true">0</i>
+                    </th>
                 </tr>
                 </thead>
                 <tbody id="subRegionTableBody">
                 @foreach ($reality as $key => $r)
-                    <tr class="{!! $r->status == '2' ? 'pink' : ($r->status == '3' ? 'bg-danger' : '') !!}">
+                    <tr class="{{$key % 2 == 0 ? 'odd' : ''}}">
                         <td>{!! $key !!}</td>
                         <td>{{$r->code}}</td>
                         

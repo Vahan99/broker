@@ -12,16 +12,15 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('admin.admin',['errorMessage'=>'Ձեր էջը բլոկավօրված է', 'error'=> false]);
+        return view('admin.admin', ['errorMessage'=>'Ձեր էջը բլոկավօրված է', 'error'=> false]);
     }
     public function list()
     {
-
         if(Auth::user()->Admin() == 1){
             $countAdmin = [];
             $count = [];
             $usersByAdmin = 0;
-            $users = DB::table('users')->get();
+            $users = DB::table('users')->whereAdmin(2)->get();
             for($i = 0; $i < count($users); $i++){
                 if($users[$i]->admin == 0) {
                     $usersByAdmin = DB::table('users')->select('id')->where('admin_id',$users[$i]->id)->get();
@@ -38,6 +37,7 @@ class UserController extends Controller
                         array_push($countAdmin, ['id'=> $users[$i]->id, 'count'=> 0]);
                     }
                 } else if($users[$i]->admin == 2) {
+
                     array_push($count, ['id'=> 0, 'count'=> 0]);
                     $c = DB::table('reality')->where(function($query){
                                 $query->where('type', 0);
@@ -50,7 +50,9 @@ class UserController extends Controller
             $count = array_merge($count,$countAdmin);
 //            dd( $count);
             return view('admin.admins.admins-list',['admin'=>Auth::user()->Admin(),'count' => $count, 'users'=>$users]);
-        }else if(Auth::user()->Admin() == 3){
+        }
+
+        else if(Auth::user()->Admin() == 3){
             $countAdmin = [];
             $count = [];
             $usersByAdmin = 0;
@@ -82,7 +84,8 @@ class UserController extends Controller
             }
             $count = array_merge($count,$countAdmin);
             return view('admin.admins.admins-list',['admin'=>Auth::user()->Admin(),'count' => $count, 'users'=>$users]);
-        }else if(Auth::user()->Admin() == 0){
+        }
+        else if(Auth::user()->Admin() == 0){
             $count = [];
             $users = DB::table('users')->where('admin_id', Auth::user()->id)->get();
             for($i = 0; $i < count($users); $i++){
@@ -90,11 +93,11 @@ class UserController extends Controller
                 $c = DB::table('reality')->where(function($query){
                                 $query->where('type', 0);
                                 $query->orWhere('type', 1);
-                            })->where('status', 1)->where('user_id',$users[$i]->id)->count();
+                            })->where('status', 1)->where('user_id', $users[$i]->id)->count();
                 $count[count($count) - 1]['id'] = $users[$i]->id;
                 $count[count($count) - 1]['count'] = intval($c);
             }
-            return view('admin.admins.admins-list',['admin'=>Auth::user()->Admin(),'count' => $count, 'users'=>$users]);
+            return view('admin.admins.admins-list', ['admin'=>Auth::user()->Admin(),'count' => $count, 'users'=>$users]);
         }
     }
     public function updateAdminBlade($id)

@@ -6,7 +6,7 @@
   <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
   <meta name="author" content="Coderthemes">
 
-  <link rel="shortcut icon" href="{{ URL::asset('images/favicon_1.ico') }}">
+  <link rel="shortcut icon" href="{{ URL::asset('assets/sm-logo.png') }}">
 
   <title >@yield('title')</title>
   <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/iconic/css/material-design-iconic-font.min.css') }}">
@@ -17,8 +17,6 @@
 
   <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/util1.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/main1.css') }}">
-
-
 </head>
 
 
@@ -31,14 +29,14 @@
         <form class="login100-form validate-form" action="" method="post">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-          <span class="login100-form-title">
-            <img src="{!! URL::asset('images/kamar-logo.png') !!}" alt="" class="img-responsive" style="margin: 0 auto">
+          <span class="login100-form-title" style="margin-bottom: 3rem">
+            <img src="{!! URL::asset('assets/logo.png') !!}" alt="" class="img-responsive" style="margin: 0 auto">
           </span>
-          <span class="login100-form-title p-b-25">
-              KAMAR REALTY
-          </span>
+{{--          <span class="login100-form-title p-b-25">--}}
+{{--              MEGAPOLIS--}}
+{{--          </span>--}}
           <p class="p-b-21" style="text-align: center">
-              Անշարժ գույքի տվյալների կառավարման համակարգ
+              ԱՆՇԱՐԺ ԳՈՒՅՔԻ ՏՎՅԱԼՆԵՐԻ ԿԱՌԱՎԱՐՄԱՆ ՀԱՄԱԿԱՐԳ
           </p>
           @if($error)
             <p class="alert-danger">{!! $errorMessage !!}</p>
