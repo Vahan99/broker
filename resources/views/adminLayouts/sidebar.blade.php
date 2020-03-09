@@ -7,7 +7,7 @@
                     <a href="#"  class="{{strrpos(url()->full(), 'reality', 0) ? 'active' : ''}} waves-effect"><i class="ti-home"></i> <span> Անշարժ Գույքեր </span> </a>
                     <ul class="list-unstyled">
                         <li class="{{strrpos(url()->full(), 'reality-list', 0) ? 'active' : ''}}"><a href="/admin/reality/reality-list/1/1">Գույքերի ցուցակ</a></li>
-                        @if($admin != 2 && $admin != 1)
+                        @if($admin != 1)
                             <li class="{{strrpos(url()->full(), 'add-reality', 0) ? 'active' : ''}}"><a href="/admin/reality/add-reality">Ավելացնել Գույք</a></li>
                         @endif
                     </ul>

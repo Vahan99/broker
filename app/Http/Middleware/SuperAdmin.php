@@ -16,8 +16,7 @@ class SuperAdmin
     public function handle($request, Closure $next)
     {
 
-        if(Auth::check() && Auth::user()->status == 1 && (Auth::user()->admin == 1 || Auth::user()->admin == 0 || Auth::user()->admin == 3)){
-
+        if(Auth::check() && Auth::user()->status == 1 && (Auth::user()->admin == 1 || Auth::user()->admin == 2 || Auth::user()->admin == 3)){
             return $next($request);
         }else {
             return redirect('/')->withAlert('sorry you do not have access administrator');

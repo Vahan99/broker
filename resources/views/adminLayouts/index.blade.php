@@ -8,7 +8,7 @@
 
         <link rel="shortcut icon" href="{!! URL::asset('assets/sm-logo.png') !!}">
 
-        <title>Անշարժ գույքի տվյալների կառավարման համակարգ</title>
+        <title>MAgent</title>
 
 
         <!--Morris Chart CSS -->
@@ -28,9 +28,6 @@
         <link href="{{ URL::asset('footable/css/footable.core.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ URL::asset('css/admin_style.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ URL::asset('js/select2/select2.css') }}" rel="stylesheet" type="text/css">
-
-
-
 
         <script src="{{ URL::asset('js/modernizr.min.js') }}"></script>
         <style type="text/css" >
@@ -94,7 +91,7 @@
 
         </style>
 
-
+        <link href="{{ URL::asset('css/custom-select.css') }}" rel="stylesheet" type="text/css" />
     </head>
 
 

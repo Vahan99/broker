@@ -12,9 +12,9 @@
         <input type="hidden" name="_token" value="{!! csrf_token() !!}" id="token">
         <div class="row content" style="padding: 0 8rem">
             <div class="row m-t-20">
-                    <div class="col-sm-4">
-                        <h4 class="page-title breadcrumb">Տպագրել</h4>
-                    </div>
+                <div class="col-sm-4">
+                    <h4 class="page-title breadcrumb">Տպագրել</h4>
+                </div>
             </div>
             <div>
                 @if($error)
@@ -76,7 +76,7 @@
                         @endif
                     </div>
                     <div class="c0l-sm-8 text-left">
-                        <a  class="btn btn-primary btn-rounded waves-effect waves-light">Տպել</a>
+                        <a  class="btnprn btn btn-primary btn-rounded waves-effect waves-light">Տպել</a>
                     </div>
                 </div>
             </div>

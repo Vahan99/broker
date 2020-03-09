@@ -6,7 +6,6 @@
 
     @include('adminLayouts.header')
     @include('adminLayouts.sidebar')
-
     <div class="content-page">
         <!-- Start content -->
         <input type="hidden" name="_token" value="{!! csrf_token() !!}" id="token">
@@ -81,6 +80,8 @@
                         <div class="col-sm-12">
                             <div class="row m-t-20">
                                 <div class="col-sm-2 b-r">
+                                    <div class="custom-select" style="width:200px;">
+                                    </div>
                                     <label for="type">Տեսակ</label>
                                     <select name="type" id="type" class="form-control"  onchange="triggerFunction()">
                                         <option value="1" >Վաճառք</option>
