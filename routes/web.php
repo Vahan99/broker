@@ -13,9 +13,6 @@
 //Auth::routes();
 Route::get('/','UserController@index');
 Route::post('/', [ 'as' => 'login', 'uses' => 'UserController@login']);
-
-
-
 Route::group(['prefix' => 'admin', 'middleware' => ['superAdmin','auth']], function (){
     Route::get('/gorcakal/user-list', 'UserController@list');
     Route::get('/gorcakal/add-user', 'UserController@addAdminBlade');
@@ -55,15 +52,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['superAdmin','auth']], funct
 
     Route::get('/clients/{id}', 'RealtyController@usersList');
     Route::get('/client/{id}', 'RealtyController@curentUser');
-
-
-
 });
-
 Route::group(['prefix' => 'admin','middleware' => ['auth']],function (){
 //    Route::get('/gorcakal/user-list', 'UserController@list');
     Route::get('/logout', 'UserController@logout');
-
     //reality
     Route::get('/reality/reality-list/{id}/{type}', 'RealtyController@index');
     Route::post('/reality/reality-list/{id}/{type}', 'RealtyController@index');
@@ -75,10 +67,17 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']],function (){
     Route::get('/logout', 'UserController@logout');
 });
 
+Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth', 'super']], function (){
+    Route::get('/create-company', 'CompanyController@createCompany')->name('company.create');
+    Route::post('/create-company', 'CompanyController@storeCompany')->name('company.store');
+    Route::get('/update-company/{id}', 'CompanyController@updateCompany')->name('company.update');
+    Route::post('/update-company/{id}', 'CompanyController@editCompany')->name('company.edit');
+    Route::get('/company-index', 'CompanyController@index')->name('company.index');
 
-
-
-
+    Route::get('/create-company-admin', 'CompanyController@createAdmin')->name('company.admin.create');
+    Route::post('/create-company-admin', 'CompanyController@storeAdmin')->name('company.admin.store');
+    Route::get('/company-admin-index', 'CompanyController@indexAdmin')->name('company.admin.index');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
 

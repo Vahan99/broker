@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Filters\RealEstateFilter;
 use App\Http\Middleware\Admin;
 use App\Http\Resources\views;
+use App\Reality;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\User;
 use DB;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class RealtyController extends Controller
 {
@@ -65,517 +67,37 @@ class RealtyController extends Controller
     }
     public function index(Request $request, $id = null, $type = null)
     {
+        //Broker Role 2
         $admins = DB::table('users')->where('admin','=', 0)->get();
-        if(Auth::user()->Admin() == 1 || Auth::user()->Admin() == 3){
+        if (request()->ajax()) {
+            $reality = (new RealEstateFilter($request))->filter->paginate(10);
 
-            $users = DB::table('users')->where('admin','=', 2)->get();
-            if (request()->ajax()) {
+            $regions = DB::table('regions')->get();
+            $subRegions = DB::table('sub_regions')->get();
+            $subReg = $request->realitySubReg;
 
-                $array = [];
-                $orArray = [];
-                array_push($array, ["type","=", intval($request->type)]);
-                array_push($array, ["status","=", intval($request->status)]);
-                if($request->admin_id != -1 && $request->user_id == -1){
-                    $users = DB::table('users')->where('admin_id','=', $request->admin_id)->get();
-                }else if($request->admin_id == -1 && $request->user_id == -1){
-                    $users = DB::table('users')->where('admin','=', 2)->get();
-                }else if($request->admin_id != -1 && $request->user_id != -1){
-                    $users = DB::table('users')->where('id','=', $request->user_id)->get();
-                }
-                
-                // dd($users);
-                
-                // for($i = 0; $i < count($users); $i++){
-                //     array_push($orArray, ['user_id', '=', $users[$i]->id]);
-                // }
+            return response()->json(view('admin.reality.table', [
+                'error'=> false,
+                'id' => $id,
+                'type' => $type,
+                'superadmins'=>$admins,
+                'admin'=>Auth::user()->Admin(),
+                'subRegions' => $subRegions,
+                'regions' => $regions,
+                'reality' => $reality])->render());
 
-                if($request->code && $request->code != null){
-                    array_push($array, ["code", "LIKE", intval($request->code).'%']);
-                }
-                if($request->hp_code && $request->hp_code != null){
-                    array_push($array, ["link", "LIKE", '%'.$request->hp_code.'%']);
-                }
-                if($request->realityType && $request->realityType != "-1"){
-                    array_push($array, ["realityType", "=",intval($request->realityType)]);
-                }
-                if($request->realityProect && $request->realityProect != "-1"){
-                    array_push($array, ["proect", "=",intval($request->realityProect)]);
-                }
-                if($request->realityBuildingType && $request->realityBuildingType != "-1"){
-                    array_push($array, ["buildingType", "=",intval($request->realityBuildingType)]);
-                }
-                if($request->realityCosmetic && $request->realityCosmetic != "-1"){
-                    array_push($array, ["cosmetic", "=",intval($request->realityCosmetic)]);
-                }
-                if($request->realityBalcon && $request->realityBalcon != "-1"){
-                    array_push($array, ["balcon", "=",intval($request->realityBalcon)]);
-                }
-                if($request->realityReg && $request->realityReg != "-1" && $request->realitySubReg == null){
-                    array_push($array, ["region", "=",intval($request->realityReg)]);
-                }
-
-                if($request->streetSearch && $request->streetSearch != null){
-                    array_push($array, ["street", "like","%".$request->streetSearch."%"]);
-                }
-                if($request->buildingNumber && $request->buildingNumber != null){
-                    array_push($array, ["buildingNumber", "=",$request->buildingNumber]);
-                }
-                if($request->apartamentNumber && $request->apartamentNumber != null){
-                    array_push($array, ["apartamentNumber", "=",intval($request->apartamentNumber)]);
-                }
-                if($request->floorMin && $request->floorMin != null){
-                    array_push($array, ["floors", ">=",intval($request->floorMin)]);
-                }
-                if($request->floorMax && $request->floorMax != null){
-                    array_push($array, ["floors", "<=",intval($request->floorMax)]);
-                }
-                if($request->firstFloor && $request->firstFloor == "1"){
-                    array_push($array, ["firstFloor", "=",intval($request->firstFloor)]);
-                }
-                if($request->lastFloor && $request->lastFloor == "1"){
-                    array_push($array, ["lastFloor", "=",intval($request->lastFloor)]);
-                }
-                if($request->areaMin && $request->areaMin != null){
-                    array_push($array, ["area", ">=",intval($request->areaMin)]);
-                }
-                if($request->areaMax && $request->areaMax != null){
-                    array_push($array, ["area", "<=",intval($request->areaMax)]);
-                }
-                if($request->roomsMin && $request->roomsMin != null){
-                    array_push($array, ["rooms", ">=",intval($request->roomsMin)]);
-                }
-                if($request->roomsMax && $request->roomsMax != null){
-                    array_push($array, ["rooms", "<=",intval($request->roomsMax)]);
-                }
-                if($request->priceMin && $request->priceMin != null){
-                    array_push($array, ["price", ">=",intval($request->priceMin)]);
-                }
-                if($request->priceMax && $request->priceMax != null){
-                    array_push($array, ["price", "<=",intval($request->priceMax)]);
-                }
-                if($request->buildingFloorsMin && $request->buildingFloorsMin != null){
-                    array_push($array, ["buildingFloors", ">=",intval($request->buildingFloorsMin)]);
-                }
-                if($request->buildingFloorsMax && $request->buildingFloorsMax != null){
-                    array_push($array, ["buildingFloors", "<=",intval($request->buildingFloorsMax)]);
-                }
-                if($request->gardenMin && $request->gardenMin != null){
-                    array_push($array, ["gardenArea", ">=",intval($request->gardenMin)]);
-                }
-                if($request->gardenMax && $request->gardenMax != null){
-                    array_push($array, ["gardenArea", "<=",intval($request->gardenMax)]);
-                }
-                if($request->facePartMin && $request->facePartMin != null){
-                    array_push($array, ["faceArea", ">=", intval($request->facePartMin)]);
-                }
-                if($request->facePartMax && $request->facePartMax != null){
-                    array_push($array, ["faceArea", "<=",intval($request->facePartMax)]);
-                }
-                if($request->phone && $request->phone == null){
-                    array_push($array, ["phone", "LIKE",'%'.$request->phone.'%']);
-                }
-                if($request->customerName && $request->customerName == null){
-                    array_push($array, ["customerName", "=",$request->customerName]);
-                }
-                $uId = [];
-                $requestUserId = $request->user_id;
-                
-                
-                // dd($uId);
-                
-
-
-                $regions = DB::table('regions')->get();
-                $subRegions = DB::table('sub_regions')->get();
-                
-                $subReg = $request->realitySubReg;
-                
-                $sql = \DB::table('reality');
-                
-                if($request->user_id && $request->user_id == "-1"){
-                    // dd($users);
-                    if(count($users) > 0){
-                      for($i = 0; $i < count($users); $i++){
-                        $sql->orWhere(function ($sql) use ($users,$subReg, $i, $array) {
-                            $sql->where($array);
-                            $sql->where('user_id', '=', $users[$i]->id); 
-                            if($subReg !=null && !empty($subReg) && count($subReg) > 0){
-                            for($j = 0; $j < count($subReg); $j++){
-                                    $sql->where('subRegion', '=', $subReg[$j]);
-                                }
-                            }
-                        });
-                        }
-                        $reality = $sql->orderBy('code', 'desc')->paginate(10);
-                    }else{
-                        $reality = [];
-                    }
-                    
-                }else{
-                    $us_id = intval($request->user_id);
-                    if($subReg !=null && !empty($subReg) && count($subReg) > 0){
-                        for($j = 0; $j < count($subReg); $j++){
-                            $sql->orWhere(function ($sql) use ($us_id,$j, $subReg, $array) {
-                                $sql->where('subRegion', '=', $subReg[$j]);
-                                $sql->where($array);
-                                $sql->where('user_id', '=', $us_id); 
-                                
-                            });
-                                
-                        }
-                    }else{
-                        $sql->where($array);
-                        $sql->where('user_id', '=', $us_id);
-                    }
-                    $reality = $sql->orderBy('code', 'desc')->paginate(10);
-                    
-                }
-
-                return response()->json(view('admin.reality.table', [
-                    'error'=> false,
-                    'id' => $id,
-                    'type' => $type,
-                    'admin'=>Auth::user()->Admin(),
-                    'users'=>$users,
-                    'superadmins'=>$admins,
-                    'subRegions' => $subRegions,
-                    'regions' => $regions,
-                    'reality' => $reality])->render());
-
-            }else{
-
-                $regions = DB::table('regions')->get();
-                $subRegions = DB::table('sub_regions')->get();
-                $reality = DB::table('reality')->where('status', $id)->where('type', $type)->orderBy('code', 'desc')->paginate(10);
-
-                return view('admin.reality.index',[
-                    'error'=> false,
-                    'id' => $id,
-                    'type' => $type,
-                    'admin'=>Auth::user()->Admin(),
-                    'users'=> $users,
-                    'superadmins'=>$admins,
-                    'subRegions' => $subRegions,
-                    'regions' => $regions,
-                    'reality' => $reality]);
-            }
-        }else if(Auth::user()->Admin() == 0){
-            
-            
-            if (request()->ajax()) {
-                $array = [];
-                array_push($array, ["type","=", intval($request->type)]);
-                array_push($array, ["status","=", intval($request->status)]);
-                if($request->code && $request->code != null){
-                    array_push($array, ["code", "LIKE", intval($request->code).'%']);
-                }
-                if($request->hp_code && $request->hp_code != null){
-                    array_push($array, ["link", "LIKE", '%'.$request->hp_code.'%']);
-                }
-                if($request->realityType && $request->realityType != "-1"){
-                    array_push($array, ["realityType", "=",intval($request->realityType)]);
-                }
-                if($request->realityProect && $request->realityProect != "-1"){
-                    array_push($array, ["proect", "=",intval($request->realityProect)]);
-                }
-                if($request->realityBuildingType && $request->realityBuildingType != "-1"){
-                    array_push($array, ["buildingType", "=",intval($request->realityBuildingType)]);
-                }
-                if($request->realityCosmetic && $request->realityCosmetic != "-1"){
-                    array_push($array, ["cosmetic", "=",intval($request->realityCosmetic)]);
-                }
-                if($request->realityBalcon && $request->realityBalcon != "-1"){
-                    array_push($array, ["balcon", "=",intval($request->realityBalcon)]);
-                }
-                if($request->realityReg && $request->realityReg != "-1" && $request->realitySubReg == null){
-                    array_push($array, ["region", "=",intval($request->realityReg)]);
-                }
-                if($request->streetSearch && $request->streetSearch != null){
-                    array_push($array, ["street", "like","%".$request->streetSearch."%"]);
-                }
-                if($request->buildingNumber && $request->buildingNumber != null){
-                    array_push($array, ["buildingNumber", "=",$request->buildingNumber]);
-                }
-                if($request->apartamentNumber && $request->apartamentNumber != null){
-                    array_push($array, ["apartamentNumber", "=",intval($request->apartamentNumber)]);
-                }
-                if($request->floorMin && $request->floorMin != null){
-                    array_push($array, ["floors", ">=",intval($request->floorMin)]);
-                }
-                if($request->floorMax && $request->floorMax != null){
-                    array_push($array, ["floors", "<=",intval($request->floorMax)]);
-                }
-                if($request->firstFloor && $request->firstFloor == "1"){
-                    array_push($array, ["firstFloor", "=",intval($request->firstFloor)]);
-                }
-                if($request->lastFloor && $request->lastFloor == "1"){
-                    array_push($array, ["lastFloor", "=",intval($request->lastFloor)]);
-                }
-                if($request->areaMin && $request->areaMin != null){
-                    array_push($array, ["area", ">=",intval($request->areaMin)]);
-                }
-                if($request->areaMax && $request->areaMax != null){
-                    array_push($array, ["area", "<=",intval($request->areaMax)]);
-                }
-                if($request->roomsMin && $request->roomsMin != null){
-                    array_push($array, ["rooms", ">=",intval($request->roomsMin)]);
-                }
-                if($request->roomsMax && $request->roomsMax != null){
-                    array_push($array, ["rooms", "<=",intval($request->roomsMax)]);
-                }
-                if($request->priceMin && $request->priceMin != null){
-                    array_push($array, ["price", ">=",intval($request->priceMin)]);
-                }
-                if($request->priceMax && $request->priceMax != null){
-                    array_push($array, ["price", "<=",intval($request->priceMax)]);
-                }
-                if($request->buildingFloorsMin && $request->buildingFloorsMin != null){
-                    array_push($array, ["buildingFloors", ">=",intval($request->buildingFloorsMin)]);
-                }
-                if($request->buildingFloorsMax && $request->buildingFloorsMax != null){
-                    array_push($array, ["buildingFloors", "<=",intval($request->buildingFloorsMax)]);
-                }
-                if($request->gardenMin && $request->gardenMin != null){
-                    array_push($array, ["gardenArea", ">=",intval($request->gardenMin)]);
-                }
-                if($request->gardenMax && $request->gardenMax != null){
-                    array_push($array, ["gardenArea", "<=",intval($request->gardenMax)]);
-                }
-                if($request->facePartMin && $request->facePartMin != null){
-                    array_push($array, ["faceArea", ">=", intval($request->facePartMin)]);
-                }
-                if($request->facePartMax && $request->facePartMax != null){
-                    array_push($array, ["faceArea", "<=",intval($request->facePartMax)]);
-                }
-                if($request->phone && $request->phone == null){
-                    array_push($array, ["phone", "LIKE",'%'.$request->phone.'%']);
-                }
-                if($request->customerName && $request->customerName == null){
-                    array_push($array, ["customerName", "=",$request->customerName]);
-                }
-
-                if($request->user_id && $request->user_id == -1){
-                    $users = DB::table('users')->where('admin_id', Auth::user()->id)->get();
-                }else if($request->user_id && $request->user_id != -1){
-                    $users = DB::table('users')->where('id','=', $request->user_id)->get();
-                }
-
-                // dd($users);
-                $regions = DB::table('regions')->get();
-                $subRegions = DB::table('sub_regions')->get();
-                $subReg = $request->realitySubReg;
-                
-                $sql = \DB::table('reality');
-                if($request->user_id && $request->user_id == "-1"){
-                    
-                    $users = DB::table('users')->where('admin_id', Auth::user()->id)->get();
-                   
-                    if(count($users) > 0){
-                        
-                        for($i = 0; $i < count($users); $i++){
-                        $sql->orWhere(function ($sql) use ($users,$subReg, $i, $array) {
-                            $sql->where($array);
-                            $sql->where('user_id', '=', $users[$i]->id); 
-                            if($subReg !=null && !empty($subReg) && count($subReg) > 0){
-                            for($j = 0; $j < count($subReg); $j++){
-                                    $sql->where('subRegion', '=', $subReg[$j]);
-                                }
-                            }
-                            });
-                        }
-                        
-                        $reality = $sql ->orderBy('code', 'desc')->paginate(10);
-                        return response()->json(view('admin.reality.table', [
-                        'error'=> false,
-                        'id' => $id,
-                        'type' => $type,
-                        'users'=> $users,
-                        'superadmins'=>$admins,
-                        'admin'=>Auth::user()->Admin(),
-                        'subRegions' => $subRegions,
-                        'regions' => $regions,
-                        'reality' => $reality])->render());
-                    }else{
-                        $reality = [];
-                        return response()->json(view('admin.reality.table', [
-                        'error'=> false,
-                        'id' => $id,
-                        'type' => $type,
-                        'users'=> $users,
-                        'superadmins'=>$admins,
-                        'admin'=>Auth::user()->Admin(),
-                        'subRegions' => $subRegions,
-                        'regions' => $regions,
-                        'reality' => $reality])->render());
-                    }
-                    
-                }else if($request->user_id && $request->user_id != "-1"){
-                    $us_id = $request->user_id;
-                    if($subReg !=null && !empty($subReg) && count($subReg) > 0){
-                        for($j = 0; $j < count($subReg); $j++){
-                            $sql->orWhere(function ($sql) use ($us_id,$j, $subReg, $array) {
-                                $sql->where('subRegion', '=', $subReg[$j]);
-                                $sql->where($array);
-                                $sql->where('user_id', '=', $us_id); 
-                                
-                            });
-                                
-                        }
-                        
-                        $reality = $sql ->orderBy('code', 'desc')->paginate(10);    
-                    }else{
-                        $sql->where($array);
-                        $sql->where('user_id', '=', $us_id);
-                        $reality = $sql ->orderBy('code', 'desc')->paginate(10);
-                    }
-                }
-                $reality = $sql ->orderBy('code', 'desc')->paginate(10);
-                
-                $users = DB::table('users')->where('admin_id', Auth::user()->id)->get();
-
-                return response()->json(view('admin.reality.table', [
-                    'error'=> false,
-                    'id' => $id,
-                    'type' => $type,
-                    'users'=> $users,
-                    'superadmins'=>$admins,
-                    'admin'=>Auth::user()->Admin(),
-                    'subRegions' => $subRegions,
-                    'regions' => $regions,
-                    'reality' => $reality])->render());
-
-            }else{
-                $array = [];
-                $users = DB::table('users')->where('admin_id', Auth::user()->id)->get();
-                if (count($users) > 0) {
-                   for($i = 0; $i < count($users); $i++){
-                        array_push($array, ["user_id", "=",$users[$i]->id]);
-                    } 
-                } else {
-                    array_push($array, ["user_id", "=",null]);
-                }
-                $regions = DB::table('regions')->get();
-                $subRegions = DB::table('sub_regions')->get();
-                $reality = DB::table('reality')
-                    ->where("status", "=",$id)->where('type', $type)->where($array)->orderBy('code', 'desc')->paginate(10);
-                return view('admin.reality.index',[
-                    'error'=> false,
-                    'id' => $id,
-                    'type' => $type,
-                    'admin'=>Auth::user()->Admin(),
-                    'users'=> $users,
-                    'superadmins'=>$admins,
-                    'subRegions' => $subRegions,
-                    'regions' => $regions,
-                    'reality' => $reality]);
-            }
         }else{
-            if (request()->ajax()) {
-                $array = [];
-                array_push($array, ["type","=", intval($request->type)]);
-                array_push($array, ["status","=", $id]);
-                if($request->code && $request->code != null){
-                    array_push($array, ["code", "LIKE", intval($request->code).'%']);
-                }
-                if($request->hp_code && $request->hp_code != null){
-                    array_push($array, ["link", "LIKE", '%'.$request->hp_code.'%']);
-                }
-                if($request->realityType && $request->realityType != "-1"){
-                    array_push($array, ["realityType", "=",intval($request->realityType)]);
-                }
-                if($request->realityProect && $request->realityProect != "-1"){
-                    array_push($array, ["proect", "=",intval($request->realityProect)]);
-                }
-                if($request->realityBuildingType && $request->realityBuildingType != "-1"){
-                    array_push($array, ["buildingType", "=",intval($request->realityBuildingType)]);
-                }
-                if($request->realityCosmetic && $request->realityCosmetic != "-1"){
-                    array_push($array, ["cosmetic", "=",intval($request->realityCosmetic)]);
-                }
-                if($request->realityBalcon && $request->realityBalcon != "-1"){
-                    array_push($array, ["balcon", "=",intval($request->realityBalcon)]);
-                }
-                if($request->realityReg && $request->realityReg != "-1" && $request->realitySubReg == null){
-                    array_push($array, ["region", "=",intval($request->realityReg)]);
-                }
-                if($request->streetSearch && $request->streetSearch != null){
-                    array_push($array, ["street", "like","%".$request->streetSearch."%"]);
-                }
-                if($request->buildingNumber && $request->buildingNumber != null){
-                    array_push($array, ["buildingNumber", "=",$request->buildingNumber]);
-                }
-                if($request->apartamentNumber && $request->apartamentNumber != null){
-                    array_push($array, ["apartamentNumber", "=",intval($request->apartamentNumber)]);
-                }
-                if($request->floorMin && $request->floorMin != null){
-                    array_push($array, ["floors", ">=",intval($request->floorMin)]);
-                }
-                if($request->floorMax && $request->floorMax != null){
-                    array_push($array, ["floors", "<=",intval($request->floorMax)]);
-                }
-                if($request->firstFloor && $request->firstFloor == "1"){
-                    array_push($array, ["firstFloor", "=",intval($request->firstFloor)]);
-                }
-                if($request->lastFloor && $request->lastFloor == "1"){
-                    array_push($array, ["lastFloor", "=",intval($request->lastFloor)]);
-                }
-                if($request->areaMin && $request->areaMin != null){
-                    array_push($array, ["area", ">=",intval($request->areaMin)]);
-                }
-                if($request->areaMax && $request->areaMax != null){
-                    array_push($array, ["area", "<=",intval($request->areaMax)]);
-                }
-                if($request->roomsMin && $request->roomsMin != null){
-                    array_push($array, ["rooms", ">=",intval($request->roomsMin)]);
-                }
-                if($request->roomsMax && $request->roomsMax != null){
-                    array_push($array, ["rooms", "<=",intval($request->roomsMax)]);
-                }
-                if($request->priceMin && $request->priceMin != null){
-                    array_push($array, ["price", ">=",intval($request->priceMin)]);
-                }
-                if($request->priceMax && $request->priceMax != null){
-                    array_push($array, ["price", "<=",intval($request->priceMax)]);
-                }
-                if($request->buildingFloorsMin && $request->buildingFloorsMin != null){
-                    array_push($array, ["buildingFloors", ">=",intval($request->buildingFloorsMin)]);
-                }
-                if($request->buildingFloorsMax && $request->buildingFloorsMax != null){
-                    array_push($array, ["buildingFloors", "<=",intval($request->buildingFloorsMax)]);
-                }
-                if($request->gardenMin && $request->gardenMin != null){
-                    array_push($array, ["gardenArea", ">=",intval($request->gardenMin)]);
-                }
-                if($request->gardenMax && $request->gardenMax != null){
-                    array_push($array, ["gardenArea", "<=",intval($request->gardenMax)]);
-                }
-                if($request->facePartMin && $request->facePartMin != null){
-                    array_push($array, ["faceArea", ">=", intval($request->facePartMin)]);
-                }
-                if($request->facePartMax && $request->facePartMax != null){
-                    array_push($array, ["faceArea", "<=",intval($request->facePartMax)]);
-                }
-                if($request->phone && $request->phone == null){
-                    array_push($array, ["phone", "LIKE",'%'.$request->phone.'%']);
-                }
-                if($request->customerName && $request->customerName == null){
-                    array_push($array, ["customerName", "=",$request->customerName]);
-                }
-
-                array_push($array, ["user_id", "=",Auth::user()->id]);
-
+            $array = [];
+            array_push($array, ["user_id", "=",Auth::id()]);
+            if($id == 3) {
+                return back();
+            }else{
+                array_push($array, ["status", "=",$id]);
                 $regions = DB::table('regions')->get();
                 $subRegions = DB::table('sub_regions')->get();
-                $subReg = $request->realitySubReg;
-                $reality = DB::table('reality')->
-                when(!empty($subReg) && count($subReg) > 0, function ($query) use ($subReg) {
-                    return $query->whereIn('subRegion', $subReg);
-                })->where('status', $id)
-                    ->where($array)
-                    ->orderBy('code', 'desc')->paginate(10);
-
-
-                return response()->json(view('admin.reality.table', [
+                $reality = DB::table('reality')->where('type', $type)
+                    ->where($array)->orderBy('code', 'desc')->paginate(10);
+                return view('admin.reality.index',[
                     'error'=> false,
                     'id' => $id,
                     'type' => $type,
@@ -583,34 +105,7 @@ class RealtyController extends Controller
                     'admin'=>Auth::user()->Admin(),
                     'subRegions' => $subRegions,
                     'regions' => $regions,
-                    'reality' => $reality])->render());
-
-            }else{
-                $array = [];
-                array_push($array, ["user_id", "=",Auth::user()->id]);
-
-                if($id == 3) {
-                    return back();
-                }else{
-                    array_push($array, ["status", "=",$id]);
-
-                    $regions = DB::table('regions')->get();
-                    $subRegions = DB::table('sub_regions')->get();
-                    $reality = DB::table('reality')->where('type', $type)
-                        ->where($array)->orderBy('code', 'desc')->paginate(10);
-
-                    return view('admin.reality.index',[
-                        'error'=> false,
-                        'id' => $id,
-                        'type' => $type,
-                        'superadmins'=>$admins,
-                        'admin'=>Auth::user()->Admin(),
-                        'subRegions' => $subRegions,
-                        'regions' => $regions,
-                        'reality' => $reality]);
-                }
-
-
+                    'reality' => $reality]);
             }
         }
     }
@@ -709,7 +204,7 @@ class RealtyController extends Controller
                 "firstFloor" => 0,
                 "status" => 1,
                 "lastFloor" => 0,
-                "user_id" => $request->user,
+                "user_id" => Auth::id(),
                 "created_at" => date('Y-m-d-H:i:s'),
                 "updated_at" => date('Y-m-d-H:i:s'),
             ];

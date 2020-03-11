@@ -35,12 +35,10 @@
                     <div class="pull-right p-5">
                         <p class="no-margin color-white"><small>{!! Auth::user()->name !!}</small></p>
                         <p class="no-margin color-white">
-                        @if(Auth::user()->admin == 1)
+                        @if(Auth::user()->admin == 4)
                             <b>Սուպեր Ադմին</b>
-                        @elseif(Auth::user()->admin == 3)
-                            <b>Սուպեր ադմինի օգնական</b>
-                        @elseif(Auth::user()->admin == 0)
-                            <b>Ադմին</b>
+                        @elseif(Auth::user()->admin == 1)
+                            <b>Ադմինի</b>
                         @else
                             <b>Գործակալ</b>
                         @endif

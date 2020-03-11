@@ -45,14 +45,14 @@
                                             </select>
                                         </div>
                                         @endif
-                                        <div class="col-sm-3 b-r">
-                                            <label for="addRealityUsers">Գործակալ</label>
-                                            <select name="user" id="addRealityUsers" class="form-control">
-                                                @foreach($users as $user)
-                                                    <option value="{!! $user->id !!}">{!! $user->name !!}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+{{--                                        <div class="col-sm-3 b-r">--}}
+{{--                                            <label for="addRealityUsers">Գործակալ</label>--}}
+{{--                                            <select name="user" id="addRealityUsers" class="form-control">--}}
+{{--                                                @foreach($users as $user)--}}
+{{--                                                    <option value="{!! $user->id !!}">{!! $user->name !!}</option>--}}
+{{--                                                @endforeach--}}
+{{--                                            </select>--}}
+{{--                                        </div>--}}
                                         <div class="col-sm-3 b-r">
                                             <label for="type">Տեսակ</label>
                                             <select name="type" id="type1" class="form-control">
@@ -316,14 +316,14 @@
                                                 </select>
                                             </div>
                                         @endif
-                                        <div class="col-sm-3 b-r">
-                                            <label for="realityRegion">Գործակալ</label>
-                                            <select name="user" id="editRealityUsers" class="form-control">
-                                                @foreach($users as $user)
-                                                    <option value="{!! $user->id !!}" {!! $reality->user_id == $user->id ? 'selected' : '' !!}>{!! $user->name !!}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+{{--                                        <div class="col-sm-3 b-r">--}}
+{{--                                            <label for="realityRegion">Գործակալ</label>--}}
+{{--                                            <select name="user" id="editRealityUsers" class="form-control">--}}
+{{--                                                @foreach($users as $user)--}}
+{{--                                                    <option value="{!! $user->id !!}" {!! $reality->user_id == $user->id ? 'selected' : '' !!}>{!! $user->name !!}</option>--}}
+{{--                                                @endforeach--}}
+{{--                                            </select>--}}
+{{--                                        </div>--}}
                                         <div class="col-sm-3">
                                             <label for="type">Տեսակ</label>
                                             <select name="type" id="type" class="form-control">

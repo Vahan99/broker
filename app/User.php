@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'name', 'email', 'password', 'status', 'admin', 'phone', 'address',
     ];
 
     /**
@@ -30,5 +30,30 @@ class User extends Authenticatable
     public function Admin()
     {
         return $this->admin;
+    }
+
+    public function companyUser()
+    {
+        return $this->hasOne(CompanyUser::class, 'user_id');
+    }
+
+    public function getDateAttribute()
+    {
+        return $this->created_at->format('Y-m-d');
+    }
+
+    public function getCompany()
+    {
+        return $this->companyUser ? $this->companyUser->company : false;
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'admin_id');
+    }
+
+    public function hasCompanyDisplay()
+    {
+        return $this->getCompany() ? $this->getCompany()->display : $this->parent->companyUser->company->display;
     }
 }

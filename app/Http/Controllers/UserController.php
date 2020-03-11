@@ -281,14 +281,15 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        if (Auth::attempt(['email' => $request->input('email'),
-            'password' => $request->input('password')])) {
-            if(Auth::user()->status == 1){
-                return redirect('/admin/reality/reality-list/1/1');
-            }else{
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
+            if(Auth::user()->admin != 4 && Auth::user()->hasCompanyDisplay() == false){
                 return view('admin.admin',['errorMessage'=>'Ձեր էջը բլոկավորված է', 'error'=> true]);
+            } else if(Auth::user()->status == false && Auth::user()->admin != 4){
+                return view('admin.admin',['errorMessage'=>'Ձեր էջը բլոկավորված է', 'error'=> true]);
+            } else {
+                return redirect('/admin/reality/reality-list/1/1');
             }
-        }else{
+        } else{
             return view('admin.admin',['errorMessage'=>'Ձեր էլ-փոստը կամ գաղտնաբառը սխալ է', 'error'=> true]);
         }
     }

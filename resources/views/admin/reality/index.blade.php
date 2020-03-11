@@ -33,17 +33,17 @@
                                 </select>
                             </div>
                         @endif
-                        @if($admin !== 2)
-                            <div class="col-sm-3 b-r">
-                                <label for="realityUser">Գործակալ</label>
-                                <select name="user" id="realityUser" class="form-control" onchange="triggerFunction()">
-                                    <option value="-1">Բոլորը</option>
-                                    @foreach($users as $user)
-                                        <option value="{!! $user->id !!}" >{!! $user->name !!}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        @endif
+{{--                        @if($admin !== 2)--}}
+{{--                            <div class="col-sm-3 b-r">--}}
+{{--                                <label for="realityUser">Գործակալ</label>--}}
+{{--                                <select name="user" id="realityUser" class="form-control" onchange="triggerFunction()">--}}
+{{--                                    <option value="-1">Բոլորը</option>--}}
+{{--                                    @foreach($users as $user)--}}
+{{--                                        <option value="{!! $user->id !!}" >{!! $user->name !!}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
+{{--                        @endif--}}
                         <div class="col-sm-3 b-r">
                             <div class="row">
                                 <div class="col-sm-6">
