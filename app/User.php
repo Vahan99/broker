@@ -56,4 +56,14 @@ class User extends Authenticatable
     {
         return $this->getCompany() ? $this->getCompany()->display : $this->parent->companyUser->company->display;
     }
+
+    public function brokers()
+    {
+        return $this->hasMany(self::class, 'admin_id')->whereAdmin(2);
+    }
+
+    public function reality()
+    {
+        return $this->hasMany(Reality::class, 'user_id');
+    }
 }

@@ -13,7 +13,7 @@
 //Auth::routes();
 Route::get('/','UserController@index');
 Route::post('/', [ 'as' => 'login', 'uses' => 'UserController@login']);
-Route::group(['prefix' => 'admin', 'middleware' => ['superAdmin','auth']], function (){
+Route::group(['prefix' => 'admin', 'middleware' => ['superAdmin', 'auth']], function (){
     Route::get('/gorcakal/user-list', 'UserController@list');
     Route::get('/gorcakal/add-user', 'UserController@addAdminBlade');
     Route::post('/gorcakal/add-user', 'UserController@addAdminPost');

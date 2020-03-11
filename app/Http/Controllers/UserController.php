@@ -16,88 +16,11 @@ class UserController extends Controller
     }
     public function list()
     {
+        $user = Auth::user();
+        $users = $user->brokers;
+
         if(Auth::user()->Admin() == 1){
-            $countAdmin = [];
-            $count = [];
-            $usersByAdmin = 0;
-            $users = DB::table('users')->whereAdmin(2)->get();
-            for($i = 0; $i < count($users); $i++){
-                if($users[$i]->admin == 0) {
-                    $usersByAdmin = DB::table('users')->select('id')->where('admin_id',$users[$i]->id)->get();
-                    if(count($usersByAdmin) > 0){
-                        array_push($countAdmin, ['id'=> $users[$i]->id, 'count'=> 0]);
-                        for($j = 0; $j < count($usersByAdmin); $j++){
-                            $c = DB::table('reality')->where(function($query){
-                                $query->where('type', 0);
-                                $query->orWhere('type', 1);
-                            })->where('status', 1)->where('user_id',$usersByAdmin[$j]->id)->count();
-                            $countAdmin[count($countAdmin) - 1]['count'] = intval($c) + $countAdmin[count($countAdmin) - 1]['count'];
-                        }
-                    }else{
-                        array_push($countAdmin, ['id'=> $users[$i]->id, 'count'=> 0]);
-                    }
-                } else if($users[$i]->admin == 2) {
-
-                    array_push($count, ['id'=> 0, 'count'=> 0]);
-                    $c = DB::table('reality')->where(function($query){
-                                $query->where('type', 0);
-                                $query->orWhere('type', 1);
-                            })->where('status', 1)->where('user_id',$users[$i]->id)->count();
-                    $count[count($count) - 1]['id'] = $users[$i]->id;
-                    $count[count($count) - 1]['count'] = intval($c);
-                }
-            }
-            $count = array_merge($count,$countAdmin);
-//            dd( $count);
-            return view('admin.admins.admins-list',['admin'=>Auth::user()->Admin(),'count' => $count, 'users'=>$users]);
-        }
-
-        else if(Auth::user()->Admin() == 3){
-            $countAdmin = [];
-            $count = [];
-            $usersByAdmin = 0;
-            $users = DB::table('users')->whereNotIn('admin',[1, 3])->get();
-            for($i = 0; $i < count($users); $i++){
-                if($users[$i]->admin == 0) {
-                    $usersByAdmin = DB::table('users')->select('id')->where('admin_id',$users[$i]->id)->get();
-                    if(count($usersByAdmin) > 0){
-                        array_push($countAdmin, ['id'=> $users[$i]->id, 'count'=> 0]);
-                        for($j = 0; $j < count($usersByAdmin); $j++){
-                            $c = DB::table('reality')->where(function($query){
-                                $query->where('type', 0);
-                                $query->orWhere('type', 1);
-                            })->where('status', 1)->where('user_id',$usersByAdmin[$j]->id)->count();
-                            $countAdmin[count($countAdmin) - 1]['count'] = intval($c) + $countAdmin[count($countAdmin) - 1]['count'];
-                        }
-                    }else{
-                        array_push($countAdmin, ['id'=> $users[$i]->id, 'count'=> 0]);
-                    }
-                } else if($users[$i]->admin == 2) {
-                    array_push($count, ['id'=> 0, 'count'=> 0]);
-                    $c = DB::table('reality')->where(function($query){
-                                $query->where('type', 0);
-                                $query->orWhere('type', 1);
-                            })->where('status', 1)->where('user_id',$users[$i]->id)->count();
-                    $count[count($count) - 1]['id'] = $users[$i]->id;
-                    $count[count($count) - 1]['count'] = intval($c);
-                }
-            }
-            $count = array_merge($count,$countAdmin);
-            return view('admin.admins.admins-list',['admin'=>Auth::user()->Admin(),'count' => $count, 'users'=>$users]);
-        }
-        else if(Auth::user()->Admin() == 0){
-            $count = [];
-            $users = DB::table('users')->where('admin_id', Auth::user()->id)->get();
-            for($i = 0; $i < count($users); $i++){
-                array_push($count, ['id'=> 0, 'count'=> 0]);
-                $c = DB::table('reality')->where(function($query){
-                                $query->where('type', 0);
-                                $query->orWhere('type', 1);
-                            })->where('status', 1)->where('user_id', $users[$i]->id)->count();
-                $count[count($count) - 1]['id'] = $users[$i]->id;
-                $count[count($count) - 1]['count'] = intval($c);
-            }
-            return view('admin.admins.admins-list', ['admin'=>Auth::user()->Admin(),'count' => $count, 'users'=>$users]);
+            return view('admin.admins.admins-list',['admin' => Auth::user()->Admin(), 'users'=>$users]);
         }
     }
     public function updateAdminBlade($id)
@@ -284,7 +207,7 @@ class UserController extends Controller
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
             if(Auth::user()->admin != 4 && Auth::user()->hasCompanyDisplay() == false){
                 return view('admin.admin',['errorMessage'=>'Ձեր էջը բլոկավորված է', 'error'=> true]);
-            } else if(Auth::user()->status == false && Auth::user()->admin != 4){
+            } else if(Auth::user()->status == 0  && Auth::user()->admin != 4){
                 return view('admin.admin',['errorMessage'=>'Ձեր էջը բլոկավորված է', 'error'=> true]);
             } else {
                 return redirect('/admin/reality/reality-list/1/1');

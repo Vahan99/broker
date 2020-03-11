@@ -57,13 +57,7 @@
                                         @endif
                                         <td>{!! $user->email !!}</td>
                                         <td>{!! $user->address !!}</td>
-                                        <td>
-                                            @foreach($count as $c)
-                                                @if($user->id == $c['id'])
-                                                    {!! $c['count'] !!}
-                                                @endif
-                                            @endforeach
-                                        </td>
+                                        <td>{!! $user->reality()->count() !!}</td>
                                         <td>
                                             <a href="/admin/gorcakal/edit-user/{!! $user->id !!}" class="btn btn-primary btn-rounded waves-effect waves-light"><i class="glyphicon glyphicon-pencil"></i></a>
                                         </td>
