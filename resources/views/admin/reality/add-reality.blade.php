@@ -233,7 +233,7 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group">
-                                                <label for="priceMin">Արժեք</label>
+                                                <label for="priceMin">Արժեք ($)</label>
                                                 <input type="number" min="0" name="price" class="form-control"
                                                        id="priceMin">
                                             </div>
@@ -292,7 +292,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label for="info">Հավելյալ Տեղեկատվություն, Enter կոճակը օգտագործելու համար օգտագործել Shift + Enter,<br> հղում օգտագործելու համար օգտվել այս նմուշից՝ &#60;a href&#61;&#39;Ձեր հղումն այստեղ&#39; target&#61;&#39;_blank&#39; &#62;Հղում&#60;&#47;a&#62;</label>
+                                                <label for="info">Հավելյալ Տեղեկատվություն</label>
                                                 <textarea name="info" id="info" rows="10" class="form-control"></textarea>
                                             </div>
                                         </div>

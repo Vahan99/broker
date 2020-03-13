@@ -1,12 +1,8 @@
 @extends('adminLayouts.index')
-
 @section('title', 'Admin Dashboard')
-
 @section('content')
-
     @include('adminLayouts.header')
     @include('adminLayouts.sidebar')
-
     <div class="content-page">
         <!-- Start content -->
         <input type="hidden" name="_token" value="{!! csrf_token() !!}" id="token">
@@ -66,10 +62,8 @@
                             {{ $users->links() }}
                         </div>
                     </div>
-
                 </div>
                 @include('adminLayouts.footer')
             </div>
         </div>
-
 @stop

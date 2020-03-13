@@ -38,7 +38,7 @@
                         @if(Auth::user()->admin == 4)
                             <b>Սուպեր Ադմին</b>
                         @elseif(Auth::user()->admin == 1)
-                            <b>Ադմինի</b>
+                            <b>Ադմին</b>
                         @else
                             <b>Գործակալ</b>
                         @endif
