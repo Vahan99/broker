@@ -425,9 +425,6 @@ $(document).ready(function(){
         $('#searchButtonReality').trigger('click')
     }
     if(window.location.pathname.indexOf('/admin/reality/reality-list/') >= 0) {
-        
-        
-
         $(window).on('hashchange', function() {
             if (window.location.hash && localStorage.getItem('search')) {
                 var page = window.location.hash.replace('#', '');
@@ -547,6 +544,7 @@ $(document).ready(function(){
         var data, page;
         if (localStorage.getItem('search')){
             data = JSON.parse(localStorage.getItem('search'));
+            console.log(data, "666666666666666666");
             $('#type').val(data.type)
             $('#codeSearch').val(data.code)
             $('#hp_code').val(data.hp_codde)
@@ -585,9 +583,8 @@ $(document).ready(function(){
             $("#admin_id").trigger("change")
         }
 
-        
-
         $('#searchButtonReality').on('click', function(){
+            console.log('5555555555555555');
             localStorage.setItem('searchBoolean', 'true')
             var search = {
                 '_token':$('#token').val(),

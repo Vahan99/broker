@@ -54,20 +54,21 @@ Route::group(['prefix' => 'admin', 'middleware' => ['superAdmin', 'auth']], func
 
     Route::get('/clients/{id}', 'RealtyController@usersList');
     Route::get('/client/{id}', 'RealtyController@curentUser');
-});
-Route::group(['prefix' => 'admin','middleware' => ['auth']],function (){
-//    Route::get('/gorcakal/user-list', 'UserController@list');
-    Route::get('/logout', 'UserController@logout');
-    //reality
-    Route::get('/reality/reality-list/{id}/{type}', 'RealtyController@index');
-    Route::post('/reality/reality-list/{id}/{type}', 'RealtyController@index');
-    Route::get('/reality/single-reality/{id}', 'RealtyController@singleRealityBlade');
-    Route::get('/reality/reality-print-list/{id}', 'RealtyController@printList');
+});///
 
-    Route::get('/clients/{id}', 'RealtyController@usersList');
-    Route::get('/client/{id}', 'RealtyController@curentUser');
-    Route::get('/logout', 'UserController@logout');
-});
+//Route::group(['prefix' => 'admin','middleware' => ['auth']],function (){
+////    Route::get('/gorcakal/user-list', 'UserController@list');
+//    Route::get('/logout', 'UserController@logout');
+//    //reality
+//    Route::get('/reality/reality-list/{id}/{type}', 'RealtyController@index');
+//    Route::post('/reality/reality-list/{id}/{type}', 'RealtyController@index');
+//    Route::get('/reality/single-reality/{id}', 'RealtyController@singleRealityBlade');
+//    Route::get('/reality/reality-print-list/{id}', 'RealtyController@printList');
+//
+//    Route::get('/clients/{id}', 'RealtyController@usersList');
+//    Route::get('/client/{id}', 'RealtyController@curentUser');
+//    Route::get('/logout', 'UserController@logout');
+//});
 
 Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth', 'super']], function (){
     Route::get('/create-company', 'CompanyController@createCompany')->name('company.create');

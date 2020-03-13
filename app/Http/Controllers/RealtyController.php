@@ -71,7 +71,6 @@ class RealtyController extends Controller
         $admins = DB::table('users')->where('admin','=', 0)->get();
         if (request()->ajax()) {
             $reality = (new RealEstateFilter($request))->filter->paginate(10);
-
             $regions = DB::table('regions')->get();
             $subRegions = DB::table('sub_regions')->get();
             $subReg = $request->realitySubReg;

@@ -26,7 +26,7 @@
                             <div class="col-sm-3 b-r">
                                 <label for="admin_id">Ադմին</label>
                                 <select name="admin_id" id="admin_id" class="form-control" onchange="triggerFunction()">
-                                    <option value="-1">Բոլորը</option>
+                                    <option>Բոլորը</option>
                                     @foreach($superadmins as $superadmin)
                                         <option value="{!! $superadmin->id !!}">{!! $superadmin->name !!}</option>
                                     @endforeach
@@ -37,7 +37,7 @@
 {{--                            <div class="col-sm-3 b-r">--}}
 {{--                                <label for="realityUser">Գործակալ</label>--}}
 {{--                                <select name="user" id="realityUser" class="form-control" onchange="triggerFunction()">--}}
-{{--                                    <option value="-1">Բոլորը</option>--}}
+{{--                                    <option>Բոլորը</option>--}}
 {{--                                    @foreach($users as $user)--}}
 {{--                                        <option value="{!! $user->id !!}" >{!! $user->name !!}</option>--}}
 {{--                                    @endforeach--}}
@@ -93,7 +93,7 @@
                                 <div class="col-sm-2 b-r">
                                     <label for="realityType">Գույքի տեսակ</label>
                                     <select name="realityType" id="realityType" class="form-control"  onchange="triggerFunction()">
-                                        <option value="-1">Բոլորը</option>
+                                        <option>Բոլորը</option>
                                         <option value="0">Բնակարան</option>
                                         <option value="1">Տուն</option>
                                         <option value="2">Առանձնատուն</option>
@@ -110,7 +110,7 @@
                                 <div class="col-sm-2 b-r">
                                     <label for="realityReg">Մարզ</label>
                                     <select name="balcon" id="realityReg" class="form-control"  onchange="triggerFunction()">
-                                        <option value="-1">Բոլորը</option>
+                                        <option>Բոլորը</option>
                                         @foreach($regions as $region)
                                             <option value="{!! $region->id !!}">{!! $region->name !!}</option>
                                         @endforeach
@@ -150,7 +150,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="floorMin">Հարկեր ս․</label>
-                                                <input type="number" min="0" class="form-control" id="floorMin" >
+                                                <input type="number" min="0" class="form-control" id="floorMin" name="floorMin">
                                                 <p class="align-content-center no-margin p-t-5">
                                                     <span style="font-size: 13px;">Առաջին հ.</span>
                                                     <input style="margin-left: 5px" type="checkbox" id="firstFloor" >
@@ -160,7 +160,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group m-l-10">
                                                 <label for="floorMax">Հարկեր վ․</label>
-                                                <input type="number" min="0" class="form-control" id="floorMax" >
+                                                <input type="number" min="0" class="form-control" id="floorMax" name="floorMax">
                                                 <p  class="align-content-center no-margin p-t-5">
                                                     <span style="font-size: 13px;">Վերջին հ.</span>
                                                     <input style="margin-left: 5px" type="checkbox" id="lastFloor" >
@@ -174,13 +174,13 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="roomsMin">Սեն. ս․</label>
-                                                <input type="number" min="0" class="form-control" id="roomsMin" >
+                                                <input type="number" min="0" class="form-control" id="roomsMin" name="roomsMin">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group m-l-10">
                                                 <label for="roomsMax">Սեն. վ․</label>
-                                                <input type="number" min="0" class="form-control" id="roomsMax" >
+                                                <input type="number" min="0" class="form-control" id="roomsMax" name="roomsMax">
                                             </div>
                                         </div>
                                     </div>
@@ -206,13 +206,13 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="priceMin">Արժ. ս․</label>
-                                                <input type="number" min="0" class="form-control" id="priceMin" >
+                                                <input type="number" min="0" class="form-control" id="priceMin" name="priceMin">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group m-l-10">
                                                 <label for="priceMax">Արժ. վ․</label>
-                                                <input type="number" min="0" class="form-control" id="priceMax" >
+                                                <input type="number" min="0" class="form-control" id="priceMax" name="priceMax">
                                             </div>
                                         </div>
                                     </div>
@@ -222,13 +222,13 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="buildingFloorsMin">Շենք ք. ս․</label>
-                                                <input type="number" min="0" class="form-control" id="buildingFloorsMin" >
+                                                <input type="number" min="0" class="form-control" id="buildingFloorsMin" name="buildingFloorsMin">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group m-l-10">
                                                 <label for="buildingFloorsMax">Շենք ք. վ․</label>
-                                                <input type="number" min="0" class="form-control" id="buildingFloorsMax" >
+                                                <input type="number" min="0" class="form-control" id="buildingFloorsMax" name="buildingFloorsMax">
                                             </div>
                                         </div>
                                     </div>
@@ -251,7 +251,7 @@
                                 <div class="col-sm-2 b-r">
                                     <label for="realityProect">Նախագիծ</label>
                                     <select name="proect" id="realityProect" class="form-control">
-                                        <option value="-1">Բոլորը</option>
+                                        <option>Բոլորը</option>
                                         <option value="0">Ստալին փ/ծ</option>
                                         <option value="1">Ստալին բ/ծ</option>
                                         <option value="2">Խռուշյչովյան</option>
@@ -270,7 +270,7 @@
                                 <div class="col-sm-2 b-r">
                                     <label for="realityBuildingType">Շենքի տիպ</label>
                                     <select name="buildingType" id="realityBuildingType" class="form-control">
-                                        <option value="-1">Բոլորը</option>
+                                        <option>Բոլորը</option>
                                         <option value="0">Պանելային</option>
                                         <option value="1">Քարե</option>
                                         <option value="2">Մոնոլիտ</option>
@@ -283,7 +283,7 @@
                                 <div class="col-sm-2 b-r">
                                     <label for="realityCosmetic">Հարդարում</label>
                                     <select name="cosmetic" id="realityCosmetic" class="form-control">
-                                        <option value="-1">Բոլորը</option>
+                                        <option>Բոլորը</option>
                                         <option value="0">Պետական</option>
                                         <option value="1">Զրոյական</option>
                                         <option value="2">Վերանորոգած</option>
@@ -296,7 +296,7 @@
                                 <div class="col-sm-2">
                                     <label for="realityBalcon">Պատշգամբ</label>
                                     <select name="balcon" id="realityBalcon" class="form-control">
-                                        <option value="-1">Բոլորը</option>
+                                        <option>Բոլորը</option>
                                         <option value="0">Բաց</option>
                                         <option value="1">Փակ</option>
                                         <option value="2">Բաց և փակ</option>
@@ -319,13 +319,13 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="gardenMin">Այգի/հող./մետր ս․</label>
-                                                <input type="number" min="0" class="form-control" id="gardenMin" >
+                                                <input type="number" min="0" class="form-control" id="gardenMin" name="gardenMin">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group m-l-10">
                                                 <label for="gardenMax">Այգի/հող./մետր վ․</label>
-                                                <input type="number" min="0" class="form-control" id="gardenMax" >
+                                                <input type="number" min="0" class="form-control" id="gardenMax" name="gardenMax">
                                             </div>
                                         </div>
                                     </div>
@@ -335,13 +335,13 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="facePartMin">Ճակատ. մաս/մետր ս․</label>
-                                                <input type="number" min="0" class="form-control" id="facePartMin" >
+                                                <input type="number" min="0" class="form-control" id="facePartMin" name="facePartMin">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group m-l-10">
                                                 <label for="facePartMax">Ճակատ. մաս/մետր վ․</label>
-                                                <input type="number" min="0" class="form-control" id="facePartMax" >
+                                                <input type="number" min="0" class="form-control" id="facePartMax" name="facePartMax">
                                             </div>
                                         </div>
                                     </div>
