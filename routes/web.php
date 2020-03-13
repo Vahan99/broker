@@ -13,6 +13,8 @@
 //Auth::routes();
 Route::get('/','UserController@index');
 Route::post('/', [ 'as' => 'login', 'uses' => 'UserController@login']);
+Route::post('/entry-reset-password', 'UserController@entryResetPassword')->name('entry.reset.password');
+
 Route::group(['prefix' => 'admin', 'middleware' => ['superAdmin', 'auth']], function (){
     Route::get('/gorcakal/user-list', 'UserController@list');
     Route::get('/gorcakal/add-user', 'UserController@addAdminBlade');

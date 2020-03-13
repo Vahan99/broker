@@ -18,7 +18,11 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->boolean('admin')->default('0');
+            $table->longText('address');
+            $table->bigInteger('admin_id')->nullable();
+            $table->boolean('status')->default(0);
+            $table->boolean('admin')->default(0);
+            $table->boolean('entry')->default(0);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
@@ -32,8 +36,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('admin');
-        });
+        Schema::dropIfExists('users');
     }
 }

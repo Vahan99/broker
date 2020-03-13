@@ -207,9 +207,12 @@ class UserController extends Controller
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
             if(Auth::user()->admin != 4 && Auth::user()->hasCompanyDisplay() == false){
                 return view('admin.admin',['errorMessage'=>'Ձեր էջը բլոկավորված է', 'error'=> true]);
-            } else if(Auth::user()->status == 0  && Auth::user()->admin != 4){
+            } else if(Auth::user()->status == 2 || Auth::user()->status == 0  && Auth::user()->admin != 4){
                 return view('admin.admin',['errorMessage'=>'Ձեր էջը բլոկավորված է', 'error'=> true]);
             } else {
+                if(!Auth::user()->entry){
+                    return view('auth.passwords.entry');
+                }
                 return redirect('/admin/reality/reality-list/1/1');
             }
         } else{
@@ -230,6 +233,15 @@ class UserController extends Controller
     {
         Auth::logout();
         return redirect('/');
+    }
+
+    public function entryResetPassword(Request $request)
+    {
+        User::find(Auth::id())->update([
+            'password' => bcrypt($request->password),
+            'entry' => 1
+        ]);
+        return redirect('/admin/reality/reality-list/1/1');
     }
 }
 

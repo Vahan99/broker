@@ -7,10 +7,15 @@
                     <li class="has_sub">
                         <a href="#"><i class="fa fa-building"></i> <span> Ընկերություններ </span> </a>
                         <ul class="list-unstyled">
-                            <li class="{{strrpos(url()->full(), 'user-list', 0) ? 'active' : ''}}"><a href="{{route('company.index')}}">Բոլորը</a></li>
                             <li class="{{strrpos(url()->full(), 'add-user', 0) ? 'active' : ''}}"><a href="{{route('company.create')}}">Ստեղծել</a></li>
-                            <li class="{{strrpos(url()->full(), 'add-user', 0) ? 'active' : ''}}"><a href="{{route('company.admin.create')}}">Ստեղծել Ադմին</a></li>
-                            <li class="{{strrpos(url()->full(), 'add-user', 0) ? 'active' : ''}}"><a href="{{route('company.admin.index')}}">Բոլոր Ադմիններ</a></li>
+                            <li class="{{strrpos(url()->full(), 'user-list', 0) ? 'active' : ''}}"><a href="{{route('company.index')}}">Բոլորը</a></li>
+                        </ul>
+                    </li>
+                    <li class="has_sub">
+                        <a href="#"><i class="fa fa-users"></i> <span> Ադմիններ </span> </a>
+                        <ul class="list-unstyled">
+                            <li class="{{strrpos(url()->full(), 'add-user', 0) ? 'active' : ''}}"><a href="{{route('company.admin.create')}}">Ստեղծել</a></li>
+                            <li class="{{strrpos(url()->full(), 'add-user', 0) ? 'active' : ''}}"><a href="{{route('company.admin.index')}}">Բոլորը</a></li>
                         </ul>
                     </li>
                     @else

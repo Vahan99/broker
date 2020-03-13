@@ -32,7 +32,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="tax_id">Հ․Վ․Հ․Հ</label>
-                                <input type="text" name="tax_id" class="form-control" value="{{isset($company->tax_id) ? $company->tax_id : ''}}" required>
+                                <input type="text" name="tax_id" class="form-control" value="{{isset($company->tax_id) ? $company->tax_id : ''}}">
                             </div>
                             <button type="submit" class="btn btn-primary" id="addOrEditUserButton">{{isset($company) ? 'Փոփոխել' : 'Ավելացնել'}}</button>
                         </form>

@@ -53,7 +53,6 @@ class CompanyController extends Controller
             'address' => 'required',
             'phone' => 'required',
             'email' => 'required|unique:companies',
-            'tax_id' => 'required|unique:companies'
         ]);
 
         Company::create($request->all());
@@ -65,7 +64,6 @@ class CompanyController extends Controller
     {
         $admin = Auth::user()->Admin();
         $companies = Company::with('companyUser')->has('companyUser', '==', '0')->get();
-
         return view('superadmin.admin.create-update', compact('admin', 'companies'));
     }
 
