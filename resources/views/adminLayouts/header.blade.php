@@ -2,7 +2,7 @@
     <div class="topbar">
         <div class="topbar-left">
             <div class="text-center">
-                <a href="/admin/reality/reality-list/1/1" class="logo logo-title">
+                <a href="/admin/reality/reality-list" class="logo logo-title">
                     <img style="margin: auto; border: none; width: 9rem; padding: 0" src="{!! URL::asset('assets/light-logo.png') !!}" class="img-responsive" alt="">
                     <i class="icon-c-logo">
                     </i>

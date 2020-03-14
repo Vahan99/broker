@@ -67,21 +67,19 @@ class RealtyController extends Controller
         }
 
     }
-    public function index(Request $request, $id = null, $type = null)
+    public function index(Request $request)
     {
-        $regions = Region::get();
+        $regions    = Region::get();
         $subRegions = SubRegion::get();
-        $subReg = $request->realitySubReg;
-        $reality = (new RealEstateFilter($request))->filter->paginate(10);
+        $subReg     = $request->realitySubReg;
+        $reality    = (new RealEstateFilter($request))->filter->paginate(10);
 
         $data = [
-            'id' => $id,
-            'type' => $type,
-            'subReg' => $subReg,
-            'regions' => $regions,
-            'reality' => $reality,
+            'subReg'     => $subReg,
+            'reality'    => $reality,
+            'regions'    => $regions,
             'subRegions' => $subRegions,
-            'admin'=>Auth::user()->Admin(),
+            'admin'      => Auth::user()->Admin(),
         ];
 
         if (request()->ajax()) {
@@ -199,7 +197,7 @@ class RealtyController extends Controller
             $save = DB::table('reality')->insert($array);
     
             if ($save) {
-                return redirect('/admin/reality/reality-list/1/1');
+                return redirect('/admin/reality/reality-list');
             }else {
                 return response([
                     'error' => true,
@@ -305,7 +303,7 @@ class RealtyController extends Controller
             $save = DB::table('reality')->where('id', $id)->update($array);
         
             if ($save) {
-                return redirect('/admin/reality/reality-list/1/1');
+                return redirect('/admin/reality/reality-list');
             }else {
                 return response([
                     'error' => true,
@@ -714,7 +712,7 @@ class RealtyController extends Controller
     {
         $delete = Db::table('reality')->where('id', $id)->delete();
         if($delete) {
-            return redirect('/admin/reality/reality-list/1/1');
+            return redirect('/admin/reality/reality-list');
         }else {
             $reality = DB::table('reality')->where('id', $id)->where('user_id', Auth::user()->id)->get();
             $regions = DB::table('regions')->get();

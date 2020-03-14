@@ -5,41 +5,48 @@ $(document).ready(function () {
         }
     });
 
-    let companyDisplay = $('.company-display');
+    const Request = {
+        company: {
+            url: 'update-company/',
+            method: 'POST'
+        },
+        reality: {
+            url: 'reality-list/',
+            method: 'GET'
+        }
+    };
 
     $("#reality-filter input, select").change(function () {
-        console.log($(this).val(), $(this).attr('name'));
-        ajaxRequest();
-    });
-
-    companyDisplay.change(function () {
-        let id = $(this).data('id');
-
-        const data = {
-            url: `update-company/${id}`,
-            display: $(this)[0].checked,
-            method: 'POST'
-        };
-
-        ajaxRequest(data.url, data.method, {display: data.display}, successCallback, errorCallback);
-    });
-
-    ajaxRequest = (url, method, data, dataType, successCallback, errorCallback) => {
-        $.ajax({
-            method:method,
-            url:url,
-            data:data,
-            dataType: dataType,
-            success:successCallback,
-            error:errorCallback
+        Request.reality.data = {[$(this).attr('name')] : $(this).val()};
+        onAjax(Request.reality).done(function (data) {
+            onTable(data, $('.tabelList'), $('.card-box'));
         });
-    };
+    });
 
-    successCallback = (success) => {
-        return success;
-    };
-
-    errorCallback = (error) => {
-        return console.error(error)
-    }
+    $('.company-display').change(function () {
+        Request.company.url  = Request.company.url + $(this).data('id');
+        Request.company.data = {display:$(this)[0].checked};
+        onAjax(Request.company);
+    });
 });
+
+onAjax    = (request) => {
+    if(!request.error){
+        request.error = onError
+    }  if(!request.success){
+        request.success = onSuccess
+    }  return $.ajax(request);
+};
+onForm    = () => {};
+onTable   = (data, table, removed) => {
+    removed.remove();
+    table.append(data);
+};
+onError   = (error) => {
+    return console.error(error)
+};
+onRemove  = () => {};
+onSuccess = (success) => {
+    return success;
+};
+

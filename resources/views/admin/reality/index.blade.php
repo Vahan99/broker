@@ -1,9 +1,6 @@
 @extends('adminLayouts.index')
-
 @section('title', 'Admin Dashboard')
-
 @section('content')
-
     @include('adminLayouts.header')
     @include('adminLayouts.sidebar')
     <div class="content-page" id="reality-filter">
@@ -25,7 +22,7 @@
                                     <div class="ms-container" id="ms-my_multi_select3">
                                         <div class="ms-selectable">
                                             <label for="code">Կոդ</label>
-                                            <input type="text" class="form-control" id="codeSearch" >
+                                            <input type="text" class="form-control" id="codeSearch" name="code">
                                             <ul class="ms-list" tabindex="-1">
                                             </ul>
                                         </div>
@@ -40,17 +37,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                        </div>
-                        <div class="col-sm-3 b-r">
-                            <label for="filterReality">Ֆիլտրել ըստ ստատուսի</label>
-                            <select name="filterStatus" class="form-control" id="filterRealityStatus">
-                                <option value="1" {!! $id == '1' ? 'selected' : '' !!} class="activ">Ակտիվ</option>
-                                <option value="2" {!! $id == '2' ? 'selected' : '' !!} class="stoped">Դադարեցված</option>
-                                @if($admin !== 2)
-                                    <option value="3" {!! $id == '3' ? 'selected' : '' !!} class="archiv">Արխիվ</option>
-                                @endif
-                            </select>
                         </div>
                         <div class="col-sm-12">
                             <div class="row m-t-20">
@@ -336,10 +322,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="table-load row m-t-20 show text-center">
-                        <div class="loader" style="margin: 0 auto;"></div>
-                    </div>
-                    <div class="table-block row m-t-20 tabelList hide">
+{{--                    <div class="table-load row m-t-20 show text-center">--}}
+{{--                        <div class="loader" style="margin: 0 auto;"></div>--}}
+{{--                    </div>--}}
+                    <div class="table-block row m-t-20 tabelList">
                         @include('admin.reality.table')
                     </div>
 

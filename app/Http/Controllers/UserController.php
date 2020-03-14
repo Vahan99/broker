@@ -38,7 +38,6 @@ class UserController extends Controller
 
 
     }
-
     public function addAdminPost(Request $request)
     {
         $error = false;
@@ -79,7 +78,6 @@ class UserController extends Controller
             return redirect('/admin/broker/user-list');
         }
     }
-
     public function updateUserStatus($id, $status)
     {
         $reality = DB::table('users')->where('id', $id)->update(['status' => $status]);
@@ -90,7 +88,6 @@ class UserController extends Controller
             return response(['error' => true, 'message' => 'Փորցեք մի փոքր ուշ']);
         }
     }
-
     public function updateAdminPost($id, Request  $request)
     {
         $this->validate($request, [
@@ -129,7 +126,6 @@ class UserController extends Controller
             return view('admin.admin',['error'=>false]);
         }
     }
-
     public function getUsersByAdmin($id)
     {
         if($id != -1){
@@ -139,7 +135,6 @@ class UserController extends Controller
         }
         return response(['error'=> false, 'users' => $users]);
     }
-
     public function deleteAdmin($id)
     {
         $delete = Db::table('users')->where('id', $id)->delete();
@@ -151,7 +146,6 @@ class UserController extends Controller
             return view('admin.admins.admins-list', ['users' => $users,'admin'=>Auth::user()->Admin(), 'error' => $error] );
         }
     }
-
     public function resetPassword($id, Request $request)
     {
         $error = false;
@@ -191,7 +185,6 @@ class UserController extends Controller
             }
         }
     }
-
     public function addAdminBlade()
     {
         $error = false;
@@ -201,7 +194,6 @@ class UserController extends Controller
 
         return view('admin.admins.add-admin',compact('edit','admin','admins', 'error'));
     }
-
     public function login(Request $request)
     {
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
@@ -213,13 +205,12 @@ class UserController extends Controller
                 if(!Auth::user()->entry){
                     return view('auth.passwords.entry');
                 }
-                return redirect('/admin/reality/reality-list/1/1');
+                return redirect('/admin/reality/reality-list');
             }
         } else{
             return view('admin.admin',['errorMessage'=>'Ձեր էլ-փոստը կամ գաղտնաբառը սխալ է', 'error'=> true]);
         }
     }
-
 //    public function dashboard()
 //    {
 //    	if (Auth::check()) {
@@ -237,11 +228,8 @@ class UserController extends Controller
 
     public function entryResetPassword(Request $request)
     {
-        User::find(Auth::id())->update([
-            'password' => bcrypt($request->password),
-            'entry' => 1
-        ]);
-        return redirect('/admin/reality/reality-list/1/1');
+        User::find(Auth::id())->update(['password' => bcrypt($request->password),'entry' => 1]);
+        return redirect('/admin/reality/reality-list');
     }
 }
 

@@ -10,13 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Auth::routes();
 
 Route::get('/','UserController@index');
 Route::post('/', [ 'as' => 'login', 'uses' => 'UserController@login']);
 Route::post('/entry-reset-password', 'UserController@entryResetPassword')->name('entry.reset.password');
-
-Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth', 'superAdmin']], function (){
+Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function (){
     Route::get('/broker/user-list', 'UserController@list');
     Route::get('/broker/add-user', 'UserController@addAdminBlade');
     Route::post('/broker/add-user', 'UserController@addAdminPost');
@@ -39,11 +37,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth', 'superAdmin']
     Route::get('/regions/delete/{id}', 'RegionsController@delete');
 
     //reality
-    Route::get('/reality/reality-list/{id}/{type}', 'RealtyController@index');
+    Route::get('/reality/reality-list', 'RealtyController@index');
     Route::get('/reality/get-count-reality/{id}', 'RealtyController@getCount');
     Route::get('/reality/get-reality-by-user-id/{id}', 'RealtyController@getRealityByUserId');
     Route::get('/reality/reality-print-list/{id}', 'RealtyController@printList');
-    Route::post('/reality/reality-list/{id}/{type}', 'RealtyController@index');
     Route::get('/reality/add-reality', 'RealtyController@addRealityBlade');
     Route::post('/reality/add-reality', 'RealtyController@addRealityPost');
     Route::get('/regions/get-code', 'RealtyController@getCode');
@@ -55,9 +52,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth', 'superAdmin']
 
     Route::get('/clients/{id}', 'RealtyController@usersList');
     Route::get('/client/{id}', 'RealtyController@curentUser');
-});///
 
-Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth', 'super']], function (){
+});///
+Route::group(['middleware' => ['web', 'auth', 'super']], function (){
     Route::get('/create-company', 'CompanyController@createCompany')->name('company.create');
     Route::post('/create-company', 'CompanyController@storeCompany')->name('company.store');
     Route::get('/update-company/{id}', 'CompanyController@updateCompany')->name('company.update');
@@ -68,4 +65,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth', 'super']], fu
     Route::post('/create-company-admin', 'CompanyController@storeAdmin')->name('company.admin.store');
     Route::get('/company-admin-index', 'CompanyController@indexAdmin')->name('company.admin.index');
 });
+
 
