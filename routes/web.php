@@ -11,18 +11,19 @@
 |
 */
 //Auth::routes();
+
 Route::get('/','UserController@index');
 Route::post('/', [ 'as' => 'login', 'uses' => 'UserController@login']);
 Route::post('/entry-reset-password', 'UserController@entryResetPassword')->name('entry.reset.password');
 
-Route::group(['prefix' => 'admin', 'middleware' => ['superAdmin', 'auth']], function (){
-    Route::get('/gorcakal/user-list', 'UserController@list');
-    Route::get('/gorcakal/add-user', 'UserController@addAdminBlade');
-    Route::post('/gorcakal/add-user', 'UserController@addAdminPost');
-    Route::get('/gorcakal/edit-user/{id}', 'UserController@updateAdminBlade');
-    Route::get('/gorcakal/get-users/{id}', 'UserController@getUsersByAdmin');
-    Route::get('/gorcakal/update-user-status/{id}/{status}', 'UserController@updateUserStatus');
-    Route::post('/gorcakal/edit-user/{id}', 'UserController@updateAdminPost');
+Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth', 'superAdmin']], function (){
+    Route::get('/broker/user-list', 'UserController@list');
+    Route::get('/broker/add-user', 'UserController@addAdminBlade');
+    Route::post('/broker/add-user', 'UserController@addAdminPost');
+    Route::get('/broker/edit-user/{id}', 'UserController@updateAdminBlade');
+    Route::get('/broker/get-users/{id}', 'UserController@getUsersByAdmin');
+    Route::get('/broker/update-user-status/{id}/{status}', 'UserController@updateUserStatus');
+    Route::post('/broker/edit-user/{id}', 'UserController@updateAdminPost');
     Route::get('/logout', 'UserController@logout');
     Route::post('/reset/password/{id}', 'UserController@resetPassword');
     Route::get('/admins/delete/{id}', 'UserController@deleteAdmin');
@@ -56,20 +57,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['superAdmin', 'auth']], func
     Route::get('/client/{id}', 'RealtyController@curentUser');
 });///
 
-//Route::group(['prefix' => 'admin','middleware' => ['auth']],function (){
-////    Route::get('/gorcakal/user-list', 'UserController@list');
-//    Route::get('/logout', 'UserController@logout');
-//    //reality
-//    Route::get('/reality/reality-list/{id}/{type}', 'RealtyController@index');
-//    Route::post('/reality/reality-list/{id}/{type}', 'RealtyController@index');
-//    Route::get('/reality/single-reality/{id}', 'RealtyController@singleRealityBlade');
-//    Route::get('/reality/reality-print-list/{id}', 'RealtyController@printList');
-//
-//    Route::get('/clients/{id}', 'RealtyController@usersList');
-//    Route::get('/client/{id}', 'RealtyController@curentUser');
-//    Route::get('/logout', 'UserController@logout');
-//});
-
 Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth', 'super']], function (){
     Route::get('/create-company', 'CompanyController@createCompany')->name('company.create');
     Route::post('/create-company', 'CompanyController@storeCompany')->name('company.store');
@@ -81,6 +68,4 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth', 'super']], fu
     Route::post('/create-company-admin', 'CompanyController@storeAdmin')->name('company.admin.store');
     Route::get('/company-admin-index', 'CompanyController@indexAdmin')->name('company.admin.index');
 });
-
-Route::get('/home', 'HomeController@index')->name('home');
 

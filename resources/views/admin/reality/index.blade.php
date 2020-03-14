@@ -6,7 +6,7 @@
 
     @include('adminLayouts.header')
     @include('adminLayouts.sidebar')
-    <div class="content-page">
+    <div class="content-page" id="reality-filter">
         <!-- Start content -->
         <input type="hidden" name="_token" value="{!! csrf_token() !!}" id="token">
         <div class="content">
@@ -17,33 +17,8 @@
                     </div>
                 </div>
                 <div class="">
-                    @if($error)
-                        <p class="alert-danger"><b>Error !</b> Something goes wrong , please try again</p>
-                    @endIf
                     <p class="alert alert-success" id="successMessageHallBookingDelete" style="display:none"></p>
                     <div class="row search-box m-t-20">
-                        @if($admin == 1 || $admin == 3)
-                            <div class="col-sm-3 b-r">
-                                <label for="admin_id">Ադմին</label>
-                                <select name="admin_id" id="admin_id" class="form-control" onchange="triggerFunction()">
-                                    <option>Բոլորը</option>
-                                    @foreach($superadmins as $superadmin)
-                                        <option value="{!! $superadmin->id !!}">{!! $superadmin->name !!}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        @endif
-{{--                        @if($admin !== 2)--}}
-{{--                            <div class="col-sm-3 b-r">--}}
-{{--                                <label for="realityUser">Գործակալ</label>--}}
-{{--                                <select name="user" id="realityUser" class="form-control" onchange="triggerFunction()">--}}
-{{--                                    <option>Բոլորը</option>--}}
-{{--                                    @foreach($users as $user)--}}
-{{--                                        <option value="{!! $user->id !!}" >{!! $user->name !!}</option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select>--}}
-{{--                            </div>--}}
-{{--                        @endif--}}
                         <div class="col-sm-3 b-r">
                             <div class="row">
                                 <div class="col-sm-6">
@@ -69,7 +44,7 @@
                         </div>
                         <div class="col-sm-3 b-r">
                             <label for="filterReality">Ֆիլտրել ըստ ստատուսի</label>
-                            <select name="filterStatus" class="form-control" id="filterRealityStatus" onchange="triggerFunction()">
+                            <select name="filterStatus" class="form-control" id="filterRealityStatus">
                                 <option value="1" {!! $id == '1' ? 'selected' : '' !!} class="activ">Ակտիվ</option>
                                 <option value="2" {!! $id == '2' ? 'selected' : '' !!} class="stoped">Դադարեցված</option>
                                 @if($admin !== 2)
@@ -83,7 +58,7 @@
                                     <div class="custom-select" style="width:200px;">
                                     </div>
                                     <label for="type">Տեսակ</label>
-                                    <select name="type" id="type" class="form-control"  onchange="triggerFunction()">
+                                    <select name="type" id="type" class="form-control" >
                                         <option value="1" >Վաճառք</option>
                                         <option value="0" >Վարձակալություն</option>
                                         <option value="2" >Գնորդ</option>
@@ -92,7 +67,7 @@
                                 </div>
                                 <div class="col-sm-2 b-r">
                                     <label for="realityType">Գույքի տեսակ</label>
-                                    <select name="realityType" id="realityType" class="form-control"  onchange="triggerFunction()">
+                                    <select name="realityType" id="realityType" class="form-control" >
                                         <option>Բոլորը</option>
                                         <option value="0">Բնակարան</option>
                                         <option value="1">Տուն</option>
@@ -109,7 +84,7 @@
                                 </div>
                                 <div class="col-sm-2 b-r">
                                     <label for="realityReg">Մարզ</label>
-                                    <select name="balcon" id="realityReg" class="form-control"  onchange="triggerFunction()">
+                                    <select name="balcon" id="realityReg" class="form-control" >
                                         <option>Բոլորը</option>
                                         @foreach($regions as $region)
                                             <option value="{!! $region->id !!}">{!! $region->name !!}</option>
@@ -118,7 +93,7 @@
                                 </div>
                                 <div class="col-sm-4 b-r">
                                     <label for="realitySubReg">Համայնք</label>
-                                    <select name="subRegions[]"  onchange="triggerFunction()" id="realitySubReg" class="select2 select2-multiple"
+                                    <select name="subRegions[]"  id="realitySubReg" class="select2 select2-multiple"
                                              multiple="multiple" multiple data-placeholder="Համայնք">
                                         @foreach($subRegions as $subRegion)
                                             <option value="{!! $subRegion->id !!}">{!! $subRegion->name !!}</option>
@@ -362,7 +337,7 @@
                         </div>
                     </div>
                     <div class="table-load row m-t-20 show text-center">
-                        <div class="loader" style="margin: 0 auto;"></div> 
+                        <div class="loader" style="margin: 0 auto;"></div>
                     </div>
                     <div class="table-block row m-t-20 tabelList hide">
                         @include('admin.reality.table')

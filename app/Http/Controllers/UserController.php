@@ -65,18 +65,18 @@ class UserController extends Controller
         if($saved) {
             if(Auth::user()->Admin() == 1){
                 $users = DB::table('users')->get();
-                return redirect('/admin/gorcakal/user-list');
+                return redirect('/admin/broker/user-list');
             }else if(Auth::user()->Admin() == 0){
                 $users = DB::table('users')->where('id', Auth::user()->id)->orWhere('admin_id', Auth::user()->id)->get();
-                return redirect('/admin/gorcakal/user-list');
+                return redirect('/admin/broker/user-list');
             }else{
                 $users = DB::table('users')->where('id', Auth::user()->id)->where('admin_id', Auth::user()->admin_id)->get();
-                return redirect('/admin/gorcakal/user-list');
+                return redirect('/admin/broker/user-list');
             }
         }else{
             $error = true;
             $edit = false;
-            return redirect('/admin/gorcakal/user-list');
+            return redirect('/admin/broker/user-list');
         }
     }
 
@@ -115,7 +115,7 @@ class UserController extends Controller
                     'phone' => $request->phone,
                 ]);
             if($saved) {
-                return redirect('/admin/gorcakal/user-list');
+                return redirect('/admin/broker/user-list');
 
             }else{
                 $error = true;
@@ -123,7 +123,7 @@ class UserController extends Controller
                 $user = DB::table('users')->where('id', $id)->get();
                 $admin=Auth::user()->Admin();
                 $edit = true;
-                return redirect('/admin/gorcakal/user-list');
+                return redirect('/admin/broker/user-list');
             }
         } else {
             return view('admin.admin',['error'=>false]);
@@ -144,7 +144,7 @@ class UserController extends Controller
     {
         $delete = Db::table('users')->where('id', $id)->delete();
         if($delete) {
-            return redirect('/admin/gorcakal/user-list');
+            return redirect('/admin/broker/user-list');
         }else {
             $error = true;
             $users = DB::table('users')->get();

@@ -6,31 +6,23 @@
         <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
         <meta name="author" content="Coderthemes">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
-
         <link rel="shortcut icon" href="{!! URL::asset('assets/sm-logo.png') !!}">
-
         <title>MAgent</title>
-
-
         <!--Morris Chart CSS -->
-		    <link rel="stylesheet" href="{{ URL::asset('css/morris.css') }}">
-
+        <link rel="stylesheet" href="{{ URL::asset('css/morris.css') }}">
         <link href="{{ URL::asset('css/bootstrap1.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ URL::asset('css/core.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ URL::asset('css/components.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ URL::asset('css/icons.css') }}" rel="stylesheet" type="text/css" />
-
         <link href="{{ URL::asset('css/pages.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ URL::asset('css/bootstrap-timepicker.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ URL::asset('css/responsive.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ URL::asset('css/custom-checkbox.css') }}" rel="stylesheet" type="text/css" />
-
         <link href="{{ URL::asset('css/daterangepicker.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ URL::asset('switchery/dist/switchery.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ URL::asset('footable/css/footable.core.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ URL::asset('css/admin_style.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ URL::asset('js/select2/select2.css') }}" rel="stylesheet" type="text/css">
-
         <script src="{{ URL::asset('js/modernizr.min.js') }}"></script>
         <style type="text/css" >
             img {
@@ -92,22 +84,18 @@
             }
 
         </style>
-
         <link href="{{ URL::asset('css/custom-select.css') }}" rel="stylesheet" type="text/css" />
     </head>
-
-
     <body class="fixed-left">
     	 @yield('content')
         <script>
             var resizefunc = [];
         </script>
-
         <!-- jQuery  -->
-         <script src="{{ URL::asset('js/jquery.min.js') }}"></script>
-         <script src="{{ URL::asset('js/select2/select2.min.js') }}" type="text/javascript"></script>
-
-         <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{ URL::asset('js/jquery.min.js') }}"></script>
+        <script src="{{ URL::asset('js/ajax-requests.js') }}"></script>
+        <script src="{{ URL::asset('js/select2/select2.min.js') }}" type="text/javascript"></script>
+        <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
         <script src="{{ URL::asset('js/detect.js') }}"></script>
         <script src="{{ URL::asset('js/fastclick.js') }}"></script>
         <script src="{{ URL::asset('js/jquery.slimscroll.js') }}"></script>
@@ -116,50 +104,35 @@
         <script src="{{ URL::asset('js/wow.min.js') }}"></script>
         <script src="{{ URL::asset('js/jquery.nicescroll.js') }}"></script>
         <script src="{{ URL::asset('js/jquery.scrollTo.min.js') }}"></script>
-
         <script src="{{ URL::asset('js/jquery.peity.min.js') }}"></script>
-
         <!-- jQuery  -->
         <script src="{{ URL::asset('js/jquery.waypoints.js') }}"></script>
         <script src="{{ URL::asset('js/jquery.counterup.min.js') }}"></script>
-
-
-
         <script src="{{ URL::asset('js/morris.min.js') }}"></script>
         <script src="{{ URL::asset('js/raphael-min.js') }}"></script>
         <script src="{{ URL::asset('js/moment.js') }}"></script>
         <script src="{{ URL::asset('js/jquery.knob.js') }}"></script>
         <script src="{{ URL::asset('js/jquery.dashboard.js') }}"></script>
-
         <script src="{{ URL::asset('js/bootstrap-filestyle.min.js') }}"></script>
         <script src="{{ URL::asset('js/dist/js/bootstrap-datepicker.min.js') }}"></script>
         <script src="{{ URL::asset('js/bootstrap-timepicker.min.js') }}"></script>
         <script src="{{ URL::asset('js/daterangepicker.js') }}"></script>
         <script src="{{ URL::asset('footable/js/footable.all.min.js') }}"></script>
-        
         <script src="{{ URL::asset('switchery/dist/switchery.min.js') }}"></script>
         <script src="{{ URL::asset('js/jquery.footable.js') }}"></script>
-
         <script src="{{ URL::asset('notifyjs/dist/notify.min.js') }}"></script>
         <script src="{{ URL::asset('notifications/notify-metro.js') }}"></script>
-
         <script src="{{ URL::asset('js/jquery.core.js') }}"></script>
         <script src="{{ URL::asset('js/jquery.app.js') }}"></script>
         <script src="{{ URL::asset('js/script.js') }}"></script>
         <script src="{{ URL::asset('js/print.js') }}"></script>
-        <script src="{{ URL::asset('js/ajax-requests.js') }}"></script>
-
-
-
         <script type="text/javascript">
             jQuery(document).ready(function($) {
                 $('.counter').counterUp({
                     delay: 100,
                     time: 1200
                 });
-
                 $(".knob").knob();
-
                 jQuery('#date-range').datepicker({
                     toggleActive: true,
                     orientation: 'top'
@@ -168,13 +141,7 @@
                 jQuery('#timepicker').timepicker({
                     defaultTIme : false
                 });
-
-
             });
         </script>
-
-
-
-
     </body>
 </html>

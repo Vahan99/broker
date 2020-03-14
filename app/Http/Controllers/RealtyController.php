@@ -6,6 +6,8 @@ use App\Http\Filters\RealEstateFilter;
 use App\Http\Middleware\Admin;
 use App\Http\Resources\views;
 use App\Reality;
+use App\Region;
+use App\SubRegion;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\User;
@@ -67,45 +69,25 @@ class RealtyController extends Controller
     }
     public function index(Request $request, $id = null, $type = null)
     {
-        //Broker Role 2
-        $admins = DB::table('users')->where('admin','=', 0)->get();
+        $regions = Region::get();
+        $subRegions = SubRegion::get();
+        $subReg = $request->realitySubReg;
+        $reality = (new RealEstateFilter($request))->filter->paginate(10);
+
+        $data = [
+            'id' => $id,
+            'type' => $type,
+            'subReg' => $subReg,
+            'regions' => $regions,
+            'reality' => $reality,
+            'subRegions' => $subRegions,
+            'admin'=>Auth::user()->Admin(),
+        ];
+
         if (request()->ajax()) {
-            $reality = (new RealEstateFilter($request))->filter->paginate(10);
-            $regions = DB::table('regions')->get();
-            $subRegions = DB::table('sub_regions')->get();
-            $subReg = $request->realitySubReg;
-
-            return response()->json(view('admin.reality.table', [
-                'error'=> false,
-                'id' => $id,
-                'type' => $type,
-                'superadmins'=>$admins,
-                'admin'=>Auth::user()->Admin(),
-                'subRegions' => $subRegions,
-                'regions' => $regions,
-                'reality' => $reality])->render());
-
-        }else{
-            $array = [];
-            array_push($array, ["user_id", "=",Auth::id()]);
-            if($id == 3) {
-                return back();
-            }else{
-                array_push($array, ["status", "=",$id]);
-                $regions = DB::table('regions')->get();
-                $subRegions = DB::table('sub_regions')->get();
-                $reality = DB::table('reality')->where('type', $type)
-                    ->where($array)->orderBy('code', 'desc')->paginate(10);
-                return view('admin.reality.index',[
-                    'error'=> false,
-                    'id' => $id,
-                    'type' => $type,
-                    'superadmins'=>$admins,
-                    'admin'=>Auth::user()->Admin(),
-                    'subRegions' => $subRegions,
-                    'regions' => $regions,
-                    'reality' => $reality]);
-            }
+            return response()->json(view('admin.reality.table', $data)->render());
+        } else{
+            return view('admin.reality.index', $data);
         }
     }
 

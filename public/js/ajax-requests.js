@@ -7,6 +7,11 @@ $(document).ready(function () {
 
     let companyDisplay = $('.company-display');
 
+    $("#reality-filter input, select").change(function () {
+        console.log($(this).val(), $(this).attr('name'));
+        ajaxRequest();
+    });
+
     companyDisplay.change(function () {
         let id = $(this).data('id');
 

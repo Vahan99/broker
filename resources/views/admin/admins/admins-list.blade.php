@@ -59,7 +59,7 @@
                                         <td>{!! $user->address !!}</td>
                                         <td>{!! $user->reality()->count() !!}</td>
                                         <td>
-                                            <a href="/admin/gorcakal/edit-user/{!! $user->id !!}" class="btn btn-primary btn-rounded waves-effect waves-light"><i class="glyphicon glyphicon-pencil"></i></a>
+                                            <a href="/admin/broker/edit-user/{!! $user->id !!}" class="btn btn-primary btn-rounded waves-effect waves-light"><i class="glyphicon glyphicon-pencil"></i></a>
                                         </td>
                                         <td>
                                             <input type="hidden" name="hallId" value="{!! $user->id !!}">
