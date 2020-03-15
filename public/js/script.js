@@ -784,7 +784,7 @@ $(document).ready(function(){
 
     })
 
-})
+});
 
 
 function previewImage(input, previewElId) {
@@ -794,7 +794,7 @@ function previewImage(input, previewElId) {
 
     reader.onload = function(e) {
       $(previewElId).attr('src', e.target.result);
-    }
+    };
 
     reader.readAsDataURL(input.files[0]);
   }

@@ -53,9 +53,9 @@
                 transition: background-color 0.4s, left 0.2s!important;
             }
             #even_list_table td.switchery-demo .switchery{
-                box-shadow: rgb(237, 85, 101) 0px 0px 0px 0px inset!important; 
-                border-color: rgb(237, 85, 101)!important; 
-                background-color: rgb(237, 85, 101)!important; 
+                box-shadow: rgb(237, 85, 101) 0px 0px 0px 0px inset!important;
+                border-color: rgb(237, 85, 101)!important;
+                background-color: rgb(237, 85, 101)!important;
                 transition: border 0.4s, box-shadow 0.4s!important;
             }
             .pink{
@@ -93,6 +93,7 @@
         </script>
         <!-- jQuery  -->
         <script src="{{ URL::asset('js/jquery.min.js') }}"></script>
+        <script src="{{ URL::asset('js/route-controller.js') }}"></script>
         <script src="{{ URL::asset('js/ajax-requests.js') }}"></script>
         <script src="{{ URL::asset('js/select2/select2.min.js') }}" type="text/javascript"></script>
         <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
