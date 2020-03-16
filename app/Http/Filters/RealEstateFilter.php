@@ -23,6 +23,12 @@ class RealEstateFilter
         $this->filter->when(isset($this->r['type']), function ($q){
             $this->filter = $q->where('type', $this->r['type']);
         });
+        $this->filter->when(isset($this->r['street']) && $this->r['street'] != null, function($q){
+            $this->filter = $q->where("street", "LIKE","%".$this->r['street']."%");
+        });
+        $this->filter->when(isset($this->r['phone']) && $this->r['phone'] == null, function($q){
+            $this->filter = $q->where("phone", "LIKE",'%'.$this->r['phone'].'%');
+        });
         $this->filter->when(isset($this->r['code']) && $this->r['code'] != null, function($q){
             $this->filter = $q->where('code', "LIKE", '%'.$this->r['code'].'%');
         });
@@ -44,11 +50,11 @@ class RealEstateFilter
         $this->filter->when(isset($this->r['balcon']) && $this->r['balcon'] != "-1", function($q){
             $this->filter = $q->where('balcon', $this->r['balcon']);
         });
-        $this->filter->when(isset($this->r['realityReg']) && $this->r['realityReg'] != "-1" && $this->r['realitySubReg'] == null, function($q){
-            $this->filter = $q->whereRegion($this->r['realityReg']);
+        $this->filter->when(isset($this->r['realityReg']), function($q){
+            $this->filter = $q->where('region', $this->r['realityReg']);
         });
-        $this->filter->when(isset($this->r['street']) && $this->r['street'] != null, function($q){
-            $this->filter = $q->where("street", "LIKE","%".$this->r['street']."%");
+        $this->filter->when(isset($this->r['subRegions']) && !empty($this->r['subRegions']) && $this->r['subRegions'][0], function($q){
+            $this->filter = $q->whereIn('subRegion', $this->r['subRegions']);
         });
         $this->filter->when(isset($this->r['buildingNumber']) && $this->r['buildingNumber'] != null, function($q){
             $this->filter = $q->where('buildingNumber', $this->r['buildingNumber']);
@@ -82,9 +88,6 @@ class RealEstateFilter
         });
         $this->filter->when(isset($this->r['facePartMax'], $this->r['facePartMin']), function($q){
             $this->filter = $q->whereBetween("faceArea", [$this->r['facePartMin'], $this->r['facePartMax']]);
-        });
-        $this->filter->when(isset($this->r['phone']) && $this->r['phone'] == null, function($q){
-            $this->filter = $q->where("phone", "LIKE",'%'.$this->r['phone'].'%');
         });
         $this->filter->when(isset($this->r['customerName']) && $this->r['customerName'] == null, function($q){
             $this->filter = $q->where('customerName', $this->r['customerName']);

@@ -37,11 +37,11 @@
 .fa-print:before {
     padding-right: 8px;
 }
-.filter-buttons button {
+.filter-buttons .btn {
     background: #6c757d!important;
     border: 1px solid #ebeff2!important;
 }
-.filter-buttons button:hover, .filter-buttons button:active, .filter-buttons button:focus{
+.filter-buttons .btn:hover, .filter-buttons .btn:active, .filter-buttons .btn:focus {
     border: 1px solid #ebeff2!important;
     background: #659f30!important;
 }

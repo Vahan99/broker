@@ -34,7 +34,7 @@
                     <tr class="{{$key % 2 == 0 ? 'odd' : ''}}">
                         <td>{!! $key !!}</td>
                         <td>{{$r->code}}</td>
-                        
+
                         <td>
                             @foreach($subRegions as $subRegion)
                                 @if($subRegion->id == $r->subRegion)
@@ -106,9 +106,9 @@
             <p>Տվյալներ չեն գտնվել</p>
         @endif
     </div>
-</div>
-<div class="col-sm-12">
     @if(count($reality) > 0)
-        {{ $reality->links() }}
+        <div class="col-sm-12">
+                {{ $reality->links() }}
+        </div>
     @endif
 </div>

@@ -10,22 +10,17 @@ $(document).ready(function(){
         localStorage.removeItem('print')
     })
 	// Get the modal
-
     $("#realitySubReg").select2();
     if(window.location.pathname.indexOf('/admin/reality/reality-print-list/') >= 0){
         $('#subRegionTableHeade').find('.last').hide()
         $('#subRegionTableBody').find('.last').hide()
     }
-
     $('.btnprn').printPage(window.location.href);
-
     var modal = document.getElementById('myModal');
-
 	$('#gallery .row .column img').on('click', function(){
 	    $('#image-modal').attr('style','display : block');
 	    $('#image-modal img').attr('src', $(this).attr('src'));
 	})
-
 	$('.close-image-modal').on('click', function() {
 		$('#image-modal').attr('style','display : none');
 	});
@@ -37,22 +32,16 @@ $(document).ready(function(){
 	    $('#myModal').attr('style', 'display : block');
 	    $('#img01').attr('src', $(this).attr('src'));
 	})
-
 	// Get the <span> element that closes the modal
 	var spanClose = document.getElementsByClassName("close")[0];
-
 	// When the user clicks on <span> (x), close the modal
 	$('.close').on('click', function(){
 	    modal.style.display = "none";
 	})
-
 	// end modal function
 	var prodCatName, prodSubCatName ;
 	var that = this;
-
-
 	// users delete modal open hide
-
 	$('.userDleteModalOpen').on('click', function(){
         var userId = $(this).siblings('input').val();
 
@@ -101,7 +90,6 @@ $(document).ready(function(){
 		})
 
 	})
-
 	// reset side open hide
 	var resHideShow = false;
 	$('#resPasButton').on('click', function() {
@@ -127,9 +115,7 @@ $(document).ready(function(){
 			});
 		}
 	});
-
 	// reset password
-
     $('#resPassInput').on('keydown', function () {
         if($(this).val() && $(this).val().length >= 5){
             $('#resetPassButton').attr('disabled', false)
@@ -137,7 +123,6 @@ $(document).ready(function(){
             $('#resetPassButton').attr('disabled', 'disabled')
         }
     })
-
 	$('#resetPassButton').on('click', function(event) {
 		event.preventDefault();
 		var id = window.location.pathname.slice(window.location.pathname.lastIndexOf('/') + 1, window.location.pathname.length);
@@ -167,17 +152,13 @@ $(document).ready(function(){
 
 
 	});
-
-
 //	show subregionsByRegion
 	$('#regionSelect').on('change', function() {
         window.location.pathname = '/admin/regions/regions-list/' + $(this).val();
     })
-
     $('#typeSelectr').on('change', function() {
         window.location.pathname = '/admin/clients/' + $(this).val();
     })
-
     $("#addRealityAdmin").on("change", function(){
         $.ajax({
             url: '/admin/broker/get-users/' + $(this).val() ,
@@ -225,7 +206,6 @@ $(document).ready(function(){
                 console.log("complete");
             });
     })
-
     $("#editRealityAdmin").on("change", function(){
         $.ajax({
             url: '/admin/broker/get-users/' + $(this).val() ,
@@ -246,7 +226,6 @@ $(document).ready(function(){
                 console.log("complete");
             });
     })
-
 	$("#addRealityRegion").on("change", function(){
 	    $("#addRealitySubRegion").val(null).trigger("change");
         $.ajax({
@@ -268,51 +247,47 @@ $(document).ready(function(){
                 console.log("complete");
             });
 	})
-
-    $("#realityReg").on("change", function(){
-	    $("#realitySubReg").val(null).trigger("change");
-        $.ajax({
-            url: '/admin/regions/sub-regions-list/' + $(this).val() ,
-            type: 'GET'
-        })
-            .done(function(data) {
-                //subRegions
-                $("#realitySubReg").empty()
-                $("#realitySubReg").append("<option value='-1'>Բոլորը</option>")
-                for(var i =0; i < data.subRegions.length; i++) {
-                    $("#realitySubReg").append('<option value="' + data.subRegions[i].id + '">' + data.subRegions[i].name + '</option>')
-                }
-            })
-            .fail(function() {
-                $('#errorMessageUserDelete').append('<b>Error !</b> Something goes wrong , please try again')
-            })
-            .always(function() {
-                console.log("complete");
-            });
-    });
-
-    $("#editRealityRegion").on("change", function(){
-        $.ajax({
-            url: '/admin/regions/sub-regions-list/' + $(this).val() ,
-            type: 'GET'
-        })
-            .done(function(data) {
-                //subRegions
-                $("#editRealitySubRegion").empty()
-                $("#editRealitySubRegion").append("<option value='-1'>Բոլորը</option>")
-                for(var i =0; i < data.subRegions.length; i++) {
-                    $("#editRealitySubRegion").append('<option value="' + data.subRegions[i].id + '">' + data.subRegions[i].name + '</option>')
-                }
-            })
-            .fail(function() {
-                $('#errorMessageUserDelete').append('<b>Error !</b> Something goes wrong , please try again')
-            })
-            .always(function() {
-                console.log("complete");
-            });
-    })
-
-
+    // $("#realityReg").on("change", function(){
+	//     $("#realitySubReg").val(null).trigger("change");
+    //     $.ajax({
+    //         url: '/admin/regions/sub-regions-list/' + $(this).val() ,
+    //         type: 'GET'
+    //     })
+    //         .done(function(data) {
+    //             //subRegions
+    //             $("#realitySubReg").empty()
+    //             $("#realitySubReg").append("<option value='-1'>Բոլորը</option>")
+    //             for(var i =0; i < data.subRegions.length; i++) {
+    //                 $("#realitySubReg").append('<option value="' + data.subRegions[i].id + '">' + data.subRegions[i].name + '</option>')
+    //             }
+    //         })
+    //         .fail(function() {
+    //             $('#errorMessageUserDelete').append('<b>Error !</b> Something goes wrong , please try again')
+    //         })
+    //         .always(function() {
+    //             console.log("complete");
+    //         });
+    // });
+    // $("#editRealityRegion").on("change", function(){
+    //     $.ajax({
+    //         url: '/admin/regions/sub-regions-list/' + $(this).val() ,
+    //         type: 'GET'
+    //     })
+    //         .done(function(data) {
+    //             //subRegions
+    //             $("#editRealitySubRegion").empty()
+    //             $("#editRealitySubRegion").append("<option value='-1'>Բոլորը</option>")
+    //             for(var i =0; i < data.subRegions.length; i++) {
+    //                 $("#editRealitySubRegion").append('<option value="' + data.subRegions[i].id + '">' + data.subRegions[i].name + '</option>')
+    //             }
+    //         })
+    //         .fail(function() {
+    //             $('#errorMessageUserDelete').append('<b>Error !</b> Something goes wrong , please try again')
+    //         })
+    //         .always(function() {
+    //             console.log("complete");
+    //         });
+    // })
     $('#streetSearch').blur(function (){
         $('#streetSearch').siblings('ul.ms-list').empty();
         $('#streetSearch').siblings('ul.ms-list').css('display', 'none');
@@ -349,7 +324,6 @@ $(document).ready(function(){
             $('#streetSearch').siblings('ul.ms-list').css('display', 'none');
         }
     })
-
     $('#codeSearch').blur(function (){
         $('#codeSearch').siblings('ul.ms-list').empty();
         $('#codeSearch').siblings('ul.ms-list').css('display', 'none');
@@ -387,16 +361,12 @@ $(document).ready(function(){
             $('#codeSearch').siblings('ul.ms-list').css('display', 'none');
         }
     })
-
     // $('#filterRealityStatus').on('change', function(){
     //     window.location.pathname = "/admin/reality/reality-list/" + $(this).val() + '/' + $('#type').val()
     // })
     // $('#type').on('change', function(){
     //     window.location.pathname = "/admin/reality/reality-list/" + $('#filterRealityStatus').val() + '/' + $(this).val()
     // })
-
-
-
     $('.changeUserStatus').on('change', function(){
         var that = $(this)
         $.ajax({
@@ -417,13 +387,12 @@ $(document).ready(function(){
                 console.log("complete");
             });
     })
-
-
-
     //filtred side
-    triggerFunction = function (){
-        $('#searchButtonReality').trigger('click')
-    }
+
+    $('#clearFiltr').on('click', function () {
+        $('#realitySubReg').val(null).trigger('change');
+    });
+
     if(window.location.pathname.indexOf('/admin/reality/reality-list/') >= 0) {
         $(window).on('hashchange', function() {
             if (window.location.hash && localStorage.getItem('search')) {
@@ -457,89 +426,7 @@ $(document).ready(function(){
             }
         });
 
-        $('#clearFiltr').on('click', function () {
-            localStorage.removeItem('searchBoolean')
-            localStorage.removeItem('search')
-            $('#type').val(1),
-            $('#codeSearch').val(""),
-            $('#hp_code').val(""),
-            $('#realityType').val(-1),
-            $('#admin_id').val(-1),
-            $('#realityProect').val(-1),
-            $('#realityBuildingType').val(-1),
-            $('#realityUser').val(-1),
-            $('#realityCosmetic').val(-1),
-            $('#realityBalcon').val(-1),
-            $('#realityReg').val(-1),
-            $('#realitySubReg').val(-1),
-            $('#streetSearch').val(""),
-            $('#buildingNumber').val(""),
-            $('#apartamentNumber').val(""),
-            $('#floorMin').val(""),
-            $('#firstFloor').val(""),
-            $('#floorMax').val(""),
-            $('#lastFloor').val(""),
-            $('#areaMin').val(""),
-            $('#areaMax').val(""),
-            $('#roomsMin').val(""),
-            $('#roomsMax').val(""),
-            $('#priceMin').val(""),
-            $('#priceMax').val(""),
-            $('#buildingFloorsMin').val(""),
-            $('#buildingFloorsMax').val(""),
-            $('#gardenMin').val(""),
-            $('#gardenMax').val(""),
-            $('#facePartMin').val(""),
-            $('#facePartMax').val(""),
-            $('#phone').val(""),
-            $('#customerName').val("")
-            $('#filterRealityStatus').val('1');
-            $('#filterModal').modal('hide')
-            var search = {
-                '_token':$('#token').val(),
-                'type': $('#type').val(),
-                'status': $('#filterRealityStatus').val(),
-                'hp_code': $('#hp_code').val(),
-                'code': $('#codeSearch').val(),
-                'admin_id': $('#admin_id').val(),
-                'realityType': $('#realityType').val(),
-                'realityProect': $('#realityProect').val(),
-                'realityBuildingType': $('#realityBuildingType').val(),
-                'realityCosmetic': $('#realityCosmetic').val(),
-                'realityBalcon': $('#realityBalcon').val(),
-                'realityReg': $('#realityReg').val(),
-                'realitySubReg': $('#realitySubReg').val(),
-                'streetSearch': $('#streetSearch').val(),
-                'buildingNumber': $('#buildingNumber').val(),
-                'apartamentNumber': $('#apartamentNumber').val(),
-                'floorMin': $('#floorMin').val(),
-                'firstFloor': $('#firstFloor').val(),
-                'floorMax': $('#floorMax').val(),
-                'lastFloor': $('#lastFloor').val(),
-                'areaMin': $('#areaMin').val(),
-                'areaMax': $('#areaMax').val(),
-                'roomsMin': $('#roomsMin').val(),
-                'roomsMax': $('#roomsMax').val(),
-                'priceMin': $('#priceMin').val(),
-                'priceMax': $('#priceMax').val(),
-                'buildingFloorsMin': $('#buildingFloorsMin').val(),
-                'buildingFloorsMax': $('#buildingFloorsMax').val(),
-                'gardenMin': $('#gardenMin').val(),
-                'gardenMax': $('#gardenMax').val(),
-                'facePartMin': $('#facePartMin').val(),
-                'facePartMax': $('#facePartMax').val(),
-                'phone': $('#phone').val(),
-                'customerName': $('#customerName').val(),
-                'user_id': $('#realityUser').val()
-            }
-            if ($('#firstFloor').is(':checked')){
-                search.firstFloor = 1
-            }
-            if ($('#lastFloor').is(':checked')){
-                search.lastFloor = 1
-            }
-            window.location.reload()
-        })
+
 
         var data, page;
         if (localStorage.getItem('search')){
@@ -583,153 +470,148 @@ $(document).ready(function(){
             $("#admin_id").trigger("change")
         }
 
-        $('#searchButtonReality').on('click', function(){
-            console.log('5555555555555555');
-            localStorage.setItem('searchBoolean', 'true')
-            var search = {
-                '_token':$('#token').val(),
-                'type': $('#type').val(),
-                'code': $('#codeSearch').val(),
-                'hp_code': $('#hp_code').val(),
-                'status': $('#filterRealityStatus').val(),
-                'admin_id': $('#admin_id').val(),
-                'realityType': $('#realityType').val(),
-                'realityProect': $('#realityProect').val(),
-                'realityBuildingType': $('#realityBuildingType').val(),
-                'realityCosmetic': $('#realityCosmetic').val(),
-                'realityBalcon': $('#realityBalcon').val(),
-                'realityReg': $('#realityReg').val(),
-                'realitySubReg': $('#realitySubReg').val(),
-                'streetSearch': $('#streetSearch').val(),
-                'buildingNumber': $('#buildingNumber').val(),
-                'apartamentNumber': $('#apartamentNumber').val(),
-                'floorMin': $('#floorMin').val(),
-                'firstFloor': $('#firstFloor').val(),
-                'floorMax': $('#floorMax').val(),
-                'lastFloor': $('#lastFloor').val(),
-                'areaMin': $('#areaMin').val(),
-                'areaMax': $('#areaMax').val(),
-                'roomsMin': $('#roomsMin').val(),
-                'roomsMax': $('#roomsMax').val(),
-                'priceMin': $('#priceMin').val(),
-                'priceMax': $('#priceMax').val(),
-                'buildingFloorsMin': $('#buildingFloorsMin').val(),
-                'buildingFloorsMax': $('#buildingFloorsMax').val(),
-                'gardenMin': $('#gardenMin').val(),
-                'gardenMax': $('#gardenMax').val(),
-                'facePartMin': $('#facePartMin').val(),
-                'facePartMax': $('#facePartMax').val(),
-                'phone': $('#phone').val(),
-                'customerName': $('#customerName').val(),
-                'user_id': $('#realityUser').val()
-            }
-            if ($('#firstFloor').is(':checked')){
-                search.firstFloor = 1
-            }
-            if ($('#lastFloor').is(':checked')){
-                search.lastFloor = 1
-            }
-            localStorage.setItem('search',JSON.stringify(search))
-
-            getPosts("1", search)
-            $('#filterModal').modal('hide')
-
-        })
-
-        $('#searchButtonReality').click()
+        // $('#searchButtonReality').on('click', function(){
+        //     console.log('5555555555555555');
+        //     localStorage.setItem('searchBoolean', 'true')
+        //     var search = {
+        //         '_token':$('#token').val(),
+        //         'type': $('#type').val(),
+        //         'code': $('#codeSearch').val(),
+        //         'hp_code': $('#hp_code').val(),
+        //         'status': $('#filterRealityStatus').val(),
+        //         'admin_id': $('#admin_id').val(),
+        //         'realityType': $('#realityType').val(),
+        //         'realityProect': $('#realityProect').val(),
+        //         'realityBuildingType': $('#realityBuildingType').val(),
+        //         'realityCosmetic': $('#realityCosmetic').val(),
+        //         'realityBalcon': $('#realityBalcon').val(),
+        //         'realityReg': $('#realityReg').val(),
+        //         'realitySubReg': $('#realitySubReg').val(),
+        //         'streetSearch': $('#streetSearch').val(),
+        //         'buildingNumber': $('#buildingNumber').val(),
+        //         'apartamentNumber': $('#apartamentNumber').val(),
+        //         'floorMin': $('#floorMin').val(),
+        //         'firstFloor': $('#firstFloor').val(),
+        //         'floorMax': $('#floorMax').val(),
+        //         'lastFloor': $('#lastFloor').val(),
+        //         'areaMin': $('#areaMin').val(),
+        //         'areaMax': $('#areaMax').val(),
+        //         'roomsMin': $('#roomsMin').val(),
+        //         'roomsMax': $('#roomsMax').val(),
+        //         'priceMin': $('#priceMin').val(),
+        //         'priceMax': $('#priceMax').val(),
+        //         'buildingFloorsMin': $('#buildingFloorsMin').val(),
+        //         'buildingFloorsMax': $('#buildingFloorsMax').val(),
+        //         'gardenMin': $('#gardenMin').val(),
+        //         'gardenMax': $('#gardenMax').val(),
+        //         'facePartMin': $('#facePartMin').val(),
+        //         'facePartMax': $('#facePartMax').val(),
+        //         'phone': $('#phone').val(),
+        //         'customerName': $('#customerName').val(),
+        //         'user_id': $('#realityUser').val()
+        //     }
+        //     if ($('#firstFloor').is(':checked')){
+        //         search.firstFloor = 1
+        //     }
+        //     if ($('#lastFloor').is(':checked')){
+        //         search.lastFloor = 1
+        //     }
+        //     localStorage.setItem('search',JSON.stringify(search))
+        //
+        //     getPosts("1", search)
+        //     $('#filterModal').modal('hide')
+        //
+        // })
+        //
+        // $('#searchButtonReality').click()
 
     }else{
         localStorage.removeItem('searchBoolean')
         localStorage.removeItem('search')
         localStorage.removeItem('print')
     }
-
-    function getPosts(pе, obj) {
-        if($('.table-load').hasClass('hide')){
-            $('.table-load').addClass('show');
-            $('.table-load').removeClass('hide');
-            $('.table-block').addClass('hide');
-            $('.table-block').removeClass('show');
-        }
-        $.ajax({
-            url : '/admin/reality/reality-list/' + $('#filterRealityStatus').val() + '/' + $('#type').val() + '?page=' + pе,
-            type: 'POST',
-            data: obj,
-            dataType: 'json',
-        }).done(function (data) {
-            $('.table-load').removeClass('show');
-            $('.table-load').addClass('hide');
-            $('.table-block').addClass('show');
-            $('.tabelList').html(data);
-            var array = []
-            if (localStorage.getItem('print')){
-                array = JSON.parse(localStorage.getItem('print'))
-            }
-            $('.printNumbers').text(array.length);
-            for ( var i = 0; i < array.length; i++) {
-                $('#checkForPrint_' + array[i].id).prop("checked", true);
-            }
-
-            $('.printNumbers').on('click', function () {
-                if(localStorage.getItem('print')){
-                    if(JSON.parse(localStorage.getItem('print')).length > 0){
-                        window.open('/admin/reality/reality-print-list/' + localStorage.getItem('print'), '_target');
-                    }else{
-                        window.open('/admin/reality/reality-print-list/' + 0, '_target');
-                    }
-                }else{
-                    window.open('/admin/reality/reality-print-list/' + 0, '_target');
-                }
-            });
-            $('.checkForPrint').on('click', function () {
-                var that = this;
-                var array = []
-                if (localStorage.getItem('print')){
-                    array = JSON.parse(localStorage.getItem('print'))
-                }
-                if($(this).is(':checked')) {
-                    array.push({id: $(that).siblings('input').val()})
-                    $('.printNumbers').text(array.length);
-                    localStorage.setItem('print', JSON.stringify(array) )
-                }else{
-                    array = array.filter(function(el) {
-                        return el.id !== $(that).siblings('input').val()
-                    })
-                    $('.printNumbers').text(array.length);
-                    localStorage.setItem('print', JSON.stringify(array) )
-
-                }
-            })
-            $('.changeRealityStatus').on('change', function(){
-                var that = $(this)
-                $.ajax({
-                    url: '/admin/reality/update-reality-status/' + $(this).siblings('input').val() +'/' + $(this).val() ,
-                    type: 'GET'
-                })
-                    .done(function(data) {
-                        if(!data.error) {
-                            $.Notification.notify('custom','top left', 'Շնորհակալություն', data.message)
-                            that.parent('td').parent('tr').remove()
-                        }else{
-                            $.Notification.notify('error','top left', 'Շնորհակալություն', data.message)
-                        }
-                    })
-                    .fail(function() {
-                        $('#errorMessageUserDelete').append('<b>Error !</b> Something goes wrong , please try again')
-                    })
-                    .always(function() {
-                        console.log("complete");
-                    });
-            })
-        }).fail(function (err) {
-            console.log(err)
-        });
-    }
-
-
-
+    // function getPosts(pе, obj) {
+    //     if($('.table-load').hasClass('hide')){
+    //         $('.table-load').addClass('show');
+    //         $('.table-load').removeClass('hide');
+    //         $('.table-block').addClass('hide');
+    //         $('.table-block').removeClass('show');
+    //     }
+    //     $.ajax({
+    //         url : '/admin/reality/reality-list/' + $('#filterRealityStatus').val() + '/' + $('#type').val() + '?page=' + pе,
+    //         type: 'POST',
+    //         data: obj,
+    //         dataType: 'json',
+    //     }).done(function (data) {
+    //         $('.table-load').removeClass('show');
+    //         $('.table-load').addClass('hide');
+    //         $('.table-block').addClass('show');
+    //         $('.tabelList').html(data);
+    //         var array = []
+    //         if (localStorage.getItem('print')){
+    //             array = JSON.parse(localStorage.getItem('print'))
+    //         }
+    //         $('.printNumbers').text(array.length);
+    //         for ( var i = 0; i < array.length; i++) {
+    //             $('#checkForPrint_' + array[i].id).prop("checked", true);
+    //         }
+    //
+    //         $('.printNumbers').on('click', function () {
+    //             if(localStorage.getItem('print')){
+    //                 if(JSON.parse(localStorage.getItem('print')).length > 0){
+    //                     window.open('/admin/reality/reality-print-list/' + localStorage.getItem('print'), '_target');
+    //                 }else{
+    //                     window.open('/admin/reality/reality-print-list/' + 0, '_target');
+    //                 }
+    //             }else{
+    //                 window.open('/admin/reality/reality-print-list/' + 0, '_target');
+    //             }
+    //         });
+    //         $('.checkForPrint').on('click', function () {
+    //             var that = this;
+    //             var array = []
+    //             if (localStorage.getItem('print')){
+    //                 array = JSON.parse(localStorage.getItem('print'))
+    //             }
+    //             if($(this).is(':checked')) {
+    //                 array.push({id: $(that).siblings('input').val()})
+    //                 $('.printNumbers').text(array.length);
+    //                 localStorage.setItem('print', JSON.stringify(array) )
+    //             }else{
+    //                 array = array.filter(function(el) {
+    //                     return el.id !== $(that).siblings('input').val()
+    //                 })
+    //                 $('.printNumbers').text(array.length);
+    //                 localStorage.setItem('print', JSON.stringify(array) )
+    //
+    //             }
+    //         })
+    //         $('.changeRealityStatus').on('change', function(){
+    //             var that = $(this)
+    //             $.ajax({
+    //                 url: '/admin/reality/update-reality-status/' + $(this).siblings('input').val() +'/' + $(this).val() ,
+    //                 type: 'GET'
+    //             })
+    //                 .done(function(data) {
+    //                     if(!data.error) {
+    //                         $.Notification.notify('custom','top left', 'Շնորհակալություն', data.message)
+    //                         that.parent('td').parent('tr').remove()
+    //                     }else{
+    //                         $.Notification.notify('error','top left', 'Շնորհակալություն', data.message)
+    //                     }
+    //                 })
+    //                 .fail(function() {
+    //                     $('#errorMessageUserDelete').append('<b>Error !</b> Something goes wrong , please try again')
+    //                 })
+    //                 .always(function() {
+    //                     console.log("complete");
+    //                 });
+    //         })
+    //     }).fail(function (err) {
+    //         console.log(err)
+    //     });
+    // }
     // սւբ ռեգիօն delete modal open hide
-
     $('.regionDeleteModalOpen').on('click', function(){
         var userId = $(this).siblings('input').val();
         $('#koding').on('keyup', function () {
@@ -756,7 +638,6 @@ $(document).ready(function(){
         })
 
     })
-
     $('.realityDeleteModalOpen').on('click', function(){
         var userId = $(this).siblings('input').val();
         $('#koding223').on('keyup', function () {
@@ -783,7 +664,6 @@ $(document).ready(function(){
         })
 
     })
-
 });
 
 

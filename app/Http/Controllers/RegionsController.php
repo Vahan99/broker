@@ -12,7 +12,6 @@ class RegionsController extends Controller
 {
     public function index($id)
     {
-        
         if(Auth::user()->Admin() == 1 || Auth::user()->Admin() == 3){
             $regions = DB::table('regions')->get();
            $subRegions = DB::table('sub_regions')->where('region_id', $id)->orderBy('name', 'asc')->paginate(30);
@@ -21,7 +20,6 @@ class RegionsController extends Controller
         }else{
           return back();    
         }
-        
     }
 
     public function getStreet($region_id, $sub_region_id, $street)

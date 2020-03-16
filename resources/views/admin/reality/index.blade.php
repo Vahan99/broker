@@ -14,8 +14,9 @@
                     </div>
                 </div>
                 <div class="">
-                    <p class="alert alert-success" id="successMessageHallBookingDelete" style="display:none"></p>
-                    <div class="row search-box m-t-20">
+                    <form>
+                        <p class="alert alert-success" id="successMessageHallBookingDelete" style="display:none"></p>
+                        <div class="row search-box m-t-20">
                         <div class="col-sm-3 b-r">
                             <div class="row">
                                 <div class="col-sm-6">
@@ -70,7 +71,7 @@
                                 </div>
                                 <div class="col-sm-2 b-r">
                                     <label for="realityReg">Մարզ</label>
-                                    <select name="balcon" id="realityReg" class="form-control" >
+                                    <select name="realityReg" id="realityReg" class="form-control" >
                                         <option>Բոլորը</option>
                                         @foreach($regions as $region)
                                             <option value="{!! $region->id !!}">{!! $region->name !!}</option>
@@ -198,9 +199,7 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="row m-t-20 text-center filter-buttons">
-                                    <button type="button" class="btn btn-danger"  id="clearFiltr">Մաքրել</button>
-                                    <button type="button" class="btn btn-success" id="searchButtonReality">Որոնել
-                                    </button>
+                                    <input type="reset" id="clearFiltr" value="Մաքրել" class="btn btn-success filter-buttons">
                                     <button type="button" class="btn btn-success" id="otherSearch" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                         <span class="glyphicon glyphicon-chevron-down"></span>
                                         Ընդլայնված որոնում
@@ -322,6 +321,7 @@
                             </div>
                         </div>
                     </div>
+                    </form>
 {{--                    <div class="table-load row m-t-20 show text-center">--}}
 {{--                        <div class="loader" style="margin: 0 auto;"></div>--}}
 {{--                    </div>--}}
