@@ -18,6 +18,8 @@
                     <th>Հարկ</th>
                     <th>Մակ.</th>
                     <th>Արժեք ($)</th>
+                    <th>Հաճ․ Հեռ</th>
+                    <th>Հաճ․ անուն</th>
                     <th>Հղում</th>
                     <th>Դիտել</th>
                 @if($admin == 1 || $admin == 0 || $admin == 3)
@@ -34,7 +36,6 @@
                     <tr class="{{$key % 2 == 0 ? 'odd' : ''}}">
                         <td>{!! $key !!}</td>
                         <td>{{$r->code}}</td>
-
                         <td>
                             @foreach($subRegions as $subRegion)
                                 @if($subRegion->id == $r->subRegion)
@@ -47,7 +48,6 @@
                         <td>{!! $r->buildingNumber ? $r->buildingNumber : 0 !!}</td>
                         <td>{!! $r->apartamentNumber ? $r->apartamentNumber : 0 !!}</td>
                         @if($admin == 2 || $admin == 0)
-
                             <td>
                                 @if($r->buildingType == -1)
                                     <span>-</span>
@@ -72,6 +72,8 @@
                         <td>{!! $r->floors !!}</td>
                         <td>{!! $r->area !!}</td>
                         <td>{!! $r->price !!}</td>
+                        <td>{!! $r->phone !!}</td>
+                        <td>{!! $r->customerName !!}</td>
                         <td>{!! $r->link ? '<a href="'.$r->link.'" target="_blank">Հղում</a>' : '-' !!}</td>
                         <td>
                             <a href="/admin/reality/single-reality/{!! $r->id !!}"

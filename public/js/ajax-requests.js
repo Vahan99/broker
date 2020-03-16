@@ -1,6 +1,18 @@
-$('#reality-filter').find('input, select').change(function (element) {
+$('#reality-filter').find('.onchange').change(function (element) {
     let url  = `reality-list`,
         data = {[$(this).attr('name')] : $(this).val()};
+    onAjax({
+        url: url,
+        data: data,
+        method: 'GET'
+    }).done((data) => {
+        realtyFilterDone(data);
+    });
+});
+
+$('.glyphicon-play-circle').click(function () {
+    let url  = `reality-list`, max = $(this).data('max'), min = $(this).data('min');
+    let data = {[max] : $(`#${max}`).val(), [min] : $(`#${min}`).val()};
     onAjax({
         url: url,
         data: data,
@@ -58,7 +70,6 @@ realtyFilterDone = (data) => {
             })
             $('.printNumbers').text(array.length);
             localStorage.setItem('print', JSON.stringify(array) )
-
         }
     })
 };
