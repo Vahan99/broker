@@ -65,6 +65,23 @@
                             </div>
                         </div>
                         <div class="col-sm-2">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="buildingFloorsMin">Շենք ք. ս․</label>
+                                            <input type="number" min="0" class="form-control" id="buildingFloorsMin" name="buildingFloorsMin">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="form-group m-l-10">
+                                            <label for="buildingFloorsMax">Շենք ք. վ․</label>
+                                            <input type="number" min="0" class="form-control" id="buildingFloorsMax" name="buildingFloorsMax">
+                                        </div>
+                                    </div>
+                                    <div class="glyphicon glyphicon-play-circle" style="cursor: pointer; padding: 3rem 0;" data-min="buildingFloorsMin" data-max="buildingFloorsMax"></div>
+                                </div>
+                            </div>
+                        <div class="col-sm-2">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -115,23 +132,6 @@
                                 <div class="glyphicon glyphicon-play-circle" style="cursor: pointer; padding: 3rem 0;" data-min="priceMin" data-max="priceMax"></div>
                             </div>
                         </div>
-                        <div class="col-sm-2">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="buildingFloorsMin">Շենք ք. ս․</label>
-                                            <input type="number" min="0" class="form-control" id="buildingFloorsMin" name="buildingFloorsMin">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-5">
-                                        <div class="form-group m-l-10">
-                                            <label for="buildingFloorsMax">Շենք ք. վ․</label>
-                                            <input type="number" min="0" class="form-control" id="buildingFloorsMax" name="buildingFloorsMax">
-                                        </div>
-                                    </div>
-                                    <div class="glyphicon glyphicon-play-circle" style="cursor: pointer; padding: 3rem 0;" data-min="buildingFloorsMin" data-max="buildingFloorsMax"></div>
-                                </div>
-                            </div>
                         <div class="col-sm-12">
                             <div class="row m-t-20">
                                 @if(!Auth::user()->parent)

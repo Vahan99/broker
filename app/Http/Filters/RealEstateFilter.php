@@ -71,13 +71,7 @@ class RealEstateFilter
             $this->filter = $q->where('apartamentNumber', $this->r['apartamentNumber']);
         });
         $this->filter->when($this->r['floorMin'] != 'all' && isset($this->r['floorMin']) || isset($this->r['floorMax']), function($q){
-            if($this->r['floorMin'] && $this->r['floorMax']){
-                $this->filter = $q->whereBetween("floors", [$this->r['floorMin'], $this->r['floorMax']]);
-            } else if($this->r['floorMin']){
-                $this->filter = $q->where("floors", $this->r['floorMin']);
-            }else if ($this->r['floorMax']){
-                $this->filter = $q->where("floors", $this->r['floorMax']);
-            }
+            $this->between('floors', $q, $this->r['floorMin'], $this->r['floorMax']);
         });
         $this->filter->when($this->r['firstFloor'] != 'all' && isset($this->r['firstFloor']) && $this->r['firstFloor'] === 'true', function($q){
             $this->filter = $q->where('firstFloor', $this->r['firstFloor']);
@@ -86,63 +80,38 @@ class RealEstateFilter
             $this->filter = $q->where('lastFloor', $this->r['lastFloor']);
         });
         $this->filter->when($this->r['areaMin'] != 'all' && isset($this->r['areaMin']) || isset($this->r['areaMax']), function($q){
-            if($this->r['areaMin'] && $this->r['areaMax']){
-                $this->filter = $q->whereBetween("floors", [$this->r['areaMin'], $this->r['areaMax']]);
-            } else if($this->r['areaMin']){
-                $this->filter = $q->where("floors", $this->r['areaMin']);
-            }else if ($this->r['areaMax']){
-                $this->filter = $q->where("floors", $this->r['areaMax']);
-            }
+            $this->between('area', $q, $this->r['areaMin'], $this->r['areaMax']);
         });
         $this->filter->when($this->r['roomsMin'] != 'all' && isset($this->r['roomsMin']) || isset($this->r['roomsMax']), function($q){
-            if($this->r['roomsMin'] && $this->r['roomsMax']){
-                $this->filter = $q->whereBetween("floors", [$this->r['roomsMin'], $this->r['roomsMax']]);
-            } else if($this->r['roomsMin']){
-                $this->filter = $q->where("floors", $this->r['roomsMin']);
-            }else if ($this->r['roomsMax']){
-                $this->filter = $q->where("floors", $this->r['roomsMax']);
-            }
+            $this->between('rooms', $q, $this->r['roomsMin'], $this->r['roomsMax']);
         });
         $this->filter->when($this->r['priceMin'] != 'all' && isset($this->r['priceMin']) || isset($this->r['priceMax']), function($q){
-            if($this->r['priceMin'] && $this->r['priceMax']){
-                $this->filter = $q->whereBetween("floors", [$this->r['priceMin'], $this->r['priceMax']]);
-            } else if($this->r['priceMin']){
-                $this->filter = $q->where("floors", $this->r['priceMin']);
-            }else if ($this->r['priceMax']){
-                $this->filter = $q->where("floors", $this->r['priceMax']);
-            }
+            $this->between('price', $q, $this->r['priceMin'], $this->r['priceMax']);
         });
         $this->filter->when($this->r['buildingFloorsMin'] != 'all' && isset($this->r['buildingFloorsMin']) || isset($this->r['buildingFloorsMax']), function($q){
-            if($this->r['buildingFloorsMin'] && $this->r['buildingFloorsMax']){
-                $this->filter = $q->whereBetween("floors", [$this->r['buildingFloorsMin'], $this->r['buildingFloorsMax']]);
-            } else if($this->r['buildingFloorsMin']){
-                $this->filter = $q->where("floors", $this->r['buildingFloorsMin']);
-            }else if ($this->r['buildingFloorsMax']){
-                $this->filter = $q->where("floors", $this->r['buildingFloorsMax']);
-            }
+            $this->between('buildingFloors', $q, $this->r['buildingFloorsMin'], $this->r['buildingFloorsMax']);
         });
         $this->filter->when($this->r['gardenMin'] != 'all' && isset($this->r['gardenMin']) || isset($this->r['gardenMax']), function($q){
-            if($this->r['gardenMin'] && $this->r['gardenMax']){
-                $this->filter = $q->whereBetween("floors", [$this->r['gardenMin'], $this->r['gardenMax']]);
-            } else if($this->r['gardenMin']){
-                $this->filter = $q->where("floors", $this->r['gardenMin']);
-            }else if ($this->r['gardenMax']){
-                $this->filter = $q->where("floors", $this->r['gardenMax']);
-            }
+            $this->between('gardenArea', $q, $this->r['gardenMin'], $this->r['gardenMax']);
         });
         $this->filter->when($this->r['facePartMin'] != 'all' && isset($this->r['facePartMin']) || isset($this->r['facePartMax']), function($q){
-            if($this->r['facePartMin'] && $this->r['facePartMax']){
-                $this->filter = $q->whereBetween("floors", [$this->r['facePartMin'], $this->r['facePartMax']]);
-            } else if($this->r['facePartMin']){
-                $this->filter = $q->where("floors", $this->r['facePartMin']);
-            }else if ($this->r['facePartMax']){
-                $this->filter = $q->where("floors", $this->r['facePartMax']);
-            }
+            $this->between('faceArea', $q, $this->r['facePartMin'], $this->r['facePartMax']);
         });
         $this->filter->when($this->r['customerName'] != 'all' && isset($this->r['customerName']) && $this->r['customerName'] == null, function($q){
             $this->filter = $q->where('customerName', $this->r['customerName']);
         });
         $this->filter->orderBy('code', 'desc')->orderBy('id', 'desc');
+    }
+
+    protected function between($column, $q, $min = null, $max = null)
+    {
+        if($min && $max){
+            $this->filter = $q->whereBetween($column, [$min, $max]);
+        } else if($min){
+            $this->filter = $q->whereBetween($column, [1, $min]);
+        }else if ($max){
+            $this->filter = $q->whereBetween($column, [1, $max]);
+        }
     }
 }
 
