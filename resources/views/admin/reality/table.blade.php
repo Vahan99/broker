@@ -22,10 +22,6 @@
                     <th>Հաճ․ անուն</th>
                     <th>Հղում</th>
                     <th>Դիտել</th>
-                @if($admin == 1 || $admin == 0 || $admin == 3)
-                        <th>Գործակալ</th>
-                        <th>Ստատուս</th>
-                    @endif
                     <th class="last">
                         <i class="fa fa-print printNumbers" aria-hidden="true">0</i>
                     </th>
@@ -81,21 +77,6 @@
                                 <i class="glyphicon glyphicon-eye-open"></i>
                             </a>
                         </td>
-                        @if($admin == 1 || $admin == 0 || $admin == 3)
-                            @foreach ($users as $user)
-                                @if($user->id == $r->user_id)
-                                    <td>{!! $user->name !!}</td>
-                                @endif
-                            @endforeach
-                            <td>
-                                <input type="hidden" name="realityId" value="{!! $r->id !!}">
-                                <select name="realityStatus" class="form-control changeRealityStatus">
-                                    <option value="1" {!! $r->status == '1' ? 'selected' : '' !!}>Ակտիվ</option>
-                                    <option value="2" {!! $r->status == '2' ? 'selected' : '' !!}>Դադարեցված</option>
-                                    <option value="3" {!! $r->status == '3' ? 'selected' : '' !!}>Արխիվ</option>
-                                </select>
-                            </td>
-                        @endif
                         <td class="last">
                             <input type="hidden" name="realityId" value="{!! $r->id !!}">
                             <input type="checkbox" class="checkForPrint" id="checkForPrint_{!! $r->id !!}">

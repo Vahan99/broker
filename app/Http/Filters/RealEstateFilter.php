@@ -19,7 +19,15 @@ class RealEstateFilter
     protected function filter()
     {
         $this->filter = new Reality;
-        $this->filter = $this->filter->whereUserId(Auth::id());
+        $this->filter->when(!Auth::user()->parent, function ($q){
+            $brokers = Auth::user()->brokers()->pluck('id')->toArray();
+            $this->filter = $q->whereIn('user_id', $brokers);
+        }, function ($q){
+            $this->filter = $q->whereUserId(Auth::id());
+        });
+        $this->filter->when($this->r['broker'] != 'all' && isset($this->r['broker']), function ($q){
+            $this->filter = $q->where('user_id', $this->r['broker']);
+        });
         $this->filter->when($this->r['type'] != 'all' && isset($this->r['type']), function ($q){
             $this->filter = $q->where('type', $this->r['type']);
         });

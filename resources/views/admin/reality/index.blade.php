@@ -134,6 +134,19 @@
                             </div>
                         <div class="col-sm-12">
                             <div class="row m-t-20">
+                                @if(!Auth::user()->parent)
+                                    <div class="col-sm-2">
+                                        <div class="custom-select onchange" style="width:200px;">
+                                        </div>
+                                        <label for="type">Բրոքեռներ</label>
+                                        <select name="broker" id="type" class="form-control onchange" >
+                                            <option value="all" >Բոլորը</option>
+                                            @foreach(Auth::user()->brokers as $broker)
+                                                <option value="{{$broker->id}}" >{{$broker->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
                                 <div class="col-sm-2">
                                     <div class="custom-select" style="width:200px;">
                                     </div>
@@ -171,7 +184,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-{{!Auth::user()->parent ? '2' : '4'}}">
                                     <label for="realitySubReg">Համայնք</label>
                                     <select name="subRegions[]"  id="realitySubReg" class="select2 select2-multiple onchange"
                                              multiple="multiple" multiple data-placeholder="Համայնք">
