@@ -32,6 +32,19 @@ $('.company-display').change(function (element) {
     });
 });
 
+$('#reality-filter input[type=checkbox]').change(function () {
+    let url  = `reality-list`, max = $(this).data('max'), min = $(this).data('min');
+    let data = {[$(this).attr('name')] : $(this)[0].checked};
+    onAjax({
+        url: url,
+        data: data,
+        method: 'GET'
+    }).done((data) => {
+        realtyFilterDone(data);
+    });
+
+});
+
 realtyFilterDone = (data) => {
     $('.card-box').remove();
     $('.tabelList').append(data);
@@ -73,3 +86,4 @@ realtyFilterDone = (data) => {
         }
     })
 };
+

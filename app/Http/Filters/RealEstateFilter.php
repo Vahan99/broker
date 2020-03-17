@@ -71,10 +71,10 @@ class RealEstateFilter
                 $this->filter = $q->where("floors", $this->r['floorMax']);
             }
         });
-        $this->filter->when($this->r['firstFloor'] != 'all' && isset($this->r['firstFloor']) && $this->r['firstFloor'] == "1", function($q){
+        $this->filter->when($this->r['firstFloor'] != 'all' && isset($this->r['firstFloor']) && $this->r['firstFloor'] === 'true', function($q){
             $this->filter = $q->where('firstFloor', $this->r['firstFloor']);
         });
-        $this->filter->when($this->r['lastFloor'] != 'all' && isset($this->r['lastFloor']) && $this->r['lastFloor'] == "1", function($q){
+        $this->filter->when($this->r['lastFloor'] != 'all' && isset($this->r['lastFloor']) && $this->r['lastFloor'] === 'true', function($q){
             $this->filter = $q->where('lastFloor', $this->r['lastFloor']);
         });
         $this->filter->when($this->r['areaMin'] != 'all' && isset($this->r['areaMin']) || isset($this->r['areaMax']), function($q){

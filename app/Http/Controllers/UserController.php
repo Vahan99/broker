@@ -198,14 +198,14 @@ class UserController extends Controller
     {
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
             if(Auth::user()->admin != 4 && Auth::user()->hasCompanyDisplay() == false){
-                return view('admin.admin',['errorMessage'=>'Ձեր էջը բլոկավորված է', 'error'=> true]);
+                return view('admin.admin', ['errorMessage'=>'Ձեր էջը բլոկավորված է', 'error'=> true]);
             } else if(Auth::user()->status == 2 || Auth::user()->status == 0  && Auth::user()->admin != 4){
-                return view('admin.admin',['errorMessage'=>'Ձեր էջը բլոկավորված է', 'error'=> true]);
+                return view('admin.admin', ['errorMessage'=>'Ձեր էջը բլոկավորված է', 'error'=> true]);
             } else {
                 if(!Auth::user()->entry){
                     return view('auth.passwords.entry');
                 }
-                return redirect('/admin/reality/reality-list');
+                return redirect(Auth::user()->redirect());
             }
         } else{
             return view('admin.admin',['errorMessage'=>'Ձեր էլ-փոստը կամ գաղտնաբառը սխալ է', 'error'=> true]);

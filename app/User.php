@@ -66,4 +66,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Reality::class, 'user_id');
     }
+
+    public function redirect()
+    {
+        return $this->Admin() == 1 ? 'admin/reality/reality-list' : $this->Admin() == 2 ? 'admin/reality/reality-list' : 'super/dashboard';
+    }
 }
