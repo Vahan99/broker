@@ -9,9 +9,12 @@ class AdminController extends Controller
 {
     public function index(Request $request)
     {
-        $companies = Company::orderBy('created_at')->get()->groupBy(function ($group) {
-            return \Carbon\Carbon::parse($group->created_at)->format('Y-m-d');
-        })->toArray();
-        return view('superadmin.index', compact('companies'));
+        if($request->chart){
+            return Company::orderBy('created_at')->get()->groupBy(function ($group) {
+                return \Carbon\Carbon::parse($group->created_at)->format('Y-m-d');
+            })->toArray();
+        } else {
+            $companies = Company::get();
+        } return view('superadmin.index', compact('companies'));
     }
 }

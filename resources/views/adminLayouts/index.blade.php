@@ -95,6 +95,7 @@
         <script src="{{ URL::asset('js/jquery.min.js') }}"></script>
         <script src="{{ URL::asset('js/route-controller.js') }}"></script>
         <script src="{{ URL::asset('js/ajax-requests.js') }}"></script>
+        @stack('scripts')
         <script src="{{ URL::asset('js/select2/select2.min.js') }}" type="text/javascript"></script>
         <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
         <script src="{{ URL::asset('js/detect.js') }}"></script>
