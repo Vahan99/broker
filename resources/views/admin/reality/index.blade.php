@@ -138,7 +138,7 @@
                                     <div class="col-sm-2">
                                         <div class="custom-select onchange" style="width:200px;">
                                         </div>
-                                        <label for="type">Բրոքեռներ</label>
+                                        <label for="type">Գործակալներ</label>
                                         <select name="broker" id="type" class="form-control onchange" >
                                             <option value="all" >Բոլորը</option>
                                             @foreach(Auth::user()->brokers as $broker)
