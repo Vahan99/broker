@@ -38,31 +38,12 @@
                                         <div class="col-sm-3 b-r">
                                             <label for="addRealityAdmin">Ադմին</label>
                                             <select name="admin_id" id="addRealityAdmin" class="form-control">
-                                                <option value="-1">Բոլորը</option>
                                                 @foreach($admins as $admin)
                                                     <option value="{!! $admin->id !!}">{!! $admin->name !!}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         @endif
-{{--                                        <div class="col-sm-3 b-r">--}}
-{{--                                            <label for="addRealityUsers">Գործակալ</label>--}}
-{{--                                            <select name="user" id="addRealityUsers" class="form-control">--}}
-{{--                                                @foreach($users as $user)--}}
-{{--                                                    <option value="{!! $user->id !!}">{!! $user->name !!}</option>--}}
-{{--                                                @endforeach--}}
-{{--                                            </select>--}}
-{{--                                        </div>--}}
-                                        <div class="col-sm-3 b-r">
-                                            <label for="type">Տեսակ</label>
-                                            <select name="type" id="type1" class="form-control">
-                                                <option value="1">Վաճառք</option>
-                                                <option value="0">Վարձակալություն</option>
-                                                
-                                                <option value="2">Գնորդ</option>
-                                                <option value="3">Վարձակալ</option>
-                                            </select>
-                                        </div>
                                         <div class="col-sm-3 b-r">
                                             <label for="code">Կոդ</label>
                                             <input type="text" name="code" class="form-control">
@@ -70,7 +51,6 @@
                                         <div class="col-sm-3">
                                             <label for="realityType">Գույքի տեսակ</label>
                                             <select name="realityType" id="realityType" class="form-control">
-                                                <option value="-1">Բոլորը</option>
                                                 <option value="0">Բնակարան</option>
                                                 <option value="1">Տուն</option>
                                                 <option value="2">Առանձնատուն</option>
@@ -90,7 +70,6 @@
                                         <div class="col-sm-2 b-r">
                                             <label for="realityRegion">Մարզ</label>
                                             <select name="region" id="addRealityRegion" class="form-control">
-                                                <option value="-1">Բոլորը</option>
                                                 @foreach($regions as $region)
                                                     <option value="{!! $region->id !!}">{!! $region->name !!}</option>
                                                 @endforeach
@@ -99,7 +78,6 @@
                                         <div class="col-sm-3 b-r">
                                             <label for="realitySubRegion">Համայնք</label>
                                             <select name="subRegion" id="addRealitySubRegion" class="form-control">
-                                                <option value="-1">Բոլորը</option>
                                                 @foreach($subRegions as $subRegion)
                                                     <option value="{!! $subRegion->id !!}">{!! $subRegion->name !!}</option>
                                                 @endforeach
@@ -134,7 +112,6 @@
                                         <div class="col-sm-3 b-r">
                                             <label for="realityProect">Նախագիծ</label>
                                             <select name="proect" id="realityProect" class="form-control">
-                                                <option value="-1">Բոլորը</option>
                                                 <option value="0">Ստալին փ/ծ</option>
                                                 <option value="1">Ստալին բ/ծ</option>
                                                 <option value="2">Խռուշյչովյան</option>
@@ -153,7 +130,6 @@
                                         <div class="col-sm-3 b-r">
                                             <label for="realityBuildingType">Շենքի տիպ</label>
                                             <select name="buildingType" id="realityBuildingType" class="form-control">
-                                                <option value="-1">Բոլորը</option>
                                                 <option value="0">Պանելային</option>
                                                 <option value="1">Քարե</option>
                                                 <option value="2">Մոնոլիտ</option>
@@ -166,7 +142,6 @@
                                         <div class="col-sm-3 b-r">
                                             <label for="realityCosmetic">Հարդարում</label>
                                             <select name="cosmetic" id="realityCosmetic" class="form-control">
-                                                <option value="-1">Բոլորը</option>
                                                 <option value="0">Պետական</option>
                                                 <option value="1">Զրոյական</option>
                                                 <option value="2">Վերանորոգած</option>
@@ -179,7 +154,6 @@
                                         <div class="col-sm-3">
                                             <label for="realityBalcon">Պատշգամբ</label>
                                             <select name="balcon" id="realityBalcon" class="form-control">
-                                                <option value="-1">Բոլորը</option>
                                                 <option value="0">Բաց</option>
                                                 <option value="1">Փակ</option>
                                                 <option value="2">Բաց և փակ</option>
@@ -309,21 +283,12 @@
                                             <div class="col-sm-3 b-r">
                                                 <label for="editRealityAdmin">Ադմին</label>
                                                 <select name="admin_id" id="editRealityAdmin" class="form-control">
-                                                    <option value="-1">Բոլորը</option>
                                                     @foreach($admins as $admin)
                                                         <option value="{!! $admin->id !!}">{!! $admin->name !!}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         @endif
-{{--                                        <div class="col-sm-3 b-r">--}}
-{{--                                            <label for="realityRegion">Գործակալ</label>--}}
-{{--                                            <select name="user" id="editRealityUsers" class="form-control">--}}
-{{--                                                @foreach($users as $user)--}}
-{{--                                                    <option value="{!! $user->id !!}" {!! $reality->user_id == $user->id ? 'selected' : '' !!}>{!! $user->name !!}</option>--}}
-{{--                                                @endforeach--}}
-{{--                                            </select>--}}
-{{--                                        </div>--}}
                                         <div class="col-sm-3">
                                             <label for="type">Տեսակ</label>
                                             <select name="type" id="type" class="form-control">
@@ -516,7 +481,6 @@
                                         <div class="col-sm-2 b-r">
                                             <label for="realityRegion">Մարզ</label>
                                             <select name="region" id="editRealityRegion" class="form-control">
-                                                <option value="-1">Բոլորը</option>
                                                 @foreach($regions as $region)
                                                     <option value="{!! $region->id !!}"
                                                             {!! $region->id == $reality->region ? 'selected' : '' !!}>
@@ -528,7 +492,6 @@
                                         <div class="col-sm-3 b-r">
                                             <label for="realitySubRegion">Համայնք</label>
                                             <select name="subRegion" id="editRealitySubRegion" class="form-control">
-                                                <option value="-1">Բոլորը</option>
                                                 @foreach($subRegions as $subRegion)
                                                     <option value="{!! $subRegion->id !!}"
                                                             {!! $subRegion->id == $reality->subRegion ? 'selected' : '' !!}>
@@ -595,15 +558,6 @@
                                                                        id="lastFloor">
                                                             </span>
                                                         </p>
-                                                        {{--<label for="firstFloor">Առաջին հարկ</label>--}}
-                                                        {{--<input type="checkbox" name="firstFloor"--}}
-                                                               {{--{!! $reality->firstFloor == 1 ? 'checked' : '' !!}--}}
-                                                               {{--id="firstFloor">--}}
-                                                        {{--<br>--}}
-                                                        {{--<label for="lastFloor">Վերջի հարկ</label>--}}
-                                                        {{--<input type="checkbox" name="lastFloor"--}}
-                                                               {{--{!! $reality->lastFloor == 1 ? 'checked' : '' !!}--}}
-                                                               {{--id="lastFloor">--}}
                                                     </div>
                                                 </div>
                                             </div>
