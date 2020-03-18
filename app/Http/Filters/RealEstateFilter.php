@@ -108,7 +108,7 @@ class RealEstateFilter
         if($min && $max){
             $this->filter = $q->whereBetween($column, [$min, $max]);
         } else if($min){
-            $this->filter = $q->whereBetween($column, [1, $min]);
+            $this->filter = $q->where($column, ">=", $min);
         }else if ($max){
             $this->filter = $q->whereBetween($column, [1, $max]);
         }
