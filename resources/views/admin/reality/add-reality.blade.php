@@ -64,6 +64,20 @@
                                                 <option value="10">Այլ</option>
                                             </select>
                                         </div>
+                                        <div class="col-sm-3">
+                                                <label for="type">Տեսակ</label>
+                                                <select name="type" id="type" class="form-control">
+                                                    <option value="0">
+                                                        Վարձակալություն
+                                                    </option>
+                                                    <option value="1">Վաճառք
+                                                    </option>
+                                                    <option value="2">Գնորդ
+                                                    </option>
+                                                    <option value="3">Վարձակալ
+                                                    </option>
+                                                </select>
+                                            </div>
                                     </div>
                                     <hr>
                                     <div class="row">
@@ -128,7 +142,7 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-3 b-r">
-                                            <label for="realityBuildingType">Շենքի տիպ</label>
+                                            <label for="realityBuildingType">Շինության տիպ</label>
                                             <select name="buildingType" id="realityBuildingType" class="form-control">
                                                 <option value="0">Պանելային</option>
                                                 <option value="1">Քարե</option>
@@ -398,7 +412,7 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-2 b-r">
-                                            <label for="realityBuildingType">Շենքի տիպ</label>
+                                            <label for="realityBuildingType">Շինության տիպ</label>
                                             <select name="buildingType" id="realityBuildingType" class="form-control">
                                                 <option value="-1" {!! $reality->buildingType == '-1' ? 'selected' : '' !!}>
                                                     Բոլորը

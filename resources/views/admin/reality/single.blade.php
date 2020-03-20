@@ -131,7 +131,7 @@
                                     <span>Այլ</span>
                                 @endif
                             </p>
-                            <p><b>Շենքի տիպ : </b>
+                            <p><b>Շինության տիպ : </b>
                                 @if($reality->buildingType == '-1')
                                     <span>Բոլորը</span>
                                 @elseif($reality->buildingType == '0')

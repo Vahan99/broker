@@ -69,3 +69,6 @@ Route::group(['prefix' => 'super', 'middleware' => ['web', 'auth', 'super']], fu
 });
 
 
+//Route::get('views', function (){
+//    return view('user_side_layouts.header');
+//});

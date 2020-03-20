@@ -19,7 +19,7 @@
                         <div class="row search-box m-t-20">
                         <div class="col-sm-2">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <div class="ms-container" id="ms-my_multi_select3">
                                         <div class="ms-selectable">
                                             <label for="code">Կոդ</label>
@@ -29,14 +29,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="hp_code">
-                                            HP կոդ
-                                        </label>
-                                        <input type="text" name="hp_code" id="hp_code" class="form-control onchange">
-                                    </div>
-                                </div>
+{{--                                <div class="col-sm-6">--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <label for="hp_code">--}}
+{{--                                            HP կոդ--}}
+{{--                                        </label>--}}
+{{--                                        <input type="text" name="hp_code" id="hp_code" class="form-control onchange">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                             </div>
                         </div>
                         <div class="col-sm-2">
@@ -247,7 +247,7 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <label for="realityBuildingType">Շենքի տիպ</label>
+                                    <label for="realityBuildingType">Շինության տիպ</label>
                                     <select name="buildingType" id="realityBuildingType" class="form-control onchange">
                                         <option value="all">Բոլորը</option>
                                         <option value="0">Պանելային</option>
