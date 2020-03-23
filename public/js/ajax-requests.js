@@ -80,7 +80,7 @@ realtyFilterDone = (data) => {
         }else{
             array = array.filter(function(el) {
                 return el.id !== $(that).siblings('input').val()
-            })
+            });
             $('.printNumbers').text(array.length);
             localStorage.setItem('print', JSON.stringify(array) )
         }

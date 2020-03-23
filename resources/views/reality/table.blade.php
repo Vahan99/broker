@@ -72,7 +72,7 @@
                         <td>{!! $r->customerName !!}</td>
                         <td>{!! $r->link ? '<a href="'.$r->link.'" target="_blank">Հղում</a>' : '-' !!}</td>
                         <td>
-                            <a href="/admin/reality/single-reality/{!! $r->id !!}"
+                            <a href="single-reality/{!! $r->id !!}"
                                class="btn btn-primary btn-rounded waves-effect waves-light">
                                 <i class="glyphicon glyphicon-eye-open"></i>
                             </a>

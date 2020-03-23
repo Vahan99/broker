@@ -23,6 +23,7 @@
         <link href="{{ URL::asset('footable/css/footable.core.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ URL::asset('css/admin_style.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ URL::asset('js/select2/select2.css') }}" rel="stylesheet" type="text/css">
+        @stack('style')
         <script src="{{ URL::asset('js/modernizr.min.js') }}"></script>
         <style type="text/css" >
             img {

@@ -347,7 +347,7 @@
 {{--                        <div class="loader" style="margin: 0 auto;"></div>--}}
 {{--                    </div>--}}
                     <div class="table-block row m-t-20 tabelList">
-                        @include('admin.reality.table')
+                        @include('reality.table')
                     </div>
 
                 </div>

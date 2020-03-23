@@ -1,12 +1,6 @@
 @extends('adminLayouts.index')
-
 @section('title', 'Admin Dashboard')
-
 @section('content')
-
-    {{--@include('adminLayouts.header')--}}
-    {{--@include('adminLayouts.sidebar')--}}
-
     <div class="row">
         <!-- Start content -->
         <input type="hidden" name="_token" value="{!! csrf_token() !!}" id="token">
@@ -17,9 +11,6 @@
                 </div>
             </div>
             <div>
-                @if($error)
-                    <p class="alert-danger"><b>Error !</b> Something goes wrong , please try again</p>
-                @endIf
                 <p class="alert alert-success" id="successMessageHallBookingDelete" style="display:none"></p>
                 <div class="row m-t-20 tabelListPrint">
                     <div class="col-sm-12 card-box">
@@ -29,7 +20,6 @@
                                     <thead  id="subRegionTableHeade">
                                     <tr>
                                         <th>Կոդ</th>
-                                        <th>Գործակալ</th>
                                         <th>Սենյակներ</th>
                                         <th>Համայնք</th>
                                         <th>Փողոց</th>
@@ -43,11 +33,6 @@
                                     @foreach ($reality as $r)
                                         <tr class="{!! $r->status == '2' ? 'pink' : '' !!}">
                                             <td>{{$r->code}}</td>
-                                            @foreach ($users as $user)
-                                                @if($user->id == $r->user_id)
-                                                    <td>{!! $user->name !!}</td>
-                                                @endif
-                                            @endforeach
                                             <td>{!! $r->rooms !!}</td>
                                             <td>
                                                 @foreach($subRegions as $subRegion)
