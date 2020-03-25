@@ -35,11 +35,10 @@ class CustomerController extends Controller
             'name'     => 'required',
             'user_id'  => 'required',
             'customer' => 'required',
-            'email'    => 'unique:customers',
+//            'email'    => 'unique:customers',
             'first_phone'    => 'unique:customers',
             'last_phone'    => 'unique:customers',
         ]);
-
         Customer::create($request->all());
 
         return redirect()->back();

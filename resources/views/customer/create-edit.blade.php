@@ -51,7 +51,7 @@
                                     <div class="form-group">
                                         <div class="col-md-6">
                                             <label for="phone">Հեռախոս (քաղ․)</label>
-                                            <input name="first_phone" type="text" id="phone" class="form-control phone {{$errors->has('first_phone') ? 'error' : ''}}" value="(+374) {{old('first_phone')}}">
+                                            <input name="first_phone" type="text" id="phone" class="form-control phone {{$errors->has('first_phone') ? 'error' : ''}}" value="(+374) {{old('first_phone')}}" max="16" min="16">
                                             <span class="error-span">{{$errors->first('first_phone')}}</span>
                                         </div>
                                         <div class="col-md-6">
