@@ -46,3 +46,9 @@
     background: #659f30!important;
 }
 
+.error, .error:hover, .error:active {
+    border: 1px solid #e15361;
+}
+.error-span {
+    color: #e15361;
+}

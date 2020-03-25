@@ -47,6 +47,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function ()
     Route::get('/reality/single-reality/{id}', 'RealtyController@single')->name('realty.single');
 
     Route::post('/reality/add-reality', 'RealtyController@add')->name('realty.add');
+
+    //Customers
+    Route::get('customers', 'CustomerController@index')->name('customer.index');
+    Route::get('customers/create', 'CustomerController@create')->name('customer.create');
+    Route::post('customers/add', 'CustomerController@add')->name('customer.add');
 });
 Route::group(['prefix' => 'super', 'middleware' => ['web', 'auth', 'super']], function (){
     Route::get('/dashboard', 'AdminController@index')->name('superadmin.index');

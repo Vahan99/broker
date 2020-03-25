@@ -146,5 +146,7 @@
                 });
             });
         </script>
+         <script src="{{ URL::asset('assets/js/jquery.mask.min.js') }}"></script>
+         <script src="{{ URL::asset('assets/js/custom.js') }}"></script>
     </body>
 </html>

@@ -25,6 +25,7 @@ class RealtyController extends Controller
             'reality'    => $reality,
             'regions'    => $regions,
             'subRegions' => $subRegions,
+            'realtyData' => new DataRealty,
             'admin'      => Auth::user()->Admin(),
         ];
 
@@ -34,6 +35,7 @@ class RealtyController extends Controller
             return view('reality.index', $data);
         }
     }
+
     public function create()
     {
         return view('reality.add-reality', [
@@ -41,8 +43,10 @@ class RealtyController extends Controller
             'regions'    =>  Region::get(),
             'realtyData' => new DataRealty,
             'subRegions' =>  SubRegion::get(),
+            'action'    => 'realty.add'
         ]);
     }
+
     public function add(Request $request)
     {
         $request->validate([
@@ -54,6 +58,7 @@ class RealtyController extends Controller
 
         return redirect()->back();
     }
+
     public function printList(Request $request, $ids)
     {
         $ids = json_decode($ids);
@@ -68,6 +73,7 @@ class RealtyController extends Controller
         ]);
 
     }
+
     public function single($id){
         return view('reality.single', [
             'realtyData' => new DataRealty,
@@ -76,6 +82,7 @@ class RealtyController extends Controller
             'reality'    => Reality::whereId($id)->whereUserId(Auth::id())->first(),
         ]);
     }
+
     public function updateRealityStatus($id, $status)
     {
         $reality = Reality::whereId($id)->update(['status' => $status]);

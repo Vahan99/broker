@@ -22,7 +22,9 @@ abstract class Data
 
     public function validate($checked, $role)
     {
-        return in_array($checked, $this->handle()[$role]);
+        if(isset($checked, $role)){
+            return in_array($checked, $this->handle()[$role]);
+        }
     }
 
     abstract protected function handle();

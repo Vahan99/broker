@@ -45,20 +45,12 @@
                                     <div class="form-group">
                                         <label for="floorMin">Հարկեր ս․</label>
                                         <input type="number" min="0" class="form-control" id="floorMin" name="floorMin">
-                                        <p class="align-content-center no-margin p-t-5">
-                                            <span style="font-size: 13px;">Առաջին հ.</span>
-                                            <input style="margin-left: 5px" type="checkbox" id="firstFloor" name="firstFloor">
-                                        </p>
                                     </div>
                                 </div>
                                 <div class="col-sm-5">
                                     <div class="form-group m-l-10">
                                         <label for="floorMax">Հարկեր վ․</label>
                                         <input type="number" min="0" class="form-control" id="floorMax" name="floorMax">
-                                        <p  class="align-content-center no-margin p-t-5">
-                                            <span style="font-size: 13px;">Վերջին հ.</span>
-                                            <input style="margin-left: 5px" type="checkbox" id="lastFloor" name="lastFloor">
-                                        </p>
                                     </div>
                                 </div>
                                 <div class="glyphicon glyphicon-play-circle" style="cursor: pointer; padding: 3rem 0;" data-min="floorMin" data-max="floorMax"></div>
@@ -152,27 +144,18 @@
                                     </div>
                                     <label for="type">Տեսակ</label>
                                     <select name="type" id="type" class="form-control onchange" >
-                                        <option value="1" >Վաճառք</option>
-                                        <option value="0" >Վարձակալություն</option>
-                                        <option value="2" >Գնորդ</option>
-                                        <option value="3" >Վարձակալ</option>
+                                        @foreach($realtyData->realtyType() as $type)
+                                            <option value="{{$type['value']}}">{{$type['label']}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
                                     <label for="realityType">Գույքի տեսակ</label>
                                     <select name="realityType" id="realityType" class="form-control onchange" >
                                         <option value="all">Բոլորը</option>
-                                        <option value="0">Բնակարան</option>
-                                        <option value="1">Տուն</option>
-                                        <option value="2">Առանձնատուն</option>
-                                        <option value="3">Ամառանոց</option>
-                                        <option value="4">Գրասենյակ</option>
-                                        <option value="5">Ռեստորան</option>
-                                        <option value="6">Խանութ</option>
-                                        <option value="7">Հողատարածք</option>
-                                        <option value="8">Վարսավիրանոց</option>
-                                        <option value="9">Ավտոտեխսպասարկում</option>
-                                        <option value="10">Այլ</option>
+                                        @foreach($realtyData->types() as $type)
+                                            <option value="{{$type['value']}}">{{$type['label']}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
@@ -231,56 +214,36 @@
                                     <label for="realityProect">Նախագիծ</label>
                                     <select name="proect" id="realityProect" class="form-control onchange">
                                         <option value="all">Բոլորը</option>
-                                        <option value="0">Ստալին փ/ծ</option>
-                                        <option value="1">Ստալին բ/ծ</option>
-                                        <option value="2">Խռուշյչովյան</option>
-                                        <option value="3">հետ Խռուշչովյան</option>
-                                        <option value="4">Երևանյան</option>
-                                        <option value="5">Չեխական</option>
-                                        <option value="6">Բադալյան</option>
-                                        <option value="7">Մոսկովյան</option>
-                                        <option value="8">Վրացական</option>
-                                        <option value="9">Հատուկ</option>
-                                        <option value="10">Նորակառույց</option>
-                                        <option value="11">Հանրակացարան</option>
-                                        <option value="12">Այլ</option>
+                                        @foreach($realtyData->projects() as $type)
+                                            <option value="{{$type['value']}}">{{$type['label']}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
                                     <label for="realityBuildingType">Շինության տիպ</label>
                                     <select name="buildingType" id="realityBuildingType" class="form-control onchange">
                                         <option value="all">Բոլորը</option>
-                                        <option value="0">Պանելային</option>
-                                        <option value="1">Քարե</option>
-                                        <option value="2">Մոնոլիտ</option>
-                                        <option value="3">Աղյուսե</option>
-                                        <option value="4">Փայտե</option>
-                                        <option value="5">Կասետային</option>
-                                        <option value="6">Այլ</option>
+                                        @foreach($realtyData->buildingType() as $type)
+                                            <option value="{{$type['value']}}">{{$type['label']}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
                                     <label for="realityCosmetic">Հարդարում</label>
                                     <select name="cosmetic" id="realityCosmetic" class="form-control onchange">
                                         <option value="all">Բոլորը</option>
-                                        <option value="0">Պետական</option>
-                                        <option value="1">Զրոյական</option>
-                                        <option value="2">Վերանորոգած</option>
-                                        <option value="3">Կապ․ վեր․</option>
-                                        <option value="4">Մասամբ վեր․</option>
-                                        <option value="5">Չբնակեցված վեր․</option>
-                                        <option value="6">Հին կապիտալ</option>
+                                        @foreach($realtyData->decorations() as $type)
+                                            <option value="{{$type['value']}}">{{$type['label']}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
                                     <label for="realityBalcon">Պատշգամբ</label>
                                     <select name="balcon" id="realityBalcon" class="form-control onchange">
                                         <option value="all">Բոլորը</option>
-                                        <option value="0">Բաց</option>
-                                        <option value="1">Փակ</option>
-                                        <option value="2">Բաց և փակ</option>
-                                        <option value="3">Շքապատշգամբ</option>
-                                        <option value="4">Չունի</option>
+                                        @foreach($realtyData->balconies() as $type)
+                                            <option value="{{$type['value']}}">{{$type['label']}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-2">

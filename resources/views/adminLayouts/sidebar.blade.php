@@ -27,7 +27,7 @@
                         <ul class="list-unstyled">
                             <li class="{{strrpos(url()->full(), 'reality-list', 0) ? 'active' : ''}}"><a href="/admin/reality/reality-list">Գույքերի ցուցակ</a></li>
                             @if(Auth::user()->admin != 1)
-                                <li class="{{strrpos(url()->full(), 'add-reality', 0) ? 'active' : ''}}"><a href="/admin/reality/add-reality">Ավելացնել Գույք</a></li>
+                                <li class="{{strrpos(url()->full(), 'add-reality', 0) ? 'active' : ''}}"><a href="/admin/reality/add-reality?type=apartment&&value=0">Ավելացնել Գույք</a></li>
                             @endif
                         </ul>
                     </li>
@@ -42,9 +42,14 @@
                     </li>
                     @endif
 
-                    <li class="">
-                        <a href="/admin/clients/2"  class="{{strrpos(url()->full(), 'clients', 0) ? 'active' : ''}}"><i class="fa fa-users"></i> <span> Գնորդ / Վարձակալ </span> </a>
+                    <li class="has_sub">
+                        <a href="javascript:;"  class=""><i class="fa fa-users"></i> <span> Գնորդ / Վարձակալ </span> </a>
+                        <ul class="list-unstyled">
+                            <li class=""><a href="{{route('customer.create')}}?customer=0">Ավելացնել</a></li>
+                            <li class=""><a href="{{route('customer.index')}}">Բոլորը</a></li>
+                        </ul>
                     </li>
+
                     @if(Auth::user()->admin == 1 || Auth::user()->admin == 3)
                     <li class="has_sub">
                         <a href="#"  class="{{strrpos(url()->full(), 'regions', 0) ? 'active' : ''}} waves-effect"><i class="fa fa-globe"></i> <span> Համայնք </span> </a>
