@@ -4,10 +4,32 @@ namespace App\Http\Data;
 
 class Rules extends Data
 {
+    protected $forms = [
+        'customer.filter.add' => [
+            'inputsBlocked' => [
+                'code',
+                'info',
+                'area',
+                'link',
+                'rooms',
+                'price',
+                'phone',
+                'floors',
+                'user_id',
+                'faceArea',
+                'gardenArea',
+                'customerName',
+                'buildingFloors',
+            ],
+        ]
+    ];
+
     public function handle()
     {
         return [
             'apartment' => [
+                'customers',
+                'user_id',
                 'code',
                 'type',
                 'area',
@@ -30,6 +52,8 @@ class Rules extends Data
                 'apartamentNumber',
             ],
             'house' => [
+                'customers',
+                'user_id',
                 'code',
                 'type',
                 'area',
@@ -51,6 +75,8 @@ class Rules extends Data
                 'apartamentNumber',
             ],
             'mansion' => [
+                'customers',
+                'user_id',
                 'code',
                 'type',
                 'area',
@@ -72,6 +98,8 @@ class Rules extends Data
                 'apartamentNumber',
             ],
             'bungalow' => [
+                'customers',
+                'user_id',
                 'code',
                 'type',
                 'area',
@@ -92,6 +120,8 @@ class Rules extends Data
                 'buildingFloors',
             ],
             'office' => [
+                'customers',
+                'user_id',
                 'code',
                 'type',
                 'area',
@@ -109,6 +139,8 @@ class Rules extends Data
                 'buildingNumber',
             ],
             'restaurant' => [
+                'customers',
+                'user_id',
                 'code',
                 'type',
                 'area',
@@ -128,6 +160,8 @@ class Rules extends Data
                 'buildingFloors',
             ],
             'shop' => [
+                'customers',
+                'user_id',
                 'code',
                 'type',
                 'area',
@@ -146,6 +180,8 @@ class Rules extends Data
                 'buildingFloors',
             ],
             'land' => [
+                'customers',
+                'user_id',
                 'code',
                 'type',
                 'area',
@@ -160,6 +196,8 @@ class Rules extends Data
                 'customerName',
             ],
             'hairdresser' => [
+                'customers',
+                'user_id',
                 'code',
                 'type',
                 'area',
@@ -178,6 +216,8 @@ class Rules extends Data
                 'buildingFloors',
             ],
             'carmaintenance' => [
+                'customers',
+                'user_id',
                 'code',
                 'type',
                 'area',
@@ -193,6 +233,8 @@ class Rules extends Data
                 'buildingType',
             ],
             'garage' => [
+                'customers',
+                'user_id',
                 'code',
                 'area',
                 'link',
@@ -206,6 +248,8 @@ class Rules extends Data
                 'customerName',
             ],
             'other' => [
+                'customers',
+                'user_id',
                 'code',
                 'type',
                 'area',
@@ -228,7 +272,7 @@ class Rules extends Data
                 'buildingNumber',
                 'buildingFloors',
                 'apartamentNumber',
-            ],
+            ]
         ];
     }
 }

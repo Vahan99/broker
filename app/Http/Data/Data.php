@@ -5,6 +5,8 @@ use Prophecy\Exception\Doubler\MethodNotFoundException;
 
 abstract class Data
 {
+    protected $forms;
+
     public function __call($name, $arguments)
     {
         if(!isset($this->handle()[$name])){
@@ -20,10 +22,16 @@ abstract class Data
         return $this->handle()[$name];
     }
 
-    public function validate($checked, $role)
+    public function validate($form, $checked, $role)
     {
-        if(isset($checked, $role)){
-            return in_array($checked, $this->handle()[$role]);
+        return isset($this->forms[$form]) && $this->inArray($checked, $this->forms[$form], 'inputsBlocked') ?
+            false  : $this->inArray($checked, $this->handle(), $role);
+    }
+
+    private function inArray($checked, $array, $index)
+    {
+        if(isset($checked, $array[$index])){
+            return in_array($checked, $array[$index]);
         }
     }
 

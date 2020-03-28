@@ -88,7 +88,7 @@
         <link href="{{ URL::asset('css/custom-select.css') }}" rel="stylesheet" type="text/css" />
     </head>
     <body class="fixed-left">
-    	 @yield('content')
+        @yield('content')
         <script>
             var resizefunc = [];
         </script>

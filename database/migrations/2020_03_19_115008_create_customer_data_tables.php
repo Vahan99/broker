@@ -31,6 +31,21 @@ class CreateCustomerDataTables extends Migration
 
         Schema::create('customer_filters', function (Blueprint $table) {
             $table->increments('id');
+            $table->bigInteger('buildingFloorsMin')->nullable();
+            $table->bigInteger('buildingFloorsMax')->nullable();
+            $table->bigInteger('floorMin')->nullable();
+            $table->bigInteger('floorMax')->nullable();
+            $table->bigInteger('areaMin')->nullable();
+            $table->bigInteger('areaMax')->nullable();
+            $table->bigInteger('roomsMin')->nullable();
+            $table->bigInteger('roomsMax')->nullable();
+            $table->bigInteger('priceMin')->nullable();
+            $table->bigInteger('priceMax')->nullable();
+            $table->bigInteger('gardenMin')->nullable();
+            $table->bigInteger('gardenMax')->nullable();
+            $table->bigInteger('facePartMin')->nullable();
+            $table->bigInteger('facePartMax')->nullable();
+
             $table->bigInteger('type')->nullable();
             $table->bigInteger('realityType')->nullable();
             $table->bigInteger('proect')->nullable();
@@ -42,18 +57,8 @@ class CreateCustomerDataTables extends Migration
             $table->longText('street')->nullable();
             $table->longText('buildingNumber')->nullable();
             $table->longText('apartamentNumber')->nullable();
-            $table->bigInteger('floors')->nullable();
-            $table->bigInteger('area')->nullable();
-            $table->bigInteger('rooms')->nullable();
-            $table->bigInteger('price')->nullable();
-            $table->bigInteger('buildingFloors')->nullable();
-            $table->bigInteger('gardenArea')->nullable();
-            $table->bigInteger('faceArea')->nullable();
-            $table->longText('phone')->nullable();
             $table->longText('customerName')->nullable();
-            $table->longText('info')->nullable();
             $table->bigInteger('status')->nullable();
-            $table->longText('link')->nullable();
             $table->longText('code')->nullable();
             $table->tinyInteger('firstFloor')->nullable();
             $table->tinyInteger('lastFloor')->nullable();

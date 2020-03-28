@@ -53,7 +53,7 @@ realtyFilterDone = (data) => {
         array = JSON.parse(localStorage.getItem('print'))
     }
     $('.printNumbers').text(array.length);
-    for ( var i = 0; i < array.length; i++) {
+    for (var i = 0; i < array.length; i++) {
         $('#checkForPrint_' + array[i].id).prop("checked", true);
     }
     $('.printNumbers').on('click', function () {
