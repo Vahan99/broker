@@ -54,6 +54,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function ()
     Route::post('customers/add', 'CustomerController@add')->name('customer.add');
     //customer filters
     Route::get('customers/filter/create/', 'CustomerController@createFilter')->name('customer.filter.create');
+    Route::get('customers/filter/index/', 'CustomerController@indexFilter')->name('customer.filter.index');
     Route::post('customers/filter/add/', 'CustomerController@addFilter')->name('customer.filter.add');
 });
 Route::group(['prefix' => 'super', 'middleware' => ['web', 'auth', 'super']], function (){

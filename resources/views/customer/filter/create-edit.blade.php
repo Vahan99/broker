@@ -39,6 +39,7 @@
                                 <table class="table table-bordered m-0" style="font-size: 10px">
                                     <thead  id="subRegionTableHeade">
                                     <tr>
+                                        <th title="#">#</th>
                                         <th title="Հարկերի քանակ">Հ․Ք</th>
                                         <th title="Հարկ">Հարկ</th>
                                         <th title="Մակերես">Մակերես</th>
@@ -46,7 +47,6 @@
                                         <th title="Արժեք ($)">Արժեք</th>
                                         <th title="Այգի/հողամաս/մետր">Ա․Հ․Մ</th>
                                         <th title="Ճակատային մաս/մետր">Ճ․Մ․Մ</th>
-
                                         <th title="Տեսակ">Տեսակ</th>
                                         <th title="Գույքի տեսակ">Գ․Տ</th>
                                         <th title="Նախագիծ">Նախագիծ</th>
@@ -63,24 +63,25 @@
                                     <tbody id="subRegionTableBody">
                                     @foreach ($customerFilters as $key => $filter)
                                         <tr class="{{$key % 2 == 0 ? 'odd' : ''}}">
-                                            <td>{!! $filter->buildingFloorsMin .'-'. $filter->buildingFloorsMax!!}</td>
-                                            <td>{!! $filter->floorMin .'-'. $filter->floorMax!!}</td>
-                                            <td>{!! $filter->areaMin .'-'. $filter->areaMax!!}</td>
-                                            <td>{!! $filter->roomsMin .'-'.$filter->roomsMax!!}</td>
-                                            <td>{!! $filter->priceMin .'-'.$filter->priceMax !!}</td>
-                                            <td>{!! $filter->gardenMin .'-' .$filter->gardenMax!!}</td>
-                                            <td>{!! $filter->facePartMin .'-'.$filter->facePartMax!!}</td>
-                                            <td>{!! isset($realtyData->realtyType()[$filter->type]) ? $realtyData->realtyType()[$filter->type]['label'] : ''!!}</td>
-                                            <td>{!! isset($realtyData->types()[$filter->realityType]) ? $realtyData->types()[$filter->realityType]['label'] : ''!!}</td>
-                                            <td>{!! isset($realtyData->projects()[$filter->proect]) ? $realtyData->projects()[$filter->proect]['label'] : ''!!}</td>
-                                            <td>{!! isset($realtyData->buildingType()[$filter->buildingType]) ? $realtyData->buildingType()[$filter->buildingType]['label'] : ''!!}</td>
-                                            <td>{!! isset($realtyData->decorations()[$filter->cosmetic]) ? $realtyData->decorations()[$filter->cosmetic]['label'] : ''!!}</td>
-                                            <td>{!! isset($realtyData->balconies()[$filter->balcon]) ? $realtyData->balconies()[$filter->balcon]['label'] : '' !!}</td>
-                                            <td>{!! $filter->region !!}</td>
-                                            <td>{!! $filter->subRegion !!}</td>
-                                            <td>{!! $filter->street !!}</td>
-                                            <td>{!! $filter->buildingNumber !!}</td>
-                                            <td>{!! $filter->apartamentNumber !!}</td>
+                                            <td>{{ $filter->id }}</td>
+                                            <td>{{ $filter->buildingFloorsMin .'-'. $filter->buildingFloorsMax}}</td>
+                                            <td>{{ $filter->floorMin .'-'. $filter->floorMax}}</td>
+                                            <td>{{ $filter->areaMin .'-'. $filter->areaMax}}</td>
+                                            <td>{{ $filter->roomsMin .'-'.$filter->roomsMax}}</td>
+                                            <td>{{ $filter->priceMin .'-'.$filter->priceMax }}</td>
+                                            <td>{{ $filter->gardenMin .'-' .$filter->gardenMax}}</td>
+                                            <td>{{ $filter->facePartMin .'-'.$filter->facePartMax}}</td>
+                                            <td>{{ isset($realtyData->realtyType()[$filter->type]) ? $realtyData->realtyType()[$filter->type]['label'] : ''}}</td>
+                                            <td>{{ isset($realtyData->types()[$filter->realityType]) ? $realtyData->types()[$filter->realityType]['label'] : ''}}</td>
+                                            <td>{{ isset($realtyData->projects()[$filter->proect]) ? $realtyData->projects()[$filter->proect]['label'] : ''}}</td>
+                                            <td>{{ isset($realtyData->buildingType()[$filter->buildingType]) ? $realtyData->buildingType()[$filter->buildingType]['label'] : ''}}</td>
+                                            <td>{{ isset($realtyData->decorations()[$filter->cosmetic]) ? $realtyData->decorations()[$filter->cosmetic]['label'] : ''}}</td>
+                                            <td>{{ isset($realtyData->balconies()[$filter->balcon]) ? $realtyData->balconies()[$filter->balcon]['label'] : '' }}</td>
+                                            <td>{{ $filter->region }}</td>
+                                            <td>{{ $filter->subRegion }}</td>
+                                            <td>{{ $filter->street }}</td>
+                                            <td>{{ $filter->buildingNumber }}</td>
+                                            <td>{{ $filter->apartamentNumber }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

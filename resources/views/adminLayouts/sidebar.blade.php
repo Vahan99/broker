@@ -48,6 +48,7 @@
                             <li class=""><a href="{{route('customer.index')}}">Բոլորը</a></li>
                             <li class=""><a href="{{route('customer.create')}}?customer=0">Ավելացնել</a></li>
                             <li class=""><a href="{{route('customer.filter.create')}}?type=apartment&&value=0">Ավելացնել Ֆիլտր</a></li>
+                            <li class=""><a href="{{route('customer.filter.index')}}">ՀաՃ․ ֆիլտրացյաներ</a></li>
                         </ul>
                     </li>
 

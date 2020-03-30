@@ -15,4 +15,9 @@ class Customer extends Model
         'first_phone',
         'last_phone',
     ];
+
+    public function filters()
+    {
+        return $this->belongsTo(CustomerFilter::class, 'customer_id');
+    }
 }

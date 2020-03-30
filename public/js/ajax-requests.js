@@ -45,10 +45,13 @@ $('#reality-filter input[type=checkbox]').change(function () {
 
 });
 
+$('#customers').change(function () {
+    console.log('lllllllll');
+});
 realtyFilterDone = (data) => {
     $('.card-box').remove();
     $('.tabelList').append(data);
-    var array = []
+    var array = [];
     if (localStorage.getItem('print')){
         array = JSON.parse(localStorage.getItem('print'))
     }

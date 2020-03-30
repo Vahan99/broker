@@ -17,7 +17,7 @@ class CustomerController extends Controller
     public function index()
     {
         return view('customer.index', [
-            'customers'    => Customer::get(),
+            'customers'    => \Auth::user()->customers,
             'customerData' => new CustomerData,
         ]);
     }
@@ -51,10 +51,10 @@ class CustomerController extends Controller
             'rules'           => new Rules(),
             'regions'         => Region::get(),
             'realtyData'      => new DataRealty,
-            'customerFilters' => CustomerFilter::get(),
             'subRegions'      => SubRegion::get(),
             'action'          => 'customer.filter.add',
             'customers'       => Customer::orderBy('created_at', 'desc')->orderBy('customer', 'desc')->get(),
+            'customerFilters' => CustomerFilter::whereIn('customer_id', \Auth::user()->customers()->pluck('id')->toArray())->get(),
         ]);
     }
 
@@ -67,5 +67,12 @@ class CustomerController extends Controller
         CustomerFilter::create($request->all());
 
         return redirect()->back()->with('message', ['status' => 'success', 'text' => 'Success fully.']);
+    }
+
+    public function indexFilter()
+    {
+        return view('customer.filter.index',[
+            'customers' => \Auth::user()->customers,
+        ]);
     }
 }
