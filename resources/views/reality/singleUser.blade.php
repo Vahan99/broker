@@ -27,7 +27,7 @@
                     @endIf
                     <p class="alert alert-success" id="successMessageHallBookingDelete" style="display:none"></p>
                     <div class="row m-t-20 tabelList">
-                        @include('reality.table')
+                        @include('partials.reality-table')
                     </div>
 
                 </div>

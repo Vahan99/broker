@@ -11,15 +11,11 @@ abstract class Data
     {
         if(!isset($this->handle()[$name])){
             throw new MethodNotFoundException("MethodNotFoundException $name()", Data::class, __FUNCTION__);
-        }
-
-        if(!empty($arguments)){
+        } if(!empty($arguments)){
             foreach ($arguments as $argument){
                 $array[$argument] = $this->handle()[$name][$argument];
             } return $array;
-        }
-
-        return $this->handle()[$name];
+        } return $this->handle()[$name];
     }
 
     public function validate($form, $checked, $role)

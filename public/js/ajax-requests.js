@@ -10,6 +10,16 @@ $('#reality-filter').find('.onchange').change(function (element) {
     });
 });
 
+$('#customer-filter select, input').change(function(){
+    onAjax({
+        url: 'customers',
+        data: {[$(this).attr('name')] : $(this).val()},
+        method: 'GET'
+    }).done((data) => {
+        realtyFilterDone(data);
+    });
+});
+
 $('.glyphicon-play-circle').click(function () {
     let url  = `reality-list`, max = $(this).data('max'), min = $(this).data('min');
     let data = {[max] : $(`#${max}`).val(), [min] : $(`#${min}`).val()};
@@ -32,22 +42,18 @@ $('.company-display').change(function (element) {
     });
 });
 
-$('#reality-filter input[type=checkbox]').change(function () {
-    let url  = `reality-list`, max = $(this).data('max'), min = $(this).data('min');
-    let data = {[$(this).attr('name')] : $(this)[0].checked};
-    onAjax({
-        url: url,
-        data: data,
-        method: 'GET'
-    }).done((data) => {
-        realtyFilterDone(data);
-    });
-
-});
-
-$('#customers').change(function () {
-    console.log('lllllllll');
-});
+// $('#reality-filter input[type=checkbox]').change(function () {
+//     let url  = `reality-list`, max = $(this).data('max'), min = $(this).data('min');
+//     let data = {[$(this).attr('name')] : $(this)[0].checked};
+//     onAjax({
+//         url: url,
+//         data: data,
+//         method: 'GET'
+//     }).done((data) => {
+//         realtyFilterDone(data);
+//     });
+//
+// });
 realtyFilterDone = (data) => {
     $('.card-box').remove();
     $('.tabelList').append(data);

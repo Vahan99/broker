@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Data\Realty;
 
 class CustomerFilter extends Model
 {
@@ -21,7 +22,6 @@ class CustomerFilter extends Model
         'gardenMax',
         'facePartMin',
         'facePartMax',
-
         'type',
         'realityType',
         'proect',
@@ -41,18 +41,38 @@ class CustomerFilter extends Model
         'customer_id',
     ];
 
-    public function region()
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
+
+    public function getNameAttribute()
+    {
+        return (new Realty)->types()[$this->realityType]['label'];
+    }
+
+    public function getRegionNameAttribute()
+    {
+        if ($this->region) {
+            return $this->getRegion->name;
+
+        }
+    }
+
+    public function getSubRegionNameAttribute()
+    {
+        if($this->subRegion){
+            return $this->getSubRegion->name;
+        }
+    }
+
+    public function getRegion()
     {
         return $this->belongsTo(Region::class, 'region');
     }
 
-    public function subRegion()
+    public function getSubRegion()
     {
         return $this->belongsTo(SubRegion::class, 'subRegion');
-    }
-
-    public function customer()
-    {
-        return $this->belongsTo(Customer::class, 'customer_id');
     }
 }

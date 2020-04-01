@@ -7,19 +7,45 @@ use App\CustomerFilter;
 use App\Http\Data\Customer as CustomerData;
 use App\Http\Data\Realty as DataRealty;
 use App\Http\Data\Rules;
-use App\Reality;
+use App\Http\Helper\Filtering;
 use App\Region;
 use App\SubRegion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('customer.index', [
-            'customers'    => \Auth::user()->customers,
+        $data = [
             'customerData' => new CustomerData,
-        ]);
+            'customers'    => \Auth::user()->customers,
+        ];
+        if (request()->ajax()) {
+            $data['customers'] = (new Filtering($request, new Customer))->filter->paginate(10);
+            return response()->json(view('customer.table', $data)->render());
+        } else{
+            return view('customer.index', $data);
+        }
+    }
+
+    public function single(Request $request, $id)
+    {
+        $data['realtyData'] = new DataRealty;
+        $data['customer']   = Customer::find($id);
+        $data['filters']    = Customer::find($id)->filters;
+        if($request->filter){
+            $data['filter']         = Customer::find($id)->filters()->whereId($request->filter)->first();
+            if($data['filter']){
+                $request            = $data['filter']->toArray();
+                $request['broker']  = Auth::id();
+                $data['reality']    = (new Filtering($request, new \App\Reality))->filter->paginate(10);
+                $data['realtyData'] = new DataRealty;
+                $data['admin']      = Auth::user()->Admin();
+            }
+        }
+
+        return view('customer.single', $data);
     }
 
     public function create()
@@ -33,11 +59,11 @@ class CustomerController extends Controller
     public function add(Request $request)
     {
         $request->validate([
-            'name'     => 'required',
-            'user_id'  => 'required',
-            'customer' => 'required',
-            'first_phone'    => 'unique:customers',
-            'last_phone'    => 'unique:customers',
+            'name'        => 'required',
+            'user_id'     => 'required',
+            'customer'    => 'required',
+            'first_phone' => 'unique:customers',
+            'last_phone'  => 'unique:customers',
         ]);
 
         Customer::create($request->all());
@@ -64,15 +90,10 @@ class CustomerController extends Controller
             'customer_id' => 'required'
         ]);
 
+        $request['type'] = Customer::find($request['customer_id'])->customer;
+
         CustomerFilter::create($request->all());
 
-        return redirect()->back()->with('message', ['status' => 'success', 'text' => 'Success fully.']);
-    }
-
-    public function indexFilter()
-    {
-        return view('customer.filter.index',[
-            'customers' => \Auth::user()->customers,
-        ]);
+        return redirect()->back()->with('message', ['status' => 'success', 'text' => 'Successfully.']);
     }
 }

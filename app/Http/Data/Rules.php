@@ -8,18 +8,14 @@ class Rules extends Data
         'customer.filter.add' => [
             'inputsBlocked' => [
                 'code',
+                'type',
                 'info',
-                'area',
                 'link',
-                'rooms',
-                'price',
                 'phone',
-                'floors',
                 'user_id',
-                'faceArea',
-                'gardenArea',
                 'customerName',
-                'buildingFloors',
+                'buildingNumber',
+                'apartamentNumber',
             ],
         ]
     ];

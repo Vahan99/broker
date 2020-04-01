@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Reality;
-use App\Region;
-use App\SubRegion;
-use App\Http\Data\Rules;
+use App\Reality, App\Region, App\SubRegion;
+use App\Http\Data\Rules, App\Http\Helper\Filtering, App\Http\Data\Realty as DataRealty;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Filters\RealEstateFilter;
-use App\Http\Data\Realty as DataRealty;
 
 class RealtyController extends Controller
 {
@@ -18,7 +15,7 @@ class RealtyController extends Controller
         $regions    = Region::get();
         $subRegions = SubRegion::get();
         $subReg     = $request->realitySubReg;
-        $reality    = (new RealEstateFilter($request))->filter->paginate(10);
+        $reality    = (new Filtering($request, new Reality))->filter->paginate(10);
 
         $data = [
             'subReg'     => $subReg,
@@ -30,7 +27,7 @@ class RealtyController extends Controller
         ];
 
         if (request()->ajax()) {
-            return response()->json(view('reality.table', $data)->render());
+            return response()->json(view('partials.reality-table', $data)->render());
         } else{
             return view('reality.index', $data);
         }

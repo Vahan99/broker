@@ -1,4 +1,4 @@
-<form action="{{route($action)}}" method="post" accept-charset="utf-8">
+<form action="{{route($action)}}" method="post" accept-charset="utf-8" class="realty-form">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="hidden" name="realityType" value="{{request('value')}}">
     @if($rules->validate($action, 'user_id', request('type')))
@@ -20,101 +20,17 @@
         {{--        </div>--}}
             <div class="form-group">
                 @if($rules->validate($action, 'customers', request('type')))
-                <div class="col-md-6">
-                    <label for="customers">ՀաՃախորդներ</label>
-                    <select name="customer_id" id="customers" class="form-control">
-                        @foreach($customers as $customer)
-                            <option value="{{$customer->id}}">{{$customer->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
+                    <div class="col-md-6">
+                        <label for="customers">ՀաՃախորդներ</label>
+                        <select name="customer_id" id="customers" class="form-control">
+                            @foreach($customers as $customer)
+                                <option value="{{$customer->id}}">{{$customer->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 @endif
-                <div class="col-md-6">
-                    <label>Ճակատային մաս/մետր</label>
-                    <div class="form-group row">
-                        <div class="col-md-6">
-                            <input min="0" type="number" name="facePartMin" class="form-control" placeholder="մին">
-                        </div>
-                        <div class="col-md-6">
-                            <input  min="0" type="number" name="facePartMax" class="form-control" placeholder="մաքս">
-                        </div>
-                    </div>
-                </div>
             </div>
-            <div class="form-group">
-                <div class="col-md-6">
-                    <label>Հարկերի քանակ</label>
-                    <div class="form-group row">
-                        <div class="col-md-6">
-                            <input min="0" type="number" name="buildingFloorsMin" class="form-control" placeholder="մին">
-                        </div>
-                        <div class="col-md-6">
-                            <input  min="0" type="number" name="buildingFloorsMax" class="form-control" placeholder="մաքս">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label>Հարկ</label>
-                    <div class="form-group row">
-                        <div class="col-md-6">
-                            <input min="0" type="number" name="floorMin" class="form-control" placeholder="մին">
-                        </div>
-                        <div class="col-md-6">
-                            <input  min="0" type="number" name="floorMax" class="form-control" placeholder="մաքս">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-            <div class="col-md-6">
-                <label>Մակերես</label>
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <input min="0" type="number" name="areaMin" class="form-control" placeholder="մին">
-                    </div>
-                    <div class="col-md-6">
-                        <input  min="0" type="number" name="areaMax" class="form-control" placeholder="մաքս">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <label>Սենյակ</label>
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <input min="0" type="number" name="roomsMin" class="form-control" placeholder="մին">
-                    </div>
-                    <div class="col-md-6">
-                        <input  min="0" type="number" name="roomsMax" class="form-control" placeholder="մաքս">
-                    </div>
-                </div>
-            </div>
-        </div>
-            <div class="form-group">
-            <div class="col-md-6">
-                <label>Արժեք ($)</label>
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <input min="0" type="number" name="priceMin" class="form-control" placeholder="մին">
-                    </div>
-                    <div class="col-md-6">
-                        <input  min="0" type="number" name="priceMax" class="form-control" placeholder="մաքս">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <label>Այգի/հողամաս/մետր</label>
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <input min="0" type="number" name="gardenMin" class="form-control" placeholder="մին">
-                    </div>
-                    <div class="col-md-6">
-                        <input  min="0" type="number" name="gardenMax" class="form-control" placeholder="մաքս">
-                    </div>
-                </div>
-            </div>
-        </div>
         @endisset
-
         <div class="form-group">
             @if($rules->validate($action, 'phone', request('type')))
                 <div class="col-md-6">
@@ -230,11 +146,24 @@
         </div>
         <div class="form-group">
             @if($rules->validate($action, 'buildingFloors', request('type')))
-                <div class="col-md-6">
-                    <label for="buildingFloorsMin">Հարկերի քանակ</label>
-                    <input type="number" min="0" name="buildingFloors" class="form-control"
-                           id="buildingFloorsMin">
-                </div>
+                @isset($customers)
+                    <div class="col-md-6">
+                        <label>Հարկերի քանակ</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input min="0" type="number" name="buildingFloorsMin" class="form-control" placeholder="մին">
+                            </div>
+                            <div class="col-md-6">
+                                <input  min="0" type="number" name="buildingFloorsMax" class="form-control" placeholder="մաքս">
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <div class="col-md-6">
+                        <label for="buildingFloorsMin">Հարկերի քանակ</label>
+                        <input type="number" min="0" name="buildingFloors" class="form-control" id="buildingFloorsMin">
+                    </div>
+                @endisset
             @endif
             @if($rules->validate($action, 'balcon', request('type')))
                 <div class="col-md-6">
@@ -249,47 +178,128 @@
         </div>
         <div class="form-group">
             @if($rules->validate($action, 'area', request('type')))
-                <div class="col-md-6">
-                    <label for="areaMin">Մակերես</label>
-                    <input type="number" min="0" name="area" class="form-control" id="areaMin">
-                </div>
+                @isset($customers)
+                    <div class="col-md-6">
+                        <label>Մակերես</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input min="0" type="number" name="areaMin" class="form-control" placeholder="մին">
+                            </div>
+                            <div class="col-md-6">
+                                <input  min="0" type="number" name="areaMax" class="form-control" placeholder="մաքս">
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <div class="col-md-6">
+                        <label for="areaMin">Մակերես</label>
+                        <input type="number" min="0" name="area" class="form-control" id="areaMin">
+                    </div>
+                @endisset
             @endif
             @if($rules->validate($action, 'floors', request('type')))
-                <div class="col-md-6">
-                    <label for="floorMin">Հարկ</label>
-                    <input type="number" min="0" name="floors" class="form-control" id="floorMin">
-                </div>
+                @isset($customers)
+                    <div class="col-md-6">
+                        <label>Հարկ</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input min="0" type="number" name="floorMin" class="form-control" placeholder="մին">
+                            </div>
+                            <div class="col-md-6">
+                                <input  min="0" type="number" name="floorMax" class="form-control" placeholder="մաքս">
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <div class="col-md-6">
+                        <label for="floorMin">Հարկ</label>
+                        <input type="number" min="0" name="floors" class="form-control" id="floorMin">
+                    </div>
+                @endisset
             @endif
         </div>
         <div class="form-group">
             @if($rules->validate($action, 'rooms', request('type')))
-                <div class="col-md-6">
-                    <label for="rooms">Սենյակ</label>
-                    <input type="number" min="0" name="rooms" class="form-control"
-                           id="priceMin">
-                </div>
+                @isset($customers)
+                    <div class="col-md-6">
+                        <label>Սենյակ</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input min="0" type="number" name="roomsMin" class="form-control" placeholder="մին">
+                            </div>
+                            <div class="col-md-6">
+                                <input  min="0" type="number" name="roomsMax" class="form-control" placeholder="մաքս">
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <div class="col-md-6">
+                        <label for="rooms">Սենյակ</label>
+                        <input type="number" min="0" name="rooms" class="form-control" id="priceMin">
+                    </div>
+                @endisset
             @endif
             @if($rules->validate($action, 'price', request('type')))
-                <div class="col-md-6">
-                    <label for="priceMin">Արժեք ($)</label>
-                    <input type="number" min="0" name="price" class="form-control" id="priceMin">
-                </div>
+                @isset($customers)
+                    <div class="col-md-6">
+                        <label>Արժեք ($)</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input min="0" type="number" name="priceMin" class="form-control" placeholder="մին">
+                            </div>
+                            <div class="col-md-6">
+                                <input  min="0" type="number" name="priceMax" class="form-control" placeholder="մաքս">
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <div class="col-md-6">
+                        <label for="priceMin">Արժեք ($)</label>
+                        <input type="number" min="0" name="price" class="form-control" id="priceMin">
+                    </div>
+                @endisset
             @endif
         </div>
         <div class="form-group">
             @if($rules->validate($action, 'gardenArea', request('type')))
-                <div class="col-md-6">
-                    <label for="gardenMin">Այգի/հողամաս/մետր</label>
-                    <input type="number" min="0" name="gardenArea" class="form-control"
-                           id="gardenMin">
-                </div>
+                @isset($customers)
+                    <div class="col-md-6">
+                        <label>Այգի/հողամաս/մետր</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input min="0" type="number" name="gardenMin" class="form-control" placeholder="մին">
+                            </div>
+                            <div class="col-md-6">
+                                <input  min="0" type="number" name="gardenMax" class="form-control" placeholder="մաքս">
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <div class="col-md-6">
+                        <label for="gardenMin">Այգի/հողամաս/մետր</label>
+                        <input type="number" min="0" name="gardenArea" class="form-control" id="gardenMin">
+                    </div>
+                @endisset
             @endif
             @if($rules->validate($action, 'faceArea', request('type')))
-                <div class="col-md-6">
-                    <label for="facePartMin">Ճակատային մաս/մետր</label>
-                    <input type="number" min="0" name="faceArea" class="form-control"
-                           id="facePartMin">
-                </div>
+                @isset($customers)
+                    <div class="col-md-6">
+                        <label>Ճակատային մաս/մետր</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input min="0" type="number" name="facePartMin" class="form-control" placeholder="մին">
+                            </div>
+                            <div class="col-md-6">
+                                <input  min="0" type="number" name="facePartMax" class="form-control" placeholder="մաքս">
+                            </div>
+                        </div>
+                    </div>
+                    @else
+                    <div class="col-md-6">
+                        <label for="facePartMin">Ճակատային մաս/մետր</label>
+                        <input type="number" min="0" name="faceArea" class="form-control" id="facePartMin">
+                    </div>
+                @endisset
             @endif
         </div>
         <div class="form-group">

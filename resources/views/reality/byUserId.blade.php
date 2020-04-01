@@ -22,7 +22,7 @@
                         <p class="alert-danger"><b>Error !</b> Something goes wrong , please try again</p>
                     @endIf
                     <div class="row m-t-20 tabelList">
-                        @include('reality.table')
+                        @include('partials.reality-table')
                     </div>
 
                 </div>

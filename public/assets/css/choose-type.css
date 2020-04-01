@@ -2,7 +2,7 @@
     background: #545c63!important;
 }
 
-.dropdown button, .dropdown button:hover, .dropdown button:active, .btn-default, .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .btn-default.focus, .btn-default:active, .btn-default:focus, .btn-default:hover, .open > .dropdown-toggle.btn-default {
+.realty-form > .dropdown button, .dropdown button:hover, .dropdown button:active, .btn-default, .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .btn-default.focus, .btn-default:active, .btn-default:focus, .btn-default:hover, .open > .dropdown-toggle.btn-default {
     color: #565656!important;
     text-align: left;
     cursor: default!important;
@@ -10,24 +10,24 @@
     border: 1px solid #E3E3E3!important;
 }
 
-.dropdown button .caret {
+.realty-form > .dropdown button .caret {
     float: right;
     margin-top: 7px;
     border-top: 6px dashed!important;
     border-right: 3px solid transparent!important;
     border-left: 3px solid transparent!important;
 }
-.dropdown-menu > li > a {
+.realty-form > .dropdown-menu > li > a {
     cursor: default;
     font-size: 14px;
     padding: 2px 20px!important;
 
 }
-.dropdown-menu > li > a:hover {
+.realty-form > .dropdown-menu > li > a:hover {
     color: white;
     background-color: #2f8dfc!important;
 }
-.dropdown-menu {
+.realty-form > .dropdown-menu {
     height: 20rem;
     overflow: auto;
     z-index: 1;

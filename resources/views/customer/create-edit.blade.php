@@ -18,7 +18,7 @@
                 </div>
                 <div class="container">
                     <div class="col-md-4">
-                        <div class="container-category-left m-t-40">
+                        <div class="container-category-left" style="margin-top: 24px">
                             <ul class="nav nav-pills nav-stacked">
                                 @foreach($customerData->types() as $type)
                                     <li role="presentation" class="{{request('customer') == $type['value'] ? 'active' : ''}}">

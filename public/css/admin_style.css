@@ -52,3 +52,14 @@
 .error-span {
     color: #e15361;
 }
+.clickable {
+    cursor: pointer;
+}
+
+.user-info span {
+    color: #6ab023;
+    width: 20%;
+}
+.info-content input {
+    cursor: default!important;
+}

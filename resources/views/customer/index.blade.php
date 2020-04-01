@@ -8,46 +8,24 @@
         <input type="hidden" name="_token" value="{!! csrf_token() !!}" id="token">
         <div class="content">
             <div class="container">
-                <div class="row m-t-20">
+                <div class="row m-t-20" id="customer-filter">
                     <div class="col-sm-4">
-                        <h4 class="page-title breadcrumb">Հաճախորդների Ցուցակ</h4>
+                        <h4 class="page-title">Հաճախորդների Ցուցակ</h4>
+                    </div>
+                    <div class="col-sm-2 col-sm-offset-4">
+                        <select name="customer" class="form-control">
+                            <option value="all">Բոլորը</option>
+                            @foreach($customerData->types() as $type)
+                                <option value="{{$type['value']}}">{{$type['label']}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="search" class="form-control" placeholder="Փնտրել" name="search">
                     </div>
                 </div>
                 <div class="table-block row m-t-20 tabelList">
-                    <div class="col-sm-12 card-box">
-                        <div class="table-responsive">
-                            @if(count($customers) > 0)
-                                <table class="table table-bordered m-0">
-                                    <thead  id="subRegionTableHeade">
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Հաճաղորդ</th>
-                                            <th>Անուն</th>
-                                            <th>Ազգանուն</th>
-                                            <th>էլ․ հասցե</th>
-                                            <th>Բջջ․</th>
-                                            <th>Քաղ․</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="subRegionTableBody">
-                                        @foreach ($customers as $key => $customer)
-                                            <tr class="{{$key % 2 == 0 ? 'odd' : ''}}">
-                                                <td>{!! $customer->id !!}</td>
-                                                <td>{!! $customerData->types()[$customer->customer]['label'] !!}</td>
-                                                <td>{!! $customer->name !!}</td>
-                                                <td>{!! $customer->surname !!}</td>
-                                                <td>{!! $customer->email !!}</td>
-                                                <td>{!! $customer->first_phone !!}</td>
-                                                <td>{!! $customer->last_phone !!}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            @else
-                                <p>Տվյալներ չեն գտնվել</p>
-                            @endif
-                        </div>
-                    </div>
+                    @include('customer.table')
                 </div>
                 @include('adminLayouts.footer')
             </div>
