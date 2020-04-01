@@ -79,7 +79,7 @@ class CustomerController extends Controller
             'realtyData'      => new DataRealty,
             'subRegions'      => SubRegion::get(),
             'action'          => 'customer.filter.add',
-            'customers'       => Customer::orderBy('created_at', 'desc')->orderBy('customer', 'desc')->get(),
+            'customers'       => Auth::user()->customers()->orderBy('created_at', 'desc')->orderBy('customer', 'desc')->get(),
             'customerFilters' => CustomerFilter::whereIn('customer_id', \Auth::user()->customers()->pluck('id')->toArray())->get(),
         ]);
     }

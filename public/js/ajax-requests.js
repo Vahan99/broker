@@ -10,7 +10,7 @@ $('#reality-filter').find('.onchange').change(function (element) {
     });
 });
 
-$('#customer-filter select, input').change(function(){
+$('#customer-filter').find('select, input').change(function(){
     onAjax({
         url: 'customers',
         data: {[$(this).attr('name')] : $(this).val()},
@@ -33,6 +33,7 @@ $('.glyphicon-play-circle').click(function () {
 });
 
 $('.company-display').change(function (element) {
+    console.log(4);
     let url  = `update-company/${$(this).data('id')}`,
         data = {display: $(this)[0].checked};
 
