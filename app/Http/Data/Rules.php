@@ -4,6 +4,12 @@ namespace App\Http\Data;
 
 class Rules extends Data
 {
+    /**
+     * $forms add action route name. example $action = 'your.route.name';
+     * Add blocked inputs names example 'inputsBlocked' => ['yourInputBlockedName'];
+     * use in view example $rules = new Rules; $rules->validate($action, 'yourInputBlockedName', $handleMethodArrayIndex);
+     * */
+
     protected $forms = [
         'customer.filter.add' => [
             'inputsBlocked' => [
