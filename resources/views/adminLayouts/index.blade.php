@@ -24,6 +24,7 @@
         <link href="{{ URL::asset('css/admin_style.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ URL::asset('js/select2/select2.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ URL::asset('css/responsive/style.css') }}" rel="stylesheet" type="text/css">
+        @stack('style')
         <script src="{{ URL::asset('js/modernizr.min.js') }}"></script>
         <style type="text/css" >
             img {
@@ -88,7 +89,7 @@
         <link href="{{ URL::asset('css/custom-select.css') }}" rel="stylesheet" type="text/css" />
     </head>
     <body class="fixed-left">
-    	 @yield('content')
+        @yield('content')
         <script>
             var resizefunc = [];
         </script>
@@ -146,5 +147,7 @@
                 });
             });
         </script>
+         <script src="{{ URL::asset('assets/js/jquery.mask.min.js') }}"></script>
+         <script src="{{ URL::asset('assets/js/custom.js') }}"></script>
     </body>
 </html>
