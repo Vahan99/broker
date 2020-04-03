@@ -3,6 +3,7 @@
 @section('content')
     @include('adminLayouts.header')
     @include('adminLayouts.sidebar')
+    @include('responsive.menu')
     <div class="content-page" id="reality-filter">
         <!-- Start content -->
         <input type="hidden" name="_token" value="{!! csrf_token() !!}" id="token">

@@ -15,13 +15,13 @@
         <div class="navbar navbar-default" role="navigation">
             <div class="container">
                 <div>
-                    <div class="pull-left">
+                    <div class="pull-left menu-button">
                         <button class="button-menu-mobile open-left">
                             <i class="ion-navicon"></i>
                         </button>
                         <span class="clearfix"></span>
                     </div>
-                    <div class="col-md-offset-3 col-md-4">
+                    <div class="col-md-offset-3 col-md-4 header-title-content">
                         <p style="color: white; line-height: 50px; font-weight: 600; margin: 0">ԱՆՇԱՐԺ ԳՈՒՅՔԻ ՏՎՅԱԼՆԵՐԻ ԿԱՌԱՎԱՐՄԱՆ ՀԱՄԱԿԱՐԳ</p>
                     </div>
                     <ul class="nav navbar-nav navbar-right pull-right">

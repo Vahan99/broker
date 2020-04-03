@@ -1,0 +1,35 @@
+@media (max-width: 768px){
+    .header-title-content, .side-menu, .menu-button     {
+        display: none;
+    }
+    .container-responsive {
+        margin-top: 70px;
+        display: block!important;
+    }
+    .content-page > .content {
+         margin: 0;
+         padding: 0;
+    }
+    #wrapper.enlarged .content-page {
+        margin: 0;
+    }
+    .row-box .content-box{
+        height: 110px;
+        background-color: #6c757d;
+    }
+    .row-box {
+        margin: 10px 0;
+    }
+    .content-box i {
+        position: absolute;
+        top: 35%;
+        left: 0;
+        right: 0;
+        font-size: 30px;
+        text-align: center;
+        color: #45d74a;
+    }
+    .topbar-left {
+        margin-left: 12px;
+    }
+}
