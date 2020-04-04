@@ -62,6 +62,16 @@ class User extends Authenticatable
         return $this->hasMany(self::class, 'admin_id')->whereAdmin(2);
     }
 
+    public function customers()
+    {
+        return $this->hasMany(Customer::class, 'user_id');
+    }
+
+    public function customersFilters()
+    {
+        dd(4848);
+    }
+
     public function reality()
     {
         return $this->hasMany(Reality::class, 'user_id');

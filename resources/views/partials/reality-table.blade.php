@@ -6,6 +6,7 @@
                 <tr>
                     <th>#</th>
                     <th>Կոդ</th>
+                    <th>Մարզ</th>
                     <th>Համայնք</th>
                     <th>Փողոց</th>
                     <th>Սեն.</th>
@@ -32,13 +33,8 @@
                     <tr class="{{$key % 2 == 0 ? 'odd' : ''}}">
                         <td>{!! $key !!}</td>
                         <td>{{$r->code}}</td>
-                        <td>
-                            @foreach($subRegions as $subRegion)
-                                @if($subRegion->id == $r->subRegion)
-                                    {!! $subRegion->name !!}
-                                @endif
-                            @endforeach
-                        </td>
+                        <td>{{$r->regionName}}</td>
+                        <td>{{$r->subRegionName}}</td>
                         <td>{!! $r->street !!}</td>
                         <td>{!! $r->rooms !!}</td>
                         <td>{!! $r->buildingNumber ? $r->buildingNumber : 0 !!}</td>
@@ -72,7 +68,7 @@
                         <td>{!! $r->customerName !!}</td>
                         <td>{!! $r->link ? '<a href="'.$r->link.'" target="_blank">Հղում</a>' : '-' !!}</td>
                         <td>
-                            <a href="/admin/reality/single-reality/{!! $r->id !!}"
+                            <a href="{!! route('realty.single', ['id' => $r->id]) !!}"
                                class="btn btn-primary btn-rounded waves-effect waves-light">
                                 <i class="glyphicon glyphicon-eye-open"></i>
                             </a>
@@ -91,7 +87,7 @@
     </div>
     @if(count($reality) > 0)
         <div class="col-sm-12">
-                {{ $reality->links() }}
+            {{ $reality->links() }}
         </div>
     @endif
 </div>

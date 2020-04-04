@@ -10,6 +10,16 @@ $('#reality-filter').find('.onchange').change(function (element) {
     });
 });
 
+$('#customer-filter').find('select, input').change(function(){
+    onAjax({
+        url: 'customers',
+        data: {[$(this).attr('name')] : $(this).val()},
+        method: 'GET'
+    }).done((data) => {
+        realtyFilterDone(data);
+    });
+});
+
 $('.glyphicon-play-circle').click(function () {
     let url  = `reality-list`, max = $(this).data('max'), min = $(this).data('min');
     let data = {[max] : $(`#${max}`).val(), [min] : $(`#${min}`).val()};
@@ -23,6 +33,7 @@ $('.glyphicon-play-circle').click(function () {
 });
 
 $('.company-display').change(function (element) {
+    console.log(4);
     let url  = `update-company/${$(this).data('id')}`,
         data = {display: $(this)[0].checked};
 
@@ -32,28 +43,27 @@ $('.company-display').change(function (element) {
     });
 });
 
-$('#reality-filter input[type=checkbox]').change(function () {
-    let url  = `reality-list`, max = $(this).data('max'), min = $(this).data('min');
-    let data = {[$(this).attr('name')] : $(this)[0].checked};
-    onAjax({
-        url: url,
-        data: data,
-        method: 'GET'
-    }).done((data) => {
-        realtyFilterDone(data);
-    });
-
-});
-
+// $('#reality-filter input[type=checkbox]').change(function () {
+//     let url  = `reality-list`, max = $(this).data('max'), min = $(this).data('min');
+//     let data = {[$(this).attr('name')] : $(this)[0].checked};
+//     onAjax({
+//         url: url,
+//         data: data,
+//         method: 'GET'
+//     }).done((data) => {
+//         realtyFilterDone(data);
+//     });
+//
+// });
 realtyFilterDone = (data) => {
     $('.card-box').remove();
     $('.tabelList').append(data);
-    var array = []
+    var array = [];
     if (localStorage.getItem('print')){
         array = JSON.parse(localStorage.getItem('print'))
     }
     $('.printNumbers').text(array.length);
-    for ( var i = 0; i < array.length; i++) {
+    for (var i = 0; i < array.length; i++) {
         $('#checkForPrint_' + array[i].id).prop("checked", true);
     }
     $('.printNumbers').on('click', function () {
@@ -80,7 +90,7 @@ realtyFilterDone = (data) => {
         }else{
             array = array.filter(function(el) {
                 return el.id !== $(that).siblings('input').val()
-            })
+            });
             $('.printNumbers').text(array.length);
             localStorage.setItem('print', JSON.stringify(array) )
         }

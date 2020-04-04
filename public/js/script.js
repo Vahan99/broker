@@ -295,72 +295,72 @@ $(document).ready(function(){
     $('#streetSearch').on('keydown', function (){
 
         $(this).siblings('.ms-list').empty()
-        if($(this).val().length > 0) {
-            $.ajax({
-                url: '/admin/regions/get-street/' + $('#realityReg').val() +'/' + $('#realitySubReg').val() + '/' +  $(this).val() ,
-                type: 'GET'
-            })
-                .done(function(data) {
-					if(!data.error) {
-                        $('#streetSearch').siblings('ul.ms-list').css('display', 'block');
-                        for(var i =0; i < data.street.length; i++) {
-                            $('#streetSearch').siblings('ul.ms-list').append('<li class="streetList" style="cursor: pointer">' + data.street[i].street + '</li>')
-                        }
-                        $('.streetList').on('click', function(){
-                            $('#streetSearch').val($(this).text())
-                            $('#streetSearch').siblings('ul.ms-list').empty()
-                            $('#streetSearch').siblings('ul.ms-list').css('display', 'none');
-                        })
-					}
-                })
-                .fail(function() {
-                    $('#errorMessageUserDelete').append('<b>Error !</b> Something goes wrong , please try again')
-                })
-                .always(function() {
-                    console.log("complete");
-                });
-        }else{
-            $('#streetSearch').siblings('ul.ms-list').empty();
-            $('#streetSearch').siblings('ul.ms-list').css('display', 'none');
-        }
+        // if($(this).val().length > 0) {
+        //     $.ajax({
+        //         url: '/admin/regions/get-street/' + $('#realityReg').val() +'/' + $('#realitySubReg').val() + '/' +  $(this).val() ,
+        //         type: 'GET'
+        //     })
+        //         .done(function(data) {
+		// 			if(!data.error) {
+        //                 $('#streetSearch').siblings('ul.ms-list').css('display', 'block');
+        //                 for(var i =0; i < data.street.length; i++) {
+        //                     $('#streetSearch').siblings('ul.ms-list').append('<li class="streetList" style="cursor: pointer">' + data.street[i].street + '</li>')
+        //                 }
+        //                 $('.streetList').on('click', function(){
+        //                     $('#streetSearch').val($(this).text())
+        //                     $('#streetSearch').siblings('ul.ms-list').empty()
+        //                     $('#streetSearch').siblings('ul.ms-list').css('display', 'none');
+        //                 })
+		// 			}
+        //         })
+        //         .fail(function() {
+        //             $('#errorMessageUserDelete').append('<b>Error !</b> Something goes wrong , please try again')
+        //         })
+        //         .always(function() {
+        //             console.log("complete");
+        //         });
+        // }else{
+        //     $('#streetSearch').siblings('ul.ms-list').empty();
+        //     $('#streetSearch').siblings('ul.ms-list').css('display', 'none');
+        // }
     })
     $('#codeSearch').blur(function (){
         $('#codeSearch').siblings('ul.ms-list').empty();
         $('#codeSearch').siblings('ul.ms-list').css('display', 'none');
     })
-    $('#codeSearch').on('keydown', function (){
-        var that = this;
-        $(this).siblings('.ms-list').empty()
-        if($(this).val().length > 0) {
-            $.ajax({
-                url: '/admin/regions/get-code',
-                type: 'GET'
-            })
-                .done(function(data) {
-                    console.log(data)
-                    if(!data.error) {
-                        $('#codeSearch').siblings('ul.ms-list').css('display', 'block');
-                        for(var i =0; i < data.code.length; i++) {
-                            $('#codeSearch').siblings('ul.ms-list').append('<li class="streetList" style="cursor: pointer">' + data.code[i].code + '</li>')
-                        }
-                        $('.streetList').on('click', function(){
-                            $('#codeSearch').val($(this).text())
-                            $('#codeSearch').siblings('ul.ms-list').empty();
-                            $('#codeSearch').siblings('ul.ms-list').css('display', 'none');
-                        })
-                    }
-                })
-                .fail(function() {
-                    $('#errorMessageUserDelete').append('<b>Error !</b> Something goes wrong , please try again')
-                })
-                .always(function() {
-                    console.log("complete");
-                });
-        }else{
-            $('#codeSearch').siblings('ul.ms-list').empty();
-            $('#codeSearch').siblings('ul.ms-list').css('display', 'none');
-        }
-    })
+    // $('#codeSearch').on('keydown', function (){
+    //     var that = this;
+    //     $(this).siblings('.ms-list').empty()
+    //     if($(this).val().length > 0) {
+    //         $.ajax({
+    //             url: '/admin/regions/get-code',
+    //             type: 'GET'
+    //         })
+    //             .done(function(data) {
+    //                 console.log(data)
+    //                 if(!data.error) {
+    //                     $('#codeSearch').siblings('ul.ms-list').css('display', 'block');
+    //                     for(var i =0; i < data.code.length; i++) {
+    //                         $('#codeSearch').siblings('ul.ms-list').append('<li class="streetList" style="cursor: pointer">' + data.code[i].code + '</li>')
+    //                     }
+    //                     $('.streetList').on('click', function(){
+    //                         $('#codeSearch').val($(this).text())
+    //                         $('#codeSearch').siblings('ul.ms-list').empty();
+    //                         $('#codeSearch').siblings('ul.ms-list').css('display', 'none');
+    //                     })
+    //                 }
+    //             })
+    //             .fail(function() {
+    //                 $('#errorMessageUserDelete').append('<b>Error !</b> Something goes wrong , please try again')
+    //             })
+    //             .always(function() {
+    //                 console.log("complete");
+    //             });
+    //     }else{
+    //         $('#codeSearch').siblings('ul.ms-list').empty();
+    //         $('#codeSearch').siblings('ul.ms-list').css('display', 'none');
+    //     }
+    // })
     // $('#filterRealityStatus').on('change', function(){
     //     window.location.pathname = "/admin/reality/reality-list/" + $(this).val() + '/' + $('#type').val()
     // })

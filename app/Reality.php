@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use PhpParser\Node\Stmt\DeclareDeclare;
 
 class Reality extends Model
 {
@@ -39,4 +40,28 @@ class Reality extends Model
         'buildingFloors',
         'apartamentNumber',
     ];
+
+    public function getRegionNameAttribute()
+    {
+        if ($this->region) {
+            return $this->getRegion->name;
+        }
+    }
+
+    public function getSubRegionNameAttribute()
+    {
+        if($this->subRegion){
+            return $this->getSubRegion->name;
+        }
+    }
+
+    public function getRegion()
+    {
+        return $this->belongsTo(Region::class, 'region');
+    }
+
+    public function getSubRegion()
+    {
+        return $this->belongsTo(SubRegion::class, 'subRegion');
+    }
 }
