@@ -11,16 +11,6 @@
         <!-- Start content -->
         <div class="content">
             <div class="container">
-
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
                 <div class="row m-t-20">
                     @if (!$edit)
                         <div class="col-sm-12">
@@ -52,40 +42,27 @@
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="form-group">
                                         <label for="userName">Գործակալի անուն</label>
-                                        <input type="text" name="name" class="form-control" required>
+                                        <input type="text" name="name" class="form-control {{$errors->has('name') ? 'error' : ''}}" >
+                                        <span class="error-span">{{$errors->first('name')}}</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="userEmail">Գործակալի էլ-հասցե</label>
-                                        <input type="email" name="email" class="form-control" required>
+                                        <input type="email" name="email" class="form-control {{$errors->has('email') ? 'error' : ''}}" >
+                                        <span class="error-span">{{$errors->first('email')}}</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="userEmail">Գործակալի հեռախոսահամար</label>
-                                        <input type="text" name="phone" class="form-control" required>
+                                        <input type="text" name="phone" class="form-control {{$errors->has('phone') ? 'error' : ''}}" >
+                                        <span class="error-span">{{$errors->first('phone')}}</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="userEmail">Գործակալի հասցե</label>
-                                        <input type="text" name="address" class="form-control" required>
+                                        <input type="text" name="address" class="form-control {{$errors->has('address') ? 'error' : ''}}" >
+                                        <span class="error-span">{{$errors->first('address')}}</span>
                                     </div>
-{{--                                    <div class="form-group">--}}
-{{--                                        <label for="userRole">Պաշտոն</label>--}}
-{{--                                        <select class="form-control" name="admin" id="" onchange="changeSkill(this)">--}}
-{{--                                            <option value="2" {!! $admin == 0 ? 'selected' : '' !!}>Գործակալ</option>--}}
-{{--                                        </select>--}}
-{{--                                    </div>--}}
-{{--                                    @if($admin == 3 || $admin == 1)--}}
-{{--                                        <div class="form-group" id="adminListOnAdding" style="display: none">--}}
-{{--                                            <label for="addUserAdmins">Ադմին</label>--}}
-{{--                                            <select name="admin_id" id="addUserAdmins" class="form-control">--}}
-{{--                                                <option value="">Ընտրել ադմին</option>--}}
-{{--                                                @foreach($admins as $a)--}}
-{{--                                                    <option value="{!! $a->id !!}">{!! $a->name !!}</option>--}}
-{{--                                                @endforeach--}}
-{{--                                            </select>--}}
-{{--                                        </div>--}}
-{{--                                    @endif--}}
                                     <div class="form-group">
                                         <label for="userName">Գործակալի գաղտնաբառ</label>
-                                        <input type="password" name="password" class="form-control" required>
+                                        <input type="password" name="password" class="form-control" >
                                     </div>
                                     <button type="submit" class="btn btn-primary" id="addOrEditUserButton">Ավելացնել</button>
                                 </form>
@@ -96,15 +73,18 @@
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}" id="resPassHiddenToken">
                                     <div class="form-group">
                                         <label for="userName">Գործակալի անուն</label>
-                                        <input type="text" name="name" class="form-control" value="{!! $user[0]->name !!}">
+                                        <input type="text" name="name" class="form-control {{$errors->has('name') ? 'error' : ''}}" value="{!! $user[0]->name !!}">
+                                        <span class="error-span">{{$errors->first('name')}}</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="userEmail">Գործակալի էլ-հասցե</label>
-                                        <input type="email" name="email" class="form-control" value="{!! $user[0]->email !!}">
+                                        <input type="email" name="email" class="form-control {{$errors->has('email') ? 'error' : ''}}" value="{!! $user[0]->email !!}">
+                                        <span class="error-span">{{$errors->first('email')}}</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="userEmail">Գործակալի հասցե</label>
-                                        <input type="text" name="address" class="form-control" value="{!! $user[0]->address ? $user[0]->address : '' !!}">
+                                        <input type="text" name="address" class="form-control {{$errors->has('address') ? 'error' : ''}}" value="{!! $user[0]->address ? $user[0]->address : '' !!}">
+                                        <span class="error-span">{{$errors->first('address')}}</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="userRole">Պաշտոն</label>
