@@ -11,14 +11,14 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::all();
-        $admin = Auth::user()->Admin();
+        $admin     = Auth::user()->Admin();
         return view('superadmin.company.index', compact('admin', 'companies'));
     }
 
     public function indexAdmin()
     {
         $admins = \App\User::whereAdmin(1)->has('companyUser')->get();
-        $admin = Auth::user()->Admin();
+        $admin  = Auth::user()->Admin();
         return view('superadmin.admin.index', compact('admin', 'admins'));
     }
 
@@ -30,7 +30,7 @@ class CompanyController extends Controller
 
     public function updateCompany($id)
     {
-        $admin = Auth::user()->Admin();
+        $admin   = Auth::user()->Admin();
         $company = Company::find($id);
         return view('superadmin.company.create-update', compact('company', 'admin'));
     }
@@ -49,10 +49,10 @@ class CompanyController extends Controller
     public function storeCompany(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name'    => 'required',
             'address' => 'required',
-            'phone' => 'required',
-            'email' => 'required|unique:companies',
+            'phone'   => 'required',
+            'email'   => 'required|unique:companies',
         ]);
 
         Company::create($request->all());
@@ -62,7 +62,7 @@ class CompanyController extends Controller
 
     public function createAdmin()
     {
-        $admin = Auth::user()->Admin();
+        $admin     = Auth::user()->Admin();
         $companies = Company::with('companyUser')->has('companyUser', '==', '0')->get();
         return view('superadmin.admin.create-update', compact('admin', 'companies'));
     }
@@ -70,26 +70,26 @@ class CompanyController extends Controller
     public function storeAdmin(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'email' => 'required|unique:users',
+            'name'       => 'required',
+            'address'    => 'required',
+            'phone'      => 'required',
+            'email'      => 'required|unique:users',
             'company_id' => 'required',
         ]);
 
         $user = \App\User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'address' => $request->address,
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'phone'    => $request->phone,
+            'address'  => $request->address,
             'password' => bcrypt($request->password),
-            'status' => 1,
-            'admin' => 1,
+            'status'   => 1,
+            'admin'    => 1,
         ]);
 
         $user->companyUser()->create([
             'company_id' => $request->company_id,
-            'user_id' => $user->id
+            'user_id'    => $user->id
         ]);
 
         return redirect()->route('company.admin.index');
