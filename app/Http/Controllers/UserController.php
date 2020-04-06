@@ -43,6 +43,7 @@ class UserController extends Controller
         $error = false;
         $this->validate($request, [
             'email' => 'required|unique:users|max:255',
+            'phone' => 'required|unique:users',
         ]);
         if($request->admin_id){
             $adminId = $request->admin_id;
@@ -192,7 +193,7 @@ class UserController extends Controller
         $admin = Auth::user()->Admin();
         $admins = DB::table('users')->where('admin', 0)->get();
 
-        return view('admin.admins.add-admin',compact('edit','admin','admins', 'error'));
+        return view('admin.admins.add-admin', compact('edit','admin','admins', 'error'));
     }
     public function login(Request $request)
     {
